@@ -45,8 +45,8 @@ canvas { display: block; }
 }
 #powerup-display .icon { font-size: 28px; margin-right: 6px; vertical-align: middle; }
 #speed-bar-container {
-  position: absolute; bottom: 30px; right: 20px;
-  width: 200px; height: 16px;
+  position: absolute; bottom: 230px; right: 20px;
+  width: 180px; height: 16px;
   background: rgba(13,17,23,0.7); border: 2px solid #30363d;
   border-radius: 8px; overflow: hidden;
 }
@@ -56,7 +56,7 @@ canvas { display: block; }
   border-radius: 6px; transition: width 0.1s;
 }
 #speed-label {
-  position: absolute; bottom: 50px; right: 20px;
+  position: absolute; bottom: 250px; right: 20px;
   color: #8b949e; font-size: 12px; font-weight: 600;
 }
 #wrong-way {
@@ -183,9 +183,68 @@ canvas { display: block; }
 #finish-screen button:hover { background: #2ea043; }
 
 #minimap {
-  position: fixed; bottom: 20px; left: 20px;
-  width: 160px; height: 160px; z-index: 10; pointer-events: none;
+  position: fixed; bottom: 20px; right: 20px;
+  width: 180px; height: 180px; z-index: 10; pointer-events: none;
 }
+#speed-value {
+  position: absolute; bottom: 205px; right: 20px;
+  color: #fff; font-size: 32px; font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  text-align: right; width: 180px;
+}
+#speed-value .unit { font-size: 14px; color: #8b949e; font-weight: 600; }
+#score-display {
+  position: absolute; top: 10px; left: 200px;
+  color: #d29922; font-size: 20px; font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+.score-toast {
+  position: fixed; z-index: 16; pointer-events: none;
+  color: #3fb950; font-size: 22px; font-weight: 800;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+  animation: scoreFloat 1.2s ease-out forwards;
+}
+@keyframes scoreFloat {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-40px); }
+}
+#pause-overlay {
+  position: fixed; inset: 0; z-index: 50;
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(13,17,23,0.8);
+}
+#pause-overlay h2 { color: #fff; font-size: 48px; margin-bottom: 32px; text-shadow: 2px 2px 6px rgba(0,0,0,0.8); }
+#pause-overlay .pause-option {
+  padding: 14px 48px; font-size: 22px; font-weight: 700;
+  color: #8b949e; cursor: pointer; border-radius: 8px;
+  margin: 4px 0; transition: all 0.15s; text-align: center; min-width: 280px;
+}
+#pause-overlay .pause-option.selected {
+  color: #fff; background: rgba(56,139,253,0.2); border: 1px solid rgba(56,139,253,0.4);
+}
+#leaderboard-screen, #credits-screen {
+  position: fixed; inset: 0; z-index: 35;
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(13,17,23,0.97);
+}
+#leaderboard-screen h2, #credits-screen h2 { color: #fff; font-size: 36px; margin-bottom: 24px; }
+#leaderboard-screen .lb-content { color: #c9d1d9; font-size: 18px; text-align: center; max-width: 500px; }
+#leaderboard-screen .lb-entry { display: flex; gap: 16px; padding: 8px 16px; border-bottom: 1px solid #21262d; }
+#leaderboard-screen .lb-entry span { color: #8b949e; }
+#credits-screen .credits-content { color: #c9d1d9; font-size: 18px; text-align: center; line-height: 2.2; }
+#leaderboard-screen button, #credits-screen button {
+  margin-top: 28px; padding: 12px 36px; font-size: 20px; font-weight: 700;
+  background: #238636; color: #fff; border: none; border-radius: 8px; cursor: pointer;
+}
+.menu-option {
+  padding: 14px 48px; font-size: 24px; font-weight: 700;
+  color: #8b949e; cursor: pointer; border-radius: 8px;
+  margin: 4px 0; transition: all 0.15s; text-align: center; min-width: 320px;
+}
+.menu-option.selected {
+  color: #fff; background: rgba(56,139,253,0.2); border: 1px solid rgba(56,139,253,0.4);
+}
+.menu-option:hover { color: #fff; }
 
 /* Leaderboard */
 #leaderboard {
@@ -308,10 +367,44 @@ canvas { display: block; }
 <div id="menu">
   <h1><span class="octo">Octo</span>-<span class="cart">Cart</span></h1>
   <div class="subtitle">🐙 GitHub Kart Racing 🏁</div>
-  <button id="start-btn">🏎️ Start Race</button>
+  <div id="menu-options">
+    <div class="menu-option selected" data-action="race">🏎️ New Race</div>
+    <div class="menu-option" data-action="leaderboard">🏆 Leaderboard</div>
+    <div class="menu-option" data-action="credits">📜 Credits</div>
+  </div>
   <div class="controls-info">
-    <kbd>↑</kbd> Accelerate &nbsp; <kbd>↓</kbd> Brake &nbsp;
-    <kbd>←</kbd> <kbd>→</kbd> Steer &nbsp; <kbd>Space</kbd> Use Powerup
+    <kbd>↑</kbd> <kbd>↓</kbd> Navigate &nbsp; <kbd>Enter</kbd> Select
+  </div>
+</div>
+
+<!-- Leaderboard Screen -->
+<div id="leaderboard-screen">
+  <h2>🏆 Leaderboard</h2>
+  <div class="lb-content" id="lb-history-content"><em style="color:#8b949e;">No races recorded yet. Go race!</em></div>
+  <button id="lb-back-btn">← Back to Menu</button>
+</div>
+
+<!-- Credits Screen -->
+<div id="credits-screen">
+  <h2>📜 Credits</h2>
+  <div class="credits-content">
+    <strong style="color:#f78166;">Octo-Cart</strong> by <strong style="color:#3fb950;">GitHub Copilot</strong><br>
+    Built with <strong style="color:#58a6ff;">Three.js</strong><br><br>
+    🐙 Racers from <strong>Microsoft Developer Advocates</strong><br>
+    🎨 GitHub-themed design &amp; powerups<br>
+    🏁 Three unique tracks to master<br><br>
+    <span style="color:#8b949e;">Thanks for playing!</span>
+  </div>
+  <button id="credits-back-btn">← Back to Menu</button>
+</div>
+
+<!-- Pause Overlay -->
+<div id="pause-overlay">
+  <h2>⏸️ Paused</h2>
+  <div id="pause-options">
+    <div class="pause-option selected" data-action="resume">▶️ Resume</div>
+    <div class="pause-option" data-action="restart">🔄 Restart Race</div>
+    <div class="pause-option" data-action="mainmenu">🏠 Main Menu</div>
   </div>
 </div>
 
@@ -357,11 +450,13 @@ canvas { display: block; }
 <!-- HUD -->
 <div id="hud">
   <div id="player-portrait" style="display:none;"><img id="portrait-img" src="" alt=""><span id="portrait-name"></span></div>
+  <div id="score-display">⭐ 0</div>
   <div id="position-display">1<span>st</span></div>
   <div id="lap-display">Lap 1 / 3</div>
   <div id="powerup-display" style="display:none;"></div>
   <div id="speed-label">SPEED</div>
   <div id="speed-bar-container"><div id="speed-bar"></div></div>
+  <div id="speed-value">0 <span class="unit">km/h</span></div>
   <div id="wrong-way">⚠️ WRONG WAY!</div>
   <div id="leaderboard">
     <div class="lb-title">🏁 Standings</div>
@@ -440,13 +535,20 @@ const POWERUP_TYPES = [
 ];
 
 // ----- STATE -----
-let gameState = 'MENU'; // MENU, COUNTDOWN, RACING, FINISHED
+let gameState = 'MENU'; // MENU, COUNTDOWN, RACING, FINISHED, PAUSED
 let scene, camera, renderer;
 let trackPoints = [];     // sampled centerline
 let trackLength = 0;      // total arc length
 let segLengths = [];       // segment lengths
 let cumLengths = [];       // cumulative lengths
 let checkpointDists = [];  // checkpoint distances along track
+
+// Scoring
+let playerScore = 0;
+let raceHistory = []; // { position, score, track, date }
+let menuSelection = 0;
+let pauseSelection = 0;
+let preCountdownState = null; // for pause during countdown
 
 // Racer data
 let racers = [];   // { mesh, speed, angle, lap, dist, checkpoints, isPlayer, powerup, ... }
@@ -470,7 +572,55 @@ let particlePool = []; // recycled meshes
 
 // Input
 const keys = {};
-window.addEventListener('keydown', e => { if (!selectionPhase) { keys[e.code] = true; if (e.code === 'Space') e.preventDefault(); } });
+window.addEventListener('keydown', e => {
+  if (!selectionPhase) {
+    // Menu navigation
+    if (gameState === 'MENU') {
+      const opts = document.querySelectorAll('#menu-options .menu-option');
+      if (e.code === 'ArrowDown' || e.code === 'ArrowUp') {
+        e.preventDefault();
+        menuSelection += e.code === 'ArrowDown' ? 1 : -1;
+        menuSelection = ((menuSelection % opts.length) + opts.length) % opts.length;
+        opts.forEach((o, i) => o.classList.toggle('selected', i === menuSelection));
+      }
+      if (e.code === 'Enter') {
+        e.preventDefault();
+        const action = opts[menuSelection]?.dataset.action;
+        if (action === 'race') showCharSelect();
+        else if (action === 'leaderboard') showLeaderboardScreen();
+        else if (action === 'credits') showCreditsScreen();
+      }
+      return;
+    }
+    // Pause menu navigation
+    if (gameState === 'PAUSED') {
+      const opts = document.querySelectorAll('#pause-options .pause-option');
+      if (e.code === 'ArrowDown' || e.code === 'ArrowUp') {
+        e.preventDefault();
+        pauseSelection += e.code === 'ArrowDown' ? 1 : -1;
+        pauseSelection = ((pauseSelection % opts.length) + opts.length) % opts.length;
+        opts.forEach((o, i) => o.classList.toggle('selected', i === pauseSelection));
+      }
+      if (e.code === 'Enter') {
+        e.preventDefault();
+        const action = opts[pauseSelection]?.dataset.action;
+        if (action === 'resume') resumeGame();
+        else if (action === 'restart') { resumeGame(); resetRace(); startCountdown(); }
+        else if (action === 'mainmenu') { resumeGame(); gameState = 'MENU'; hudEl.style.display = 'none'; menuEl.style.display = 'flex'; }
+      }
+      if (e.code === 'Escape') { e.preventDefault(); resumeGame(); }
+      return;
+    }
+    // Escape to pause during racing/countdown
+    if (e.code === 'Escape' && (gameState === 'RACING' || gameState === 'COUNTDOWN')) {
+      e.preventDefault();
+      pauseGame();
+      return;
+    }
+    keys[e.code] = true;
+    if (e.code === 'Space') e.preventDefault();
+  }
+});
 window.addEventListener('keyup', e => { keys[e.code] = false; });
 
 // DOM refs
@@ -487,13 +637,16 @@ const finishTitle = document.getElementById('finish-title');
 const finishResult = document.getElementById('finish-result');
 const minimapCanvas = document.getElementById('minimap');
 const minimapCtx = minimapCanvas.getContext('2d');
-minimapCanvas.width = 160; minimapCanvas.height = 160;
+minimapCanvas.width = 180; minimapCanvas.height = 180;
 const toastContainer = document.getElementById('toast-container');
 const lapBanner = document.getElementById('lap-banner');
 const dirArrow = document.getElementById('direction-arrow');
 const posChangeEl = document.getElementById('position-change');
 const lbRows = document.getElementById('lb-rows');
 const crosshairEl = document.getElementById('crosshair');
+const pauseOverlay = document.getElementById('pause-overlay');
+const scoreDisplay = document.getElementById('score-display');
+const speedValueEl = document.getElementById('speed-value');
 
 let lastPlayerPos = 1;
 let directionArrowMesh = null; // 3D arrow in the scene
@@ -791,12 +944,84 @@ window.addEventListener('keydown', e => {
   }
 });
 
-document.getElementById('start-btn').addEventListener('click', showCharSelect);
+// Menu option click handlers
+document.querySelectorAll('#menu-options .menu-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    const action = opt.dataset.action;
+    if (action === 'race') showCharSelect();
+    else if (action === 'leaderboard') showLeaderboardScreen();
+    else if (action === 'credits') showCreditsScreen();
+  });
+});
+// Pause option click handlers
+document.querySelectorAll('#pause-options .pause-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    const action = opt.dataset.action;
+    if (action === 'resume') resumeGame();
+    else if (action === 'restart') { resumeGame(); resetRace(); startCountdown(); }
+    else if (action === 'mainmenu') { resumeGame(); gameState = 'MENU'; hudEl.style.display = 'none'; menuEl.style.display = 'flex'; }
+  });
+});
 document.getElementById('char-confirm').addEventListener('click', showCartSelect);
 document.getElementById('cart-confirm').addEventListener('click', showColorSelect);
 document.getElementById('color-confirm').addEventListener('click', confirmSelections);
 document.getElementById('level-confirm').addEventListener('click', confirmLevel);
 document.getElementById('restart-btn').addEventListener('click', () => { finishEl.style.display='none'; showCharSelect(); });
+document.getElementById('lb-back-btn').addEventListener('click', () => { document.getElementById('leaderboard-screen').style.display = 'none'; menuEl.style.display = 'flex'; });
+document.getElementById('credits-back-btn').addEventListener('click', () => { document.getElementById('credits-screen').style.display = 'none'; menuEl.style.display = 'flex'; });
+
+// Leaderboard/Credits screens
+function showLeaderboardScreen() {
+  menuEl.style.display = 'none';
+  const screen = document.getElementById('leaderboard-screen');
+  screen.style.display = 'flex';
+  const content = document.getElementById('lb-history-content');
+  if (raceHistory.length === 0) {
+    content.innerHTML = '<em style="color:#8b949e;">No races recorded yet. Go race!</em>';
+  } else {
+    let html = '';
+    raceHistory.slice(-10).reverse().forEach((r, i) => {
+      const suffix = ['st','nd','rd','th'][Math.min(r.position - 1, 3)];
+      html += `<div class="lb-entry"><span>${i + 1}.</span> <strong>${r.position}${suffix}</strong> on ${r.track} — <span style="color:#d29922;">⭐ ${r.score} pts</span></div>`;
+    });
+    content.innerHTML = html;
+  }
+}
+
+function showCreditsScreen() {
+  menuEl.style.display = 'none';
+  document.getElementById('credits-screen').style.display = 'flex';
+}
+
+// Pause/Resume
+function pauseGame() {
+  preCountdownState = gameState;
+  gameState = 'PAUSED';
+  pauseSelection = 0;
+  pauseOverlay.style.display = 'flex';
+  document.querySelectorAll('#pause-options .pause-option').forEach((o, i) => o.classList.toggle('selected', i === 0));
+}
+
+function resumeGame() {
+  pauseOverlay.style.display = 'none';
+  gameState = preCountdownState || 'RACING';
+  preCountdownState = null;
+}
+
+// Score helpers
+function addScore(points, label) {
+  playerScore += points;
+  scoreDisplay.textContent = '⭐ ' + playerScore;
+  // Floating score toast
+  const el = document.createElement('div');
+  el.className = 'score-toast';
+  el.textContent = '+' + points + ' pts';
+  el.style.left = '50%';
+  el.style.top = '45%';
+  el.style.transform = 'translateX(-50%)';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1300);
+}
 
 // ----- TOAST / BANNER HELPERS -----
 function showToast(icon, name, desc) {
@@ -841,6 +1066,8 @@ function showPositionChange(newPos, oldPos) {
 // Track hazards and features stored here
 let boostPads = [];    // { dist, mesh }
 let trackBarriers = []; // meshes for guardrails on dangerous curves
+let beachRocks = []; // collidable rocks on beach level
+let dislodgedPoles = []; // poles flying through the air after being hit
 
 function generateTrack() {
   // Clear scene of all objects except camera
@@ -854,6 +1081,8 @@ function generateTrack() {
   // Clear arrays
   trackBarriers = [];
   boostPads = [];
+  beachRocks = [];
+  dislodgedPoles = [];
 
   const levelType = LEVELS[selectedLevelIdx].type;
   if (levelType === 'space') generateSpaceTrack();
@@ -864,32 +1093,32 @@ function generateTrack() {
 function generateCircuitTrack() {
   scene.background = new THREE.Color(0x87ceeb);
   scene.fog = new THREE.Fog(0x87ceeb, 80, 200);
-  // A much more interesting track with elevation changes and tight sections
+  // Figure-8 with hairpins and chicanes — turns both left AND right frequently
   const cp = [
-    // Start straight
-    new THREE.Vector3(0, 0, -70),
-    // Sweeping right into uphill
-    new THREE.Vector3(35, 2, -65),
-    new THREE.Vector3(55, 5, -45),
-    // Hilltop with sharp right
-    new THREE.Vector3(65, 8, -15),
-    // Downhill fast section
-    new THREE.Vector3(60, 5, 15),
-    new THREE.Vector3(45, 2, 40),
-    // Tight S-curve through canyon
-    new THREE.Vector3(25, 0, 55),
-    new THREE.Vector3(5, -1, 60),
-    new THREE.Vector3(-20, -1, 50),
-    // Tunnel entrance (valley dip)
-    new THREE.Vector3(-40, -2, 35),
-    new THREE.Vector3(-55, -2, 15),
-    // Tunnel exit, uphill
-    new THREE.Vector3(-60, 0, -10),
-    // Wide banked turn
-    new THREE.Vector3(-50, 3, -35),
-    // Chicane
-    new THREE.Vector3(-35, 2, -55),
-    new THREE.Vector3(-15, 1, -65),
+    // Start straight heading north
+    new THREE.Vector3(0, 0, -80),
+    new THREE.Vector3(0, 1, -60),
+    // Sweeping right turn
+    new THREE.Vector3(20, 2, -45),
+    new THREE.Vector3(40, 4, -25),
+    // Sharp right hairpin at top-right
+    new THREE.Vector3(50, 6, 0),
+    new THREE.Vector3(40, 5, 20),
+    // Cross back left (figure-8 crossing)
+    new THREE.Vector3(15, 3, 35),
+    new THREE.Vector3(-15, 2, 40),
+    // Sharp left hairpin
+    new THREE.Vector3(-45, 4, 35),
+    new THREE.Vector3(-55, 6, 15),
+    // Switchback right up the hill
+    new THREE.Vector3(-50, 8, -5),
+    new THREE.Vector3(-35, 7, -20),
+    // Chicane section — quick left-right-left
+    new THREE.Vector3(-20, 5, -15),
+    new THREE.Vector3(-10, 3, -25),
+    new THREE.Vector3(-25, 2, -40),
+    // Cross back through figure-8 center
+    new THREE.Vector3(-15, 1, -55),
   ];
   const curve = new THREE.CatmullRomCurve3(cp, true, 'catmullrom', 0.5);
   const SAMPLES = 500;
@@ -1010,17 +1239,31 @@ function generateSpaceTrack() {
   scene.background = new THREE.Color(0x050510);
   scene.fog = new THREE.Fog(0x050510, 120, 300);
 
+  // Spiral figure-8 with dramatic elevation changes
   const cp = [
+    // Start heading forward
     new THREE.Vector3(0, 0, -80),
-    new THREE.Vector3(40, 15, -70),
-    new THREE.Vector3(70, 25, -30),
-    new THREE.Vector3(60, 20, 20),
-    new THREE.Vector3(20, 10, 50),
-    new THREE.Vector3(-10, 5, 70),
-    new THREE.Vector3(-50, -5, 60),
-    new THREE.Vector3(-70, -15, 20),
-    new THREE.Vector3(-60, -10, -20),
-    new THREE.Vector3(-30, 0, -60),
+    new THREE.Vector3(15, 5, -60),
+    // Sweeping left climb
+    new THREE.Vector3(-10, 15, -35),
+    new THREE.Vector3(-40, 25, -15),
+    // Dramatic drop and right turn
+    new THREE.Vector3(-35, 10, 15),
+    new THREE.Vector3(-10, 0, 30),
+    // Cross center heading right (figure-8 cross)
+    new THREE.Vector3(20, -5, 25),
+    // Right loop going down
+    new THREE.Vector3(50, -10, 10),
+    new THREE.Vector3(55, -15, -20),
+    // Sharp switchback left
+    new THREE.Vector3(35, -10, -45),
+    new THREE.Vector3(10, -5, -55),
+    // Back through center heading left
+    new THREE.Vector3(-15, 0, -50),
+    new THREE.Vector3(-35, 5, -60),
+    // Final sweeping return
+    new THREE.Vector3(-30, 3, -75),
+    new THREE.Vector3(-10, 1, -80),
   ];
   const curve = new THREE.CatmullRomCurve3(cp, true, 'catmullrom', 0.5);
   const SAMPLES = 500;
@@ -1156,19 +1399,30 @@ function generateBeachTrack() {
   scene.background = new THREE.Color(0x87CEEB);
   scene.fog = new THREE.Fog(0x87CEEB, 80, 200);
 
+  // S-shaped coastal road with loop-back — turns both ways frequently
   const cp = [
-    new THREE.Vector3(0, 0, -60),
-    new THREE.Vector3(30, 0, -55),
-    new THREE.Vector3(55, 0, -35),
-    new THREE.Vector3(65, 0, -5),
-    new THREE.Vector3(55, 0, 25),
-    new THREE.Vector3(30, 0, 45),
-    new THREE.Vector3(0, 0, 55),
-    new THREE.Vector3(-30, 0, 45),
-    new THREE.Vector3(-50, 0, 20),
-    new THREE.Vector3(-55, 0, -10),
-    new THREE.Vector3(-40, 0, -40),
-    new THREE.Vector3(-15, 0, -55),
+    // Start along the coast heading south
+    new THREE.Vector3(-20, 0, -60),
+    new THREE.Vector3(-10, 0, -45),
+    // Right turn inland
+    new THREE.Vector3(10, 0, -30),
+    new THREE.Vector3(25, 0, -10),
+    // Sharp left hairpin back toward coast
+    new THREE.Vector3(15, 0, 10),
+    new THREE.Vector3(-10, 0, 20),
+    // S-curve along the shore
+    new THREE.Vector3(-30, 0, 30),
+    new THREE.Vector3(-15, 0, 45),
+    // Loop around a peninsula (right turn)
+    new THREE.Vector3(10, 0, 55),
+    new THREE.Vector3(25, 0, 45),
+    new THREE.Vector3(20, 0, 25),
+    // Switchback heading back north
+    new THREE.Vector3(0, 0, 15),
+    new THREE.Vector3(-25, 0, 0),
+    // Final sweeping left back to start
+    new THREE.Vector3(-40, 0, -20),
+    new THREE.Vector3(-35, 0, -45),
   ];
   const curve = new THREE.CatmullRomCurve3(cp, true, 'catmullrom', 0.5);
   const SAMPLES = 500;
@@ -1190,7 +1444,7 @@ function generateBeachTrack() {
     checkpointDists.push((i / NUM_CHECKPOINTS) * trackLength);
   }
 
-  // Sandy track
+  // Sandy track surface
   const trackGeo = new THREE.BufferGeometry();
   const verts = [], uvs = [], indices = [];
   for (let i = 0; i <= SAMPLES; i++) {
@@ -1252,85 +1506,105 @@ function generateBeachTrack() {
   const startN = trackPoints[1];
   sfMesh.position.set(startP.x, startP.y + 0.12, startP.z);
   sfMesh.rotation.x = -Math.PI / 2;
-  const startAngle = Math.atan2(startN.x - startP.x, startN.z - startP.z);
-  sfMesh.rotation.z = -startAngle;
+  const sfAngle = Math.atan2(startN.x - startP.x, startN.z - startP.z);
+  sfMesh.rotation.z = -sfAngle;
   scene.add(sfMesh);
 
-  // Water plane
-  const waterGeo = new THREE.PlaneGeometry(300, 300);
-  const waterMat = new THREE.MeshStandardMaterial({ color: 0x1a8fb0, transparent: true, opacity: 0.85 });
-  const water = new THREE.Mesh(waterGeo, waterMat);
-  water.rotation.x = -Math.PI / 2;
-  water.position.set(-40, -0.3, 0);
-  scene.add(water);
-
-  // Sandy ground
-  const sandGeo = new THREE.PlaneGeometry(300, 300);
+  // Large sand ground — covers the whole area
+  const sandGeo = new THREE.PlaneGeometry(400, 400);
   const sandMat = new THREE.MeshStandardMaterial({ color: 0xC2B280, roughness: 1 });
   const sand = new THREE.Mesh(sandGeo, sandMat);
   sand.rotation.x = -Math.PI / 2;
-  sand.position.set(40, -0.4, 0);
+  sand.position.y = -0.4;
   scene.add(sand);
 
-  // Palm trees on beach side
-  for (let i = 0; i < 20; i++) {
-    const angle = (i / 20) * Math.PI * 2;
+  // Ocean — far to the right (positive X), stretches out
+  const waterGeo = new THREE.PlaneGeometry(300, 400);
+  const waterMat = new THREE.MeshStandardMaterial({
+    color: 0x0077be, transparent: true, opacity: 0.85,
+    roughness: 0.3, metalness: 0.1
+  });
+  const water = new THREE.Mesh(waterGeo, waterMat);
+  water.rotation.x = -Math.PI / 2;
+  water.position.set(190, -0.2, 0);
+  scene.add(water);
+
+  // Wet sand / shoreline strip
+  const shoreGeo = new THREE.PlaneGeometry(15, 400);
+  const shoreMat = new THREE.MeshStandardMaterial({ color: 0x9B8B6B, roughness: 0.7 });
+  const shore = new THREE.Mesh(shoreGeo, shoreMat);
+  shore.rotation.x = -Math.PI / 2;
+  shore.position.set(47, -0.35, 0);
+  scene.add(shore);
+
+  // Palm trees — on the inland side (negative X, away from ocean)
+  for (let i = 0; i < 25; i++) {
+    const angle = (i / 25) * Math.PI * 2;
     const rad = 75 + Math.random() * 30;
     const px = Math.cos(angle) * rad;
     const pz = Math.sin(angle) * rad;
-    if (px > -20) {
+    if (px < 30) {
       addPalmTree(px, pz, 0);
     }
   }
 
-  // Beach umbrellas
+  // Beach umbrellas — scattered on the beach near ocean side
   const umbrellaColors = [0xf85149, 0x1f6feb, 0xd29922, 0x3fb950, 0xdb61a2, 0xa371f7];
   for (let i = 0; i < 6; i++) {
-    const angle = (i / 6) * Math.PI * 2;
-    const rad = 72 + Math.random() * 10;
-    const ux = Math.cos(angle) * rad;
-    const uz = Math.sin(angle) * rad;
-    if (ux > -10) {
-      const poleGeo = new THREE.CylinderGeometry(0.05, 0.05, 3, 4);
-      const poleMat = new THREE.MeshStandardMaterial({ color: 0x8b949e });
-      const pole = new THREE.Mesh(poleGeo, poleMat);
-      pole.position.set(ux, 1.5, uz);
-      scene.add(pole);
-      const coneGeo = new THREE.ConeGeometry(1.5, 1, 8);
-      const coneMat = new THREE.MeshStandardMaterial({ color: umbrellaColors[i % umbrellaColors.length] });
-      const cone = new THREE.Mesh(coneGeo, coneMat);
-      cone.position.set(ux, 3.2, uz);
-      cone.rotation.x = Math.PI;
-      scene.add(cone);
-    }
+    const ux = 38 + Math.random() * 8;
+    const uz = -50 + (i / 5) * 100;
+    const poleGeo = new THREE.CylinderGeometry(0.05, 0.05, 3, 4);
+    const poleMat = new THREE.MeshStandardMaterial({ color: 0x8b949e });
+    const pole = new THREE.Mesh(poleGeo, poleMat);
+    pole.position.set(ux, 1.5, uz);
+    scene.add(pole);
+    const coneGeo = new THREE.ConeGeometry(1.5, 1, 8);
+    const coneMat = new THREE.MeshStandardMaterial({ color: umbrellaColors[i] });
+    const cone = new THREE.Mesh(coneGeo, coneMat);
+    cone.position.set(ux, 3.2, uz);
+    cone.rotation.x = Math.PI;
+    scene.add(cone);
   }
 
-  // Rocks
-  for (let i = 0; i < 8; i++) {
-    const rx = -60 + Math.random() * 30;
-    const rz = -40 + Math.random() * 80;
-    const rockGeo = new THREE.DodecahedronGeometry(0.8 + Math.random() * 1.2, 0);
-    const rockMat = new THREE.MeshStandardMaterial({ color: 0x4a4a4a, flatShading: true });
+  // Rocks — placed just OUTSIDE the track edges so opponents can be pushed into them
+  beachRocks = [];
+  const rockSpots = [0.08, 0.18, 0.28, 0.38, 0.5, 0.6, 0.7, 0.8, 0.9];
+  rockSpots.forEach((frac, idx) => {
+    const d = frac * trackLength;
+    const { pos, fwd } = getPointAtDist(d);
+    const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
+    // Place rocks just outside the track edge, alternating left and right
+    const sign = idx % 2 === 0 ? -1 : 1;
+    const offset = TRACK_HALF + 1.0 + Math.random() * 1.5;
+    const rockSize = 0.8 + Math.random() * 0.8;
+    const rockGeo = new THREE.DodecahedronGeometry(rockSize, 0);
+    const shade = 0x3a3a3a + Math.floor(Math.random() * 0x202020);
+    const rockMat = new THREE.MeshStandardMaterial({ color: shade, flatShading: true });
     const rock = new THREE.Mesh(rockGeo, rockMat);
-    rock.position.set(rx, 0.3, rz);
+    rock.position.set(
+      pos.x + right.x * sign * offset,
+      rockSize * 0.4,
+      pos.z + right.z * sign * offset
+    );
     rock.rotation.set(Math.random(), Math.random(), Math.random());
     scene.add(rock);
-  }
+    beachRocks.push({ mesh: rock, radius: rockSize });
+  });
 
-  // Guardrails on water side
+  // Guardrails only on the ocean side (right/positive lateral = toward ocean)
   for (let d = 0; d < trackLength; d += 4) {
     const { pos, fwd } = getPointAtDist(d);
     const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
     const postGeo = new THREE.CylinderGeometry(0.15, 0.15, 1.5, 4);
     const postMat = new THREE.MeshStandardMaterial({ color: 0x1f6feb });
-    const postL = new THREE.Mesh(postGeo, postMat);
-    postL.position.set(
-      pos.x - right.x * (TRACK_HALF + 0.5),
+    const postR = new THREE.Mesh(postGeo, postMat);
+    postR.position.set(
+      pos.x + right.x * (TRACK_HALF + 0.5),
       pos.y + 0.75,
-      pos.z - right.z * (TRACK_HALF + 0.5)
+      pos.z + right.z * (TRACK_HALF + 0.5)
     );
-    scene.add(postL);
-    trackBarriers.push(postL);
+    scene.add(postR);
+    trackBarriers.push(postR);
   }
 
   generateBoostPads();
@@ -1909,6 +2183,9 @@ function resetRace() {
   traps.forEach(t => scene.remove(t.mesh));
   mergeZones.forEach(m => scene.remove(m.mesh));
   racers = []; projectiles = []; traps = []; mergeZones = [];
+  // Reset score
+  playerScore = 0;
+  scoreDisplay.textContent = '⭐ 0';
   // Clean up particles and explosions
   particles.forEach(p => { p.mesh.visible = false; particlePool.push(p.mesh); });
   particles = [];
@@ -2196,6 +2473,12 @@ function gameLoop(time = 0) {
     }
   }
 
+  if (gameState === 'PAUSED') {
+    // Still render the scene but skip all physics
+    renderer.render(scene, camera);
+    return;
+  }
+
   // Animate pickup boxes
   pickupBoxes.forEach(pb => {
     if (pb.active) {
@@ -2314,12 +2597,11 @@ function fixedUpdate() {
     }
   }
 
-  // Collisions with barrier posts (guardrails)
+  // Collisions with barrier posts (guardrails) — poles dislodge on impact, kart drives through
   const BARRIER_RADIUS = 0.15;
-  const BOUNCE_RESTITUTION = 0.5;
   for (let i = 0; i < racers.length; i++) {
     const r = racers[i];
-    for (let bi = 0; bi < trackBarriers.length; bi++) {
+    for (let bi = trackBarriers.length - 1; bi >= 0; bi--) {
       const barrier = trackBarriers[bi];
       const dx = r.mesh.position.x - barrier.position.x;
       const dz = r.mesh.position.z - barrier.position.z;
@@ -2327,26 +2609,70 @@ function fixedUpdate() {
       const minDist = KART_RADIUS + BARRIER_RADIUS;
       if (dist < minDist && dist > 0.01) {
         const nx = dx / dist, nz = dz / dist;
-        const overlap = minDist - dist;
 
-        // Push kart out of barrier
-        r.mesh.position.x += nx * overlap;
-        r.mesh.position.z += nz * overlap;
+        // Slight speed reduction on impact but NO bounce
+        r.speed *= 0.92;
 
-        // Reflect velocity off barrier normal
-        const vx = Math.sin(r.angle) * r.speed;
-        const vz = Math.cos(r.angle) * r.speed;
-        const dot = vx * nx + vz * nz;
+        // Dislodge the pole — launch it away from the kart
+        dislodgedPoles.push({
+          mesh: barrier,
+          vx: -nx * 0.4 + Math.sin(r.angle) * 0.15,
+          vy: 0.4 + Math.random() * 0.3,
+          vz: -nz * 0.4 + Math.cos(r.angle) * 0.15,
+          spin: (Math.random() - 0.5) * 0.3,
+          life: 3.0
+        });
+        trackBarriers.splice(bi, 1);
+      }
+    }
+  }
 
-        // Only bounce if moving into the barrier
-        if (dot < 0) {
-          const rvx = vx - 2 * dot * nx;
-          const rvz = vz - 2 * dot * nz;
-          r.speed = Math.sqrt(rvx * rvx + rvz * rvz) * BOUNCE_RESTITUTION;
-          if (r.speed > 0.01) r.angle = Math.atan2(rvx, rvz);
+  // Collisions with beach rocks — flip the kart then place back on track
+  if (beachRocks.length > 0) {
+    for (let i = 0; i < racers.length; i++) {
+      const r = racers[i];
+      if (r.stunTimer > 0) continue;
+      for (let ri = 0; ri < beachRocks.length; ri++) {
+        const rock = beachRocks[ri];
+        const dx = r.mesh.position.x - rock.mesh.position.x;
+        const dz = r.mesh.position.z - rock.mesh.position.z;
+        const dist = Math.sqrt(dx * dx + dz * dz);
+        const minDist = KART_RADIUS + rock.radius;
+        if (dist < minDist && dist > 0.01) {
+          // Place racer back on track center after flip
+          const proj = projectOntoTrack(r.mesh.position);
+          const trackInfo = getPointAtDist(proj.dist);
+          r.mesh.position.set(trackInfo.pos.x, trackInfo.pos.y, trackInfo.pos.z);
+          r.angle = Math.atan2(trackInfo.fwd.x, trackInfo.fwd.z);
           r.mesh.rotation.y = r.angle;
+          // Trigger flip animation
+          r.stunTimer = 1.5;
+          r.stunDuration = 1.5;
+          r._baseY = r.mesh.position.y;
+          r.speed *= 0.05;
+          spawnExplosion(rock.mesh.position.x, rock.mesh.position.y, rock.mesh.position.z);
+          if (r.isPlayer) showToast('🪨', 'Rock!', 'Ouch! Flipped over a rock!');
+          break;
         }
       }
+    }
+  }
+
+  // Update dislodged poles (fly through air then fade)
+  for (let i = dislodgedPoles.length - 1; i >= 0; i--) {
+    const dp = dislodgedPoles[i];
+    dp.life -= FIXED_DT;
+    dp.mesh.position.x += dp.vx;
+    dp.mesh.position.y += dp.vy;
+    dp.mesh.position.z += dp.vz;
+    dp.vy -= 0.015; // gravity
+    dp.mesh.rotation.x += dp.spin;
+    dp.mesh.rotation.z += dp.spin * 0.7;
+    if (dp.mesh.material) dp.mesh.material.opacity = Math.max(0, dp.life / 1.5);
+    if (dp.mesh.material) dp.mesh.material.transparent = true;
+    if (dp.life <= 0) {
+      scene.remove(dp.mesh);
+      dislodgedPoles.splice(i, 1);
     }
   }
 
@@ -2498,7 +2824,7 @@ function updateRacerPosition(r) {
   const levelType = LEVELS[selectedLevelIdx].type;
   if (levelType === 'space' && Math.abs(proj.lateral) > TRACK_HALF + 5) {
     startRescue(r);
-  } else if (levelType === 'beach' && proj.lateral < -(TRACK_HALF + 4)) {
+  } else if (levelType === 'beach' && r.mesh.position.x > 40) {
     startRescue(r);
   }
 }
@@ -2820,6 +3146,7 @@ function updateProjectiles() {
         r._baseY = r.mesh.position.y;
         r.speed *= 0.1;
         spawnExplosion(r.mesh.position.x, r.mesh.position.y, r.mesh.position.z);
+        if (p.owner && p.owner.isPlayer) addScore(100, 'Hit');
         hit = true;
       }
     });
@@ -2853,6 +3180,7 @@ function updateTraps() {
         r._baseY = r.mesh.position.y;
         r.speed *= 0.05;
         spawnExplosion(r.mesh.position.x, r.mesh.position.y, r.mesh.position.z);
+        if (t.owner && t.owner.isPlayer && r !== t.owner) addScore(100, 'Trap');
         trapHit = true;
       }
     });
@@ -2907,6 +3235,7 @@ function checkPickups() {
         pb.mesh.visible = false;
         pb.respawnTimer = 8;
         if (r.isPlayer) {
+          addScore(50, 'Powerup');
           showToast(r.powerup.icon, `Got: ${r.powerup.name}`, 'Press SPACE to use!');
         }
       }
@@ -2938,6 +3267,7 @@ function checkLapsAndCheckpoints() {
 
       // Lap notifications for the player
       if (r.isPlayer && r.lap < TOTAL_LAPS) {
+        addScore(25, 'Lap');
         if (r.lap === TOTAL_LAPS - 1) {
           showLapBanner('⚡ FINAL LAP!', 'Give it everything you\'ve got!');
         } else {
@@ -2981,8 +3311,14 @@ function finishRace(winner) {
   hudEl.style.display = 'none';
   const pos = getRacePositions();
   const playerPos = pos.indexOf(racers[0]) + 1;
+  // Placement bonus
+  const placementBonus = [500, 300, 200, 100];
+  const bonus = placementBonus[Math.min(playerPos - 1, 3)];
+  addScore(bonus, 'Finish');
+  // Record race
+  raceHistory.push({ position: playerPos, score: playerScore, track: LEVELS[selectedLevelIdx].name, date: new Date().toLocaleDateString() });
   finishTitle.textContent = playerPos === 1 ? '🏆 You Win!' : '🏁 Race Over!';
-  finishResult.textContent = `You finished ${playerPos}${['st','nd','rd','th'][Math.min(playerPos-1,3)]}!`;
+  finishResult.textContent = `You finished ${playerPos}${['st','nd','rd','th'][Math.min(playerPos-1,3)]}! — Score: ⭐ ${playerScore} pts`;
   finishEl.style.display = 'flex';
 }
 
@@ -3090,7 +3426,7 @@ function updateCamera() {
 
 // ----- HUD -----
 function updateHUD() {
-  if (gameState !== 'RACING' && gameState !== 'COUNTDOWN') return;
+  if (gameState !== 'RACING' && gameState !== 'COUNTDOWN' && gameState !== 'PAUSED') return;
 
   const player = racers[0];
   const positions = getRacePositions();
@@ -3116,6 +3452,8 @@ function updateHUD() {
   // Speed bar
   const speedPct = Math.abs(player.speed) / MAX_SPEED * 100;
   speedBar.style.width = Math.min(speedPct, 100) + '%';
+  const speedKmh = Math.round(player.speed * 500);
+  speedValueEl.innerHTML = speedKmh + ' <span class="unit">km/h</span>';
   if (player.boostTimer > 0) {
     speedBar.style.background = 'linear-gradient(90deg, #f78166, #f0883e)';
   } else {
@@ -3156,10 +3494,10 @@ function updateHUD() {
 // ----- MINIMAP -----
 function updateMinimap() {
   const ctx = minimapCtx;
-  const W = 160, H = 160;
+  const W = 180, H = 180;
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = 'rgba(13,17,23,0.7)';
-  ctx.beginPath(); ctx.arc(W/2, H/2, 75, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(W/2, H/2, 85, 0, Math.PI*2); ctx.fill();
 
   // Scale track to minimap
   let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
@@ -3170,7 +3508,7 @@ function updateMinimap() {
     if (p.z > maxZ) maxZ = p.z;
   });
   const rangeX = maxX - minX || 1, rangeZ = maxZ - minZ || 1;
-  const scale = 120 / Math.max(rangeX, rangeZ);
+  const scale = 140 / Math.max(rangeX, rangeZ);
   const ox = W / 2, oz = H / 2;
   const cx = (minX + maxX) / 2, cz = (minZ + maxZ) / 2;
 
