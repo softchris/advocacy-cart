@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Octo-Cart — GitHub Kart Racing</title>
+<title>AdvoCart — Advocate Kart Racing</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { overflow: hidden; background: #0d1117; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
@@ -38,12 +38,15 @@ canvas { display: block; }
 }
 #powerup-display {
   position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
-  background: rgba(13,17,23,0.85); border: 2px solid #30363d;
-  border-radius: 12px; padding: 8px 20px;
-  color: #fff; font-size: 18px; font-weight: 600;
-  text-align: center; min-width: 180px;
+  background: rgba(13,17,23,0.9); border: 2px solid #30363d;
+  border-radius: 16px; padding: 12px 28px;
+  color: #fff; font-size: 16px; font-weight: 600;
+  text-align: center; min-width: 200px;
 }
-#powerup-display .icon { font-size: 28px; margin-right: 6px; vertical-align: middle; }
+#powerup-display .pw-icon { font-size: 48px; display: block; margin-bottom: 4px; }
+#powerup-display .pw-name { font-size: 20px; font-weight: 800; display: block; }
+#powerup-display .pw-desc { font-size: 13px; color: #8b949e; font-weight: 400; display: block; margin-top: 2px; }
+#powerup-display .pw-hint { font-size: 11px; color: #484f58; display: block; margin-top: 6px; }
 #speed-bar-container {
   position: absolute; bottom: 230px; right: 20px;
   width: 180px; height: 16px;
@@ -363,10 +366,15 @@ canvas { display: block; }
 </head>
 <body>
 
+<!-- Splash Screen -->
+<div id="splash-screen" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:100;background:#0d1117;display:flex;align-items:center;justify-content:center;transition:opacity 0.8s ease-out;">
+  <img src="assets/splash.png" style="max-width:80vw;max-height:80vh;object-fit:contain;" alt="AdvoCart">
+</div>
+
 <!-- Menu -->
-<div id="menu">
-  <h1><span class="octo">Octo</span>-<span class="cart">Cart</span></h1>
-  <div class="subtitle">🐙 GitHub Kart Racing 🏁</div>
+<div id="menu" style="display:none;">
+  <h1><span class="octo">Advo</span><span class="cart">Cart</span></h1>
+  <div class="subtitle">🥑 Advocate Kart Racing 🏁</div>
   <div id="menu-options">
     <div class="menu-option selected" data-action="race">🏎️ New Race</div>
     <div class="menu-option" data-action="leaderboard">🏆 Leaderboard</div>
@@ -388,10 +396,11 @@ canvas { display: block; }
 <div id="credits-screen">
   <h2>📜 Credits</h2>
   <div class="credits-content">
-    <strong style="color:#f78166;">Octo-Cart</strong> by <strong style="color:#3fb950;">GitHub Copilot</strong><br>
+    <strong style="color:#f78166;">AdvoCart</strong> by <strong style="color:#3fb950;">GitHub Copilot</strong><br>
     Built with <strong style="color:#58a6ff;">Three.js</strong><br><br>
+    🥑 Avocado-powered racing action<br>
     🐙 Racers from <strong>Microsoft Developer Advocates</strong><br>
-    🎨 GitHub-themed design &amp; powerups<br>
+    🎨 GitHub-themed design &amp; guac-filled powerups<br>
     🏁 Three unique tracks to master<br><br>
     <span style="color:#8b949e;">Thanks for playing!</span>
   </div>
@@ -505,7 +514,7 @@ canvas { display: block; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ============================================================
-//  OCTO-CART — A GitHub-themed kart racer built with Three.js
+//  ADVOCART — An avocado-themed advocate kart racer built with Three.js
 // ============================================================
 
 // ----- CONSTANTS -----
@@ -528,10 +537,10 @@ const POWERUP_COUNT = 8;
 
 // ----- POWERUP DEFINITIONS -----
 const POWERUP_TYPES = [
-  { name: 'Force Push', icon: '🚀', desc: 'git push --force: Speed boost!', color: 0x238636, duration: 3 },
-  { name: 'Bug Report', icon: '🐛', desc: 'Drops a bug behind you', color: 0xf85149, duration: 0 },
-  { name: 'Pull Request', icon: '🎯', desc: 'Homes in on the nearest rival', color: 0x1f6feb, duration: 0 },
-  { name: 'Merge Conflict', icon: '💥', desc: 'Slows nearby opponents', color: 0xd29922, duration: 2 },
+  { name: 'Taco Turbo', icon: '🌮', desc: 'Extra spicy speed boost!', color: 0x238636, duration: 3 },
+  { name: 'Guacamole Splat', icon: '🟢', desc: 'Drops slippery guac behind you', color: 0x3fb950, duration: 0 },
+  { name: 'Holy Guacamole', icon: '🥑', desc: 'Giant avocado homes in on a rival!', color: 0x6a4c1e, duration: 0 },
+  { name: 'Burrito Blast', icon: '🫔', desc: 'Slows nearby opponents with burrito debris', color: 0xd29922, duration: 2 },
 ];
 
 // ----- STATE -----
@@ -759,11 +768,50 @@ const COLOR_THEMES = [
   { name: 'Dark Mode', color: 0x484f58, hex: '#484f58' },
 ];
 
-const LEVELS = [
-  { name: 'GitHub Circuit', desc: 'The classic track with hills, curves and boost pads', emoji: '🏁', type: 'circuit' },
-  { name: 'Cosmic Merge', desc: 'A rainbow road through the stars — don\'t drift into the void!', emoji: '🌌', type: 'space' },
-  { name: 'Tidal Branch', desc: 'Beach paradise — but watch out for the waves!', emoji: '🏖️', type: 'beach' },
-];
+let LEVELS = [];
+let levelDataCache = {}; // cache loaded JSON level data
+
+async function loadLevelManifest() {
+  try {
+    const resp = await fetch('levels/manifest.json');
+    const manifest = await resp.json();
+    const levelPromises = manifest.levels.map(async (path) => {
+      const r = await fetch(path);
+      const data = await r.json();
+      return data;
+    });
+    const allLevels = await Promise.all(levelPromises);
+    LEVELS = allLevels.map((data, i) => {
+      levelDataCache[i] = data;
+      return { name: data.name, desc: data.description, emoji: data.emoji, type: data.type };
+    });
+  } catch (e) {
+    console.warn('Failed to load level manifest, using defaults:', e);
+    LEVELS = [
+      { name: 'GitHub Circuit', desc: 'The classic track with hills, curves and boost pads', emoji: '🏁', type: 'circuit' },
+      { name: 'Cosmic Merge', desc: 'A rainbow road through the stars — don\'t drift into the void!', emoji: '🌌', type: 'space' },
+      { name: 'Tidal Branch', desc: 'Beach paradise — but watch out for the waves!', emoji: '🏖️', type: 'beach' },
+    ];
+  }
+}
+
+// Also support loading a custom level from query param
+async function loadCustomLevel() {
+  const params = new URLSearchParams(window.location.search);
+  const levelParam = params.get('level');
+  if (levelParam === 'custom') {
+    try {
+      const stored = localStorage.getItem('advocart-custom-level');
+      if (stored) {
+        const data = JSON.parse(stored);
+        const idx = LEVELS.length;
+        LEVELS.push({ name: data.name, desc: data.description, emoji: data.emoji, type: data.type });
+        levelDataCache[idx] = data;
+        selectedLevelIdx = idx;
+      }
+    } catch (e) { console.warn('Failed to load custom level:', e); }
+  }
+}
 
 let selectedCharIdx = 0;
 let selectedCartIdx = 0;
@@ -1084,42 +1132,23 @@ function generateTrack() {
   beachRocks = [];
   dislodgedPoles = [];
 
-  const levelType = LEVELS[selectedLevelIdx].type;
-  if (levelType === 'space') generateSpaceTrack();
-  else if (levelType === 'beach') generateBeachTrack();
-  else generateCircuitTrack();
+  const levelData = levelDataCache[selectedLevelIdx];
+  if (levelData) {
+    generateTrackFromJSON(levelData);
+  } else {
+    // Fallback: generate circuit track inline if no JSON data available
+    generateCircuitTrackFallback();
+  }
 }
 
-function generateCircuitTrack() {
-  scene.background = new THREE.Color(0x87ceeb);
-  scene.fog = new THREE.Fog(0x87ceeb, 80, 200);
-  // Figure-8 with hairpins and chicanes — turns both left AND right frequently
-  const cp = [
-    // Start straight heading north
-    new THREE.Vector3(0, 0, -80),
-    new THREE.Vector3(0, 1, -60),
-    // Sweeping right turn
-    new THREE.Vector3(20, 2, -45),
-    new THREE.Vector3(40, 4, -25),
-    // Sharp right hairpin at top-right
-    new THREE.Vector3(50, 6, 0),
-    new THREE.Vector3(40, 5, 20),
-    // Cross back left (figure-8 crossing)
-    new THREE.Vector3(15, 3, 35),
-    new THREE.Vector3(-15, 2, 40),
-    // Sharp left hairpin
-    new THREE.Vector3(-45, 4, 35),
-    new THREE.Vector3(-55, 6, 15),
-    // Switchback right up the hill
-    new THREE.Vector3(-50, 8, -5),
-    new THREE.Vector3(-35, 7, -20),
-    // Chicane section — quick left-right-left
-    new THREE.Vector3(-20, 5, -15),
-    new THREE.Vector3(-10, 3, -25),
-    new THREE.Vector3(-25, 2, -40),
-    // Cross back through figure-8 center
-    new THREE.Vector3(-15, 1, -55),
-  ];
+function generateTrackFromJSON(levelData) {
+  const env = levelData.environment;
+  const skyColor = new THREE.Color(env.skyColor);
+  scene.background = skyColor;
+  scene.fog = new THREE.Fog(new THREE.Color(env.fogColor), env.fogNear, env.fogFar);
+
+  // Build control points and curve
+  const cp = levelData.controlPoints.map(p => new THREE.Vector3(p.x, p.y, p.z));
   const curve = new THREE.CatmullRomCurve3(cp, true, 'catmullrom', 0.5);
   const SAMPLES = 500;
   trackPoints = curve.getPoints(SAMPLES);
@@ -1142,9 +1171,14 @@ function generateCircuitTrack() {
     checkpointDists.push((i / NUM_CHECKPOINTS) * trackLength);
   }
 
-  // Build track mesh (ribbon that follows terrain elevation)
+  const trackW = levelData.trackWidth || TRACK_WIDTH;
+  const trackHalf = trackW / 2;
+
+  // Build track mesh
   const trackGeo = new THREE.BufferGeometry();
-  const verts = [], uvs = [], indices = [];
+  const verts = [], uvs = [], indices = [], colors = [];
+  const isRainbow = levelData.specialFeatures && levelData.specialFeatures.rainbowTrack;
+
   for (let i = 0; i <= SAMPLES; i++) {
     const idx = i % trackPoints.length;
     const nextIdx = (i + 1) % trackPoints.length;
@@ -1153,11 +1187,17 @@ function generateCircuitTrack() {
     const fwd = new THREE.Vector3().subVectors(pn, p).normalize();
     const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
 
-    const l = p.clone().add(right.clone().multiplyScalar(-TRACK_HALF));
-    const r = p.clone().add(right.clone().multiplyScalar(TRACK_HALF));
+    const l = p.clone().add(right.clone().multiplyScalar(-trackHalf));
+    const r = p.clone().add(right.clone().multiplyScalar(trackHalf));
     verts.push(l.x, p.y + 0.05, l.z, r.x, p.y + 0.05, r.z);
     const u = cumLengths[idx] / trackLength;
     uvs.push(0, u, 1, u);
+
+    if (isRainbow) {
+      const hue = (i / SAMPLES);
+      const col = new THREE.Color().setHSL(hue, 0.8, 0.5);
+      colors.push(col.r, col.g, col.b, col.r, col.g, col.b);
+    }
 
     if (i < SAMPLES) {
       const bi = i * 2;
@@ -1166,12 +1206,351 @@ function generateCircuitTrack() {
   }
   trackGeo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
   trackGeo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+  if (isRainbow) {
+    trackGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+  }
   trackGeo.setIndex(indices);
   trackGeo.computeVertexNormals();
 
-  // Track texture with lane markings
-  const tCanvas = document.createElement('canvas');
-  tCanvas.width = 128; tCanvas.height = 128;
+  // Track material
+  let trackMat;
+  if (isRainbow) {
+    trackMat = new THREE.MeshStandardMaterial({
+      vertexColors: true,
+      emissive: 0x111111,
+      emissiveIntensity: 0.3,
+      roughness: 0.5,
+    });
+  } else {
+    const surf = levelData.trackSurface || {};
+    const tCanvas = document.createElement('canvas');
+    tCanvas.width = 128; tCanvas.height = 128;
+    const tCtx = tCanvas.getContext('2d');
+    tCtx.fillStyle = surf.color || '#2d333b'; tCtx.fillRect(0, 0, 128, 128);
+    tCtx.strokeStyle = surf.laneMarking || '#484f58'; tCtx.lineWidth = 2; tCtx.setLineDash([8, 8]);
+    tCtx.beginPath(); tCtx.moveTo(64, 0); tCtx.lineTo(64, 128); tCtx.stroke();
+    tCtx.strokeStyle = surf.edgeColor || '#f0f6fc'; tCtx.lineWidth = 3; tCtx.setLineDash([]);
+    tCtx.beginPath(); tCtx.moveTo(4, 0); tCtx.lineTo(4, 128); tCtx.stroke();
+    tCtx.beginPath(); tCtx.moveTo(124, 0); tCtx.lineTo(124, 128); tCtx.stroke();
+
+    const trackTex = new THREE.CanvasTexture(tCanvas);
+    trackTex.wrapS = THREE.RepeatWrapping; trackTex.wrapT = THREE.RepeatWrapping;
+    trackTex.repeat.set(1, 50);
+    trackMat = new THREE.MeshStandardMaterial({ map: trackTex, roughness: 0.8 });
+  }
+  const trackMesh = new THREE.Mesh(trackGeo, trackMat);
+  scene.add(trackMesh);
+
+  // Start/finish line
+  const sfGeo = new THREE.PlaneGeometry(trackW, 2);
+  const sfCanvas = document.createElement('canvas');
+  sfCanvas.width = 64; sfCanvas.height = 8;
+  const sfCtx = sfCanvas.getContext('2d');
+  for (let x = 0; x < 64; x += 4) {
+    for (let y = 0; y < 8; y += 4) {
+      sfCtx.fillStyle = (x/4 + y/4) % 2 === 0 ? '#fff' : '#000';
+      sfCtx.fillRect(x, y, 4, 4);
+    }
+  }
+  const sfTex = new THREE.CanvasTexture(sfCanvas);
+  sfTex.wrapS = THREE.RepeatWrapping;
+  const sfMat = new THREE.MeshStandardMaterial({ map: sfTex });
+  const sfMesh = new THREE.Mesh(sfGeo, sfMat);
+  const startP = trackPoints[0];
+  const startN = trackPoints[1];
+  sfMesh.position.set(startP.x, startP.y + 0.12, startP.z);
+  sfMesh.rotation.x = -Math.PI / 2;
+  const startAngle = Math.atan2(startN.x - startP.x, startN.z - startP.z);
+  sfMesh.rotation.z = -startAngle;
+  scene.add(sfMesh);
+
+  // Ground plane (if groundColor is set)
+  if (env.groundColor && env.groundSize > 0) {
+    const groundGeo = new THREE.PlaneGeometry(env.groundSize, env.groundSize, 40, 40);
+    if (levelData.specialFeatures && levelData.specialFeatures.terrainVariation) {
+      const gVerts = groundGeo.attributes.position.array;
+      for (let i = 0; i < gVerts.length; i += 3) {
+        const gx = gVerts[i], gz = gVerts[i+1];
+        gVerts[i+2] = Math.sin(gx * 0.03) * Math.cos(gz * 0.03) * 2 - 0.5;
+      }
+      groundGeo.computeVertexNormals();
+    }
+    const groundMat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(env.groundColor), roughness: 1,
+      flatShading: !!(levelData.specialFeatures && levelData.specialFeatures.terrainVariation)
+    });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.5;
+    scene.add(ground);
+  }
+
+  // Stars (space level)
+  if (levelData.specialFeatures && levelData.specialFeatures.stars) {
+    const starCount = levelData.specialFeatures.starCount || 500;
+    for (let i = 0; i < starCount; i++) {
+      const starR = 0.3 + Math.random() * 0.5;
+      const starGeo = new THREE.SphereGeometry(starR, 4, 4);
+      const starMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      const star = new THREE.Mesh(starGeo, starMat);
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const radius = 50 + Math.random() * 150;
+      star.position.set(
+        Math.sin(phi) * Math.cos(theta) * radius,
+        Math.sin(phi) * Math.sin(theta) * radius,
+        Math.cos(phi) * radius
+      );
+      scene.add(star);
+    }
+  }
+
+  // Water plane (beach level)
+  if (levelData.specialFeatures && levelData.specialFeatures.waterPlane) {
+    const wp = levelData.specialFeatures.waterPlane;
+    const waterGeo = new THREE.PlaneGeometry(wp.width, wp.height);
+    const waterMat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(wp.color), transparent: true, opacity: wp.opacity,
+      roughness: 0.3, metalness: 0.1
+    });
+    const water = new THREE.Mesh(waterGeo, waterMat);
+    water.rotation.x = -Math.PI / 2;
+    water.position.set(wp.x, wp.y, wp.z);
+    scene.add(water);
+  }
+
+  // Shoreline (beach level)
+  if (levelData.specialFeatures && levelData.specialFeatures.shoreline) {
+    const sl = levelData.specialFeatures.shoreline;
+    const shoreGeo = new THREE.PlaneGeometry(sl.width, sl.height);
+    const shoreMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(sl.color), roughness: 0.7 });
+    const shore = new THREE.Mesh(shoreGeo, shoreMat);
+    shore.rotation.x = -Math.PI / 2;
+    shore.position.set(sl.x, sl.y, sl.z);
+    scene.add(shore);
+  }
+
+  // Barriers
+  if (levelData.barriers) {
+    const barrierData = levelData.barriers;
+    const spacing = barrierData.spacing || 6;
+    const barrierColor = new THREE.Color(barrierData.color || '#f85149');
+    const isGlowing = barrierData.glowing || false;
+    const barrierOpacity = barrierData.opacity || 1.0;
+    const emissiveInt = barrierData.emissiveIntensity || 0;
+
+    if (barrierData.zones) {
+      // Circuit-style: barriers only in certain zones
+      barrierData.zones.forEach(zone => {
+        const dStart = zone.start * trackLength;
+        const dEnd = zone.end * trackLength;
+        for (let d = dStart; d < dEnd; d += spacing) {
+          const { pos, fwd } = getPointAtDist(d);
+          const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
+          const postGeo = new THREE.CylinderGeometry(0.15, 0.15, 1.5, 4);
+          const matOpts = { color: barrierColor };
+          if (isGlowing) { matOpts.emissive = barrierColor; matOpts.emissiveIntensity = emissiveInt; matOpts.transparent = true; matOpts.opacity = barrierOpacity; }
+          const postMat = new THREE.MeshStandardMaterial(matOpts);
+          if (barrierData.sides === 'both' || barrierData.sides === 'left') {
+            const postL = new THREE.Mesh(postGeo, postMat);
+            postL.position.set(pos.x - right.x * (trackHalf + 0.5), pos.y + 0.75, pos.z - right.z * (trackHalf + 0.5));
+            scene.add(postL);
+            trackBarriers.push(postL);
+          }
+          if (barrierData.sides === 'both' || barrierData.sides === 'right') {
+            const postR = new THREE.Mesh(postGeo, postMat);
+            postR.position.set(pos.x + right.x * (trackHalf + 0.5), pos.y + 0.75, pos.z + right.z * (trackHalf + 0.5));
+            scene.add(postR);
+            trackBarriers.push(postR);
+          }
+        }
+      });
+    } else {
+      // Full track barriers (space/beach style)
+      for (let d = 0; d < trackLength; d += spacing) {
+        const { pos, fwd } = getPointAtDist(d);
+        const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
+        const postGeo = new THREE.CylinderGeometry(0.12, 0.12, 1.5, 4);
+        const matOpts = { color: barrierColor };
+        if (isGlowing) { matOpts.emissive = barrierColor; matOpts.emissiveIntensity = emissiveInt; matOpts.transparent = true; matOpts.opacity = barrierOpacity; }
+        const postMat = new THREE.MeshStandardMaterial(matOpts);
+        if (barrierData.sides === 'both' || barrierData.sides === 'left') {
+          const postL = new THREE.Mesh(postGeo, postMat);
+          postL.position.set(pos.x - right.x * (trackHalf + 0.5), pos.y + 0.75, pos.z - right.z * (trackHalf + 0.5));
+          scene.add(postL);
+          trackBarriers.push(postL);
+        }
+        if (barrierData.sides === 'both' || barrierData.sides === 'right') {
+          const postR = new THREE.Mesh(postGeo, postMat);
+          postR.position.set(pos.x + right.x * (trackHalf + 0.5), pos.y + 0.75, pos.z + right.z * (trackHalf + 0.5));
+          scene.add(postR);
+          trackBarriers.push(postR);
+        }
+      }
+    }
+  }
+
+  // Obstacles (rocks for beach level)
+  if (levelData.obstacles && levelData.obstacles.rocks) {
+    beachRocks = [];
+    levelData.obstacles.rocks.forEach((rockDef, idx) => {
+      const d = rockDef.trackFraction * trackLength;
+      const { pos, fwd } = getPointAtDist(d);
+      const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
+      const sign = rockDef.side === 'left' ? -1 : 1;
+      const offset = trackHalf + 1.0 + Math.random() * 1.5;
+      const rockSize = 0.8 + Math.random() * 0.8;
+      const rockGeo = new THREE.DodecahedronGeometry(rockSize, 0);
+      const shade = 0x3a3a3a + Math.floor(Math.random() * 0x202020);
+      const rockMat = new THREE.MeshStandardMaterial({ color: shade, flatShading: true });
+      const rock = new THREE.Mesh(rockGeo, rockMat);
+      rock.position.set(
+        pos.x + right.x * sign * offset,
+        rockSize * 0.4,
+        pos.z + right.z * sign * offset
+      );
+      rock.rotation.set(Math.random(), Math.random(), Math.random());
+      scene.add(rock);
+      beachRocks.push({ mesh: rock, radius: rockSize });
+    });
+  }
+
+  // Boost pads
+  if (levelData.boostPads && levelData.boostPads.length > 0) {
+    levelData.boostPads.forEach(padDef => {
+      const d = padDef.trackFraction * trackLength;
+      const { pos, fwd } = getPointAtDist(d);
+      const padGeo = new THREE.PlaneGeometry(3, 6);
+      const padCanvas = document.createElement('canvas');
+      padCanvas.width = 32; padCanvas.height = 64;
+      const padCtx = padCanvas.getContext('2d');
+      padCtx.fillStyle = '#0d419d'; padCtx.fillRect(0, 0, 32, 64);
+      padCtx.fillStyle = '#58a6ff';
+      for (let cy = 5; cy < 64; cy += 16) {
+        padCtx.beginPath();
+        padCtx.moveTo(16, cy); padCtx.lineTo(28, cy+8); padCtx.lineTo(16, cy+6);
+        padCtx.lineTo(4, cy+8); padCtx.closePath(); padCtx.fill();
+      }
+      const padTex = new THREE.CanvasTexture(padCanvas);
+      const padMat = new THREE.MeshStandardMaterial({
+        map: padTex, emissive: 0x1f6feb, emissiveIntensity: 0.4
+      });
+      const pad = new THREE.Mesh(padGeo, padMat);
+      pad.rotation.x = -Math.PI / 2;
+      pad.position.set(pos.x, pos.y + 0.08, pos.z);
+      const angle = Math.atan2(fwd.x, fwd.z);
+      pad.rotation.z = -angle;
+      scene.add(pad);
+      boostPads.push({ dist: d, mesh: pad });
+    });
+  }
+
+  // Scenery
+  if (levelData.scenery) {
+    const sc = levelData.scenery;
+    // Standard trees (circuit)
+    if (sc.outerTrees) {
+      for (let i = 0; i < sc.outerTrees; i++) {
+        const angle = (i / sc.outerTrees) * Math.PI * 2;
+        const r = sc.outerRadius + Math.random() * sc.outerRadiusVariation;
+        const x = Math.cos(angle) * r;
+        const z = Math.sin(angle) * r;
+        const y = levelData.specialFeatures && levelData.specialFeatures.terrainVariation
+          ? Math.sin(x * 0.03) * Math.cos(z * 0.03) * 2 - 0.5 : 0;
+        if (Math.random() > 0.3) {
+          addTree(x, z, y);
+        } else {
+          addPineTree(x, z, y);
+        }
+      }
+    }
+    if (sc.innerTrees) {
+      for (let i = 0; i < sc.innerTrees; i++) {
+        const angle = (i / sc.innerTrees) * Math.PI * 2;
+        const r = sc.innerRadius + Math.random() * sc.innerRadiusVariation;
+        const x = Math.cos(angle) * r;
+        const z = Math.sin(angle) * r;
+        addTree(x, z, 0);
+      }
+    }
+    // Palm trees (beach)
+    if (sc.palmTrees) {
+      const pt = sc.palmTrees;
+      for (let i = 0; i < pt.count; i++) {
+        const angle = (i / pt.count) * Math.PI * 2;
+        const rad = pt.radius + Math.random() * pt.radiusVariation;
+        const px = Math.cos(angle) * rad;
+        const pz = Math.sin(angle) * rad;
+        if (px < pt.maxX) {
+          addPalmTree(px, pz, 0);
+        }
+      }
+    }
+    // Umbrellas (beach)
+    if (sc.umbrellas) {
+      const umb = sc.umbrellas;
+      const umbrellaColors = umb.colors.map(c => new THREE.Color(c).getHex());
+      for (let i = 0; i < umb.count; i++) {
+        const ux = umb.xStart + Math.random() * umb.xRange;
+        const uz = umb.zStart + (i / (umb.count - 1)) * umb.zRange;
+        const poleGeo = new THREE.CylinderGeometry(0.05, 0.05, 3, 4);
+        const poleMat = new THREE.MeshStandardMaterial({ color: 0x8b949e });
+        const pole = new THREE.Mesh(poleGeo, poleMat);
+        pole.position.set(ux, 1.5, uz);
+        scene.add(pole);
+        const coneGeo = new THREE.ConeGeometry(1.5, 1, 8);
+        const coneMat = new THREE.MeshStandardMaterial({ color: umbrellaColors[i % umbrellaColors.length] });
+        const cone = new THREE.Mesh(coneGeo, coneMat);
+        cone.position.set(ux, 3.2, uz);
+        cone.rotation.x = Math.PI;
+        scene.add(cone);
+      }
+    }
+  }
+}
+
+// Fallback circuit track if JSON loading fails
+function generateCircuitTrackFallback() {
+  scene.background = new THREE.Color(0x87ceeb);
+  scene.fog = new THREE.Fog(0x87ceeb, 80, 200);
+  const cp = [
+    new THREE.Vector3(0, 0, -80), new THREE.Vector3(0, 1, -60),
+    new THREE.Vector3(20, 2, -45), new THREE.Vector3(40, 4, -25),
+    new THREE.Vector3(50, 6, 0), new THREE.Vector3(40, 5, 20),
+    new THREE.Vector3(15, 3, 35), new THREE.Vector3(-15, 2, 40),
+    new THREE.Vector3(-45, 4, 35), new THREE.Vector3(-55, 6, 15),
+    new THREE.Vector3(-50, 8, -5), new THREE.Vector3(-35, 7, -20),
+    new THREE.Vector3(-20, 5, -15), new THREE.Vector3(-10, 3, -25),
+    new THREE.Vector3(-25, 2, -40), new THREE.Vector3(-15, 1, -55),
+  ];
+  const curve = new THREE.CatmullRomCurve3(cp, true, 'catmullrom', 0.5);
+  const SAMPLES = 500;
+  trackPoints = curve.getPoints(SAMPLES);
+  segLengths = []; cumLengths = [0]; trackLength = 0;
+  for (let i = 0; i < trackPoints.length; i++) {
+    const next = trackPoints[(i + 1) % trackPoints.length];
+    const d = trackPoints[i].distanceTo(next);
+    segLengths.push(d); trackLength += d; cumLengths.push(trackLength);
+  }
+  checkpointDists = [];
+  for (let i = 0; i < NUM_CHECKPOINTS; i++) { checkpointDists.push((i / NUM_CHECKPOINTS) * trackLength); }
+  const trackGeo = new THREE.BufferGeometry();
+  const verts = [], uvs = [], indices = [];
+  for (let i = 0; i <= SAMPLES; i++) {
+    const idx = i % trackPoints.length; const nextIdx = (i + 1) % trackPoints.length;
+    const p = trackPoints[idx]; const pn = trackPoints[nextIdx];
+    const fwd = new THREE.Vector3().subVectors(pn, p).normalize();
+    const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
+    const l = p.clone().add(right.clone().multiplyScalar(-TRACK_HALF));
+    const r = p.clone().add(right.clone().multiplyScalar(TRACK_HALF));
+    verts.push(l.x, p.y + 0.05, l.z, r.x, p.y + 0.05, r.z);
+    uvs.push(0, cumLengths[idx] / trackLength, 1, cumLengths[idx] / trackLength);
+    if (i < SAMPLES) { const bi = i * 2; indices.push(bi, bi+1, bi+2, bi+1, bi+3, bi+2); }
+  }
+  trackGeo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
+  trackGeo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+  trackGeo.setIndex(indices); trackGeo.computeVertexNormals();
+  const tCanvas = document.createElement('canvas'); tCanvas.width = 128; tCanvas.height = 128;
   const tCtx = tCanvas.getContext('2d');
   tCtx.fillStyle = '#2d333b'; tCtx.fillRect(0, 0, 128, 128);
   tCtx.strokeStyle = '#484f58'; tCtx.lineWidth = 2; tCtx.setLineDash([8, 8]);
@@ -1179,435 +1558,30 @@ function generateCircuitTrack() {
   tCtx.strokeStyle = '#f0f6fc'; tCtx.lineWidth = 3; tCtx.setLineDash([]);
   tCtx.beginPath(); tCtx.moveTo(4, 0); tCtx.lineTo(4, 128); tCtx.stroke();
   tCtx.beginPath(); tCtx.moveTo(124, 0); tCtx.lineTo(124, 128); tCtx.stroke();
-
   const trackTex = new THREE.CanvasTexture(tCanvas);
-  trackTex.wrapS = THREE.RepeatWrapping; trackTex.wrapT = THREE.RepeatWrapping;
-  trackTex.repeat.set(1, 50);
-
+  trackTex.wrapS = THREE.RepeatWrapping; trackTex.wrapT = THREE.RepeatWrapping; trackTex.repeat.set(1, 50);
   const trackMat = new THREE.MeshStandardMaterial({ map: trackTex, roughness: 0.8 });
-  const trackMesh = new THREE.Mesh(trackGeo, trackMat);
-  scene.add(trackMesh);
-
-  // Start/finish line
+  scene.add(new THREE.Mesh(trackGeo, trackMat));
+  // Start line
   const sfGeo = new THREE.PlaneGeometry(TRACK_WIDTH, 2);
-  const sfCanvas = document.createElement('canvas');
-  sfCanvas.width = 64; sfCanvas.height = 8;
+  const sfCanvas = document.createElement('canvas'); sfCanvas.width = 64; sfCanvas.height = 8;
   const sfCtx = sfCanvas.getContext('2d');
-  for (let x = 0; x < 64; x += 4) {
-    for (let y = 0; y < 8; y += 4) {
-      sfCtx.fillStyle = (x/4 + y/4) % 2 === 0 ? '#fff' : '#000';
-      sfCtx.fillRect(x, y, 4, 4);
-    }
-  }
-  const sfTex = new THREE.CanvasTexture(sfCanvas);
-  sfTex.wrapS = THREE.RepeatWrapping;
+  for (let x = 0; x < 64; x += 4) { for (let y = 0; y < 8; y += 4) { sfCtx.fillStyle = (x/4 + y/4) % 2 === 0 ? '#fff' : '#000'; sfCtx.fillRect(x, y, 4, 4); } }
+  const sfTex = new THREE.CanvasTexture(sfCanvas); sfTex.wrapS = THREE.RepeatWrapping;
   const sfMat = new THREE.MeshStandardMaterial({ map: sfTex });
   const sfMesh = new THREE.Mesh(sfGeo, sfMat);
-  const startP = trackPoints[0];
-  const startN = trackPoints[1];
-  sfMesh.position.set(startP.x, startP.y + 0.12, startP.z);
+  sfMesh.position.set(trackPoints[0].x, trackPoints[0].y + 0.12, trackPoints[0].z);
   sfMesh.rotation.x = -Math.PI / 2;
-  const startAngle = Math.atan2(startN.x - startP.x, startN.z - startP.z);
-  sfMesh.rotation.z = -startAngle;
+  sfMesh.rotation.z = -Math.atan2(trackPoints[1].x - trackPoints[0].x, trackPoints[1].z - trackPoints[0].z);
   scene.add(sfMesh);
-
-  // Start line arch — removed
-
-  // Ground plane - larger and more interesting
+  // Ground
   const groundGeo = new THREE.PlaneGeometry(400, 400, 40, 40);
-  // Add some terrain variation to ground
   const gVerts = groundGeo.attributes.position.array;
-  for (let i = 0; i < gVerts.length; i += 3) {
-    const gx = gVerts[i], gz = gVerts[i+1];
-    // Gentle hills
-    gVerts[i+2] = Math.sin(gx * 0.03) * Math.cos(gz * 0.03) * 2 - 0.5;
-  }
+  for (let i = 0; i < gVerts.length; i += 3) { gVerts[i+2] = Math.sin(gVerts[i] * 0.03) * Math.cos(gVerts[i+1] * 0.03) * 2 - 0.5; }
   groundGeo.computeVertexNormals();
-  const groundMat = new THREE.MeshStandardMaterial({ color: 0x1a7f37, roughness: 1, flatShading: true });
-  const ground = new THREE.Mesh(groundGeo, groundMat);
-  ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -0.5;
-  scene.add(ground);
-
-  // === TRACK FEATURES ===
-  generateBoostPads();
-  generateBarriers();
-  generateScenery();
-}
-
-function generateSpaceTrack() {
-  scene.background = new THREE.Color(0x050510);
-  scene.fog = new THREE.Fog(0x050510, 120, 300);
-
-  // Spiral figure-8 with dramatic elevation changes
-  const cp = [
-    // Start heading forward
-    new THREE.Vector3(0, 0, -80),
-    new THREE.Vector3(15, 5, -60),
-    // Sweeping left climb
-    new THREE.Vector3(-10, 15, -35),
-    new THREE.Vector3(-40, 25, -15),
-    // Dramatic drop and right turn
-    new THREE.Vector3(-35, 10, 15),
-    new THREE.Vector3(-10, 0, 30),
-    // Cross center heading right (figure-8 cross)
-    new THREE.Vector3(20, -5, 25),
-    // Right loop going down
-    new THREE.Vector3(50, -10, 10),
-    new THREE.Vector3(55, -15, -20),
-    // Sharp switchback left
-    new THREE.Vector3(35, -10, -45),
-    new THREE.Vector3(10, -5, -55),
-    // Back through center heading left
-    new THREE.Vector3(-15, 0, -50),
-    new THREE.Vector3(-35, 5, -60),
-    // Final sweeping return
-    new THREE.Vector3(-30, 3, -75),
-    new THREE.Vector3(-10, 1, -80),
-  ];
-  const curve = new THREE.CatmullRomCurve3(cp, true, 'catmullrom', 0.5);
-  const SAMPLES = 500;
-  trackPoints = curve.getPoints(SAMPLES);
-
-  segLengths = [];
-  cumLengths = [0];
-  trackLength = 0;
-  for (let i = 0; i < trackPoints.length; i++) {
-    const next = trackPoints[(i + 1) % trackPoints.length];
-    const d = trackPoints[i].distanceTo(next);
-    segLengths.push(d);
-    trackLength += d;
-    cumLengths.push(trackLength);
-  }
-
-  checkpointDists = [];
-  for (let i = 0; i < NUM_CHECKPOINTS; i++) {
-    checkpointDists.push((i / NUM_CHECKPOINTS) * trackLength);
-  }
-
-  // Rainbow track mesh with vertex colors
-  const trackGeo = new THREE.BufferGeometry();
-  const verts = [], uvs = [], indices = [], colors = [];
-  for (let i = 0; i <= SAMPLES; i++) {
-    const idx = i % trackPoints.length;
-    const nextIdx = (i + 1) % trackPoints.length;
-    const p = trackPoints[idx];
-    const pn = trackPoints[nextIdx];
-    const fwd = new THREE.Vector3().subVectors(pn, p).normalize();
-    const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
-
-    const l = p.clone().add(right.clone().multiplyScalar(-TRACK_HALF));
-    const r = p.clone().add(right.clone().multiplyScalar(TRACK_HALF));
-    verts.push(l.x, p.y + 0.05, l.z, r.x, p.y + 0.05, r.z);
-    const u = cumLengths[idx] / trackLength;
-    uvs.push(0, u, 1, u);
-
-    const hue = (i / SAMPLES);
-    const col = new THREE.Color().setHSL(hue, 0.8, 0.5);
-    colors.push(col.r, col.g, col.b, col.r, col.g, col.b);
-
-    if (i < SAMPLES) {
-      const bi = i * 2;
-      indices.push(bi, bi+1, bi+2, bi+1, bi+3, bi+2);
-    }
-  }
-  trackGeo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
-  trackGeo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
-  trackGeo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-  trackGeo.setIndex(indices);
-  trackGeo.computeVertexNormals();
-
-  const trackMat = new THREE.MeshStandardMaterial({
-    vertexColors: true,
-    emissive: 0x111111,
-    emissiveIntensity: 0.3,
-    roughness: 0.5,
-  });
-  const trackMesh = new THREE.Mesh(trackGeo, trackMat);
-  scene.add(trackMesh);
-
-  // Start/finish line
-  const sfGeo = new THREE.PlaneGeometry(TRACK_WIDTH, 2);
-  const sfCanvas = document.createElement('canvas');
-  sfCanvas.width = 64; sfCanvas.height = 8;
-  const sfCtx = sfCanvas.getContext('2d');
-  for (let x = 0; x < 64; x += 4) {
-    for (let y = 0; y < 8; y += 4) {
-      sfCtx.fillStyle = (x/4 + y/4) % 2 === 0 ? '#fff' : '#000';
-      sfCtx.fillRect(x, y, 4, 4);
-    }
-  }
-  const sfTex = new THREE.CanvasTexture(sfCanvas);
-  sfTex.wrapS = THREE.RepeatWrapping;
-  const sfMat = new THREE.MeshStandardMaterial({ map: sfTex });
-  const sfMesh = new THREE.Mesh(sfGeo, sfMat);
-  const startP = trackPoints[0];
-  const startN = trackPoints[1];
-  sfMesh.position.set(startP.x, startP.y + 0.12, startP.z);
-  sfMesh.rotation.x = -Math.PI / 2;
-  const startAngle = Math.atan2(startN.x - startP.x, startN.z - startP.z);
-  sfMesh.rotation.z = -startAngle;
-  scene.add(sfMesh);
-
-  // Stars
-  for (let i = 0; i < 500; i++) {
-    const starR = 0.3 + Math.random() * 0.5;
-    const starGeo = new THREE.SphereGeometry(starR, 4, 4);
-    const starMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    const star = new THREE.Mesh(starGeo, starMat);
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos(2 * Math.random() - 1);
-    const radius = 50 + Math.random() * 150;
-    star.position.set(
-      Math.sin(phi) * Math.cos(theta) * radius,
-      Math.sin(phi) * Math.sin(theta) * radius,
-      Math.cos(phi) * radius
-    );
-    scene.add(star);
-  }
-
-  // Glowing guardrails
-  for (let d = 0; d < trackLength; d += 5) {
-    const { pos, fwd } = getPointAtDist(d);
-    const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
-    const postGeo = new THREE.CylinderGeometry(0.12, 0.12, 1.5, 4);
-    const postMat = new THREE.MeshStandardMaterial({
-      color: 0x58a6ff, emissive: 0x58a6ff, emissiveIntensity: 0.5,
-      transparent: true, opacity: 0.6
-    });
-    const postL = new THREE.Mesh(postGeo, postMat);
-    postL.position.set(
-      pos.x - right.x * (TRACK_HALF + 0.5),
-      pos.y + 0.75,
-      pos.z - right.z * (TRACK_HALF + 0.5)
-    );
-    scene.add(postL);
-    const postR = new THREE.Mesh(postGeo, postMat);
-    postR.position.set(
-      pos.x + right.x * (TRACK_HALF + 0.5),
-      pos.y + 0.75,
-      pos.z + right.z * (TRACK_HALF + 0.5)
-    );
-    scene.add(postR);
-    trackBarriers.push(postL, postR);
-  }
-
-  generateBoostPads();
-}
-
-function generateBeachTrack() {
-  scene.background = new THREE.Color(0x87CEEB);
-  scene.fog = new THREE.Fog(0x87CEEB, 80, 200);
-
-  // S-shaped coastal road with loop-back — turns both ways frequently
-  const cp = [
-    // Start along the coast heading south
-    new THREE.Vector3(-20, 0, -60),
-    new THREE.Vector3(-10, 0, -45),
-    // Right turn inland
-    new THREE.Vector3(10, 0, -30),
-    new THREE.Vector3(25, 0, -10),
-    // Sharp left hairpin back toward coast
-    new THREE.Vector3(15, 0, 10),
-    new THREE.Vector3(-10, 0, 20),
-    // S-curve along the shore
-    new THREE.Vector3(-30, 0, 30),
-    new THREE.Vector3(-15, 0, 45),
-    // Loop around a peninsula (right turn)
-    new THREE.Vector3(10, 0, 55),
-    new THREE.Vector3(25, 0, 45),
-    new THREE.Vector3(20, 0, 25),
-    // Switchback heading back north
-    new THREE.Vector3(0, 0, 15),
-    new THREE.Vector3(-25, 0, 0),
-    // Final sweeping left back to start
-    new THREE.Vector3(-40, 0, -20),
-    new THREE.Vector3(-35, 0, -45),
-  ];
-  const curve = new THREE.CatmullRomCurve3(cp, true, 'catmullrom', 0.5);
-  const SAMPLES = 500;
-  trackPoints = curve.getPoints(SAMPLES);
-
-  segLengths = [];
-  cumLengths = [0];
-  trackLength = 0;
-  for (let i = 0; i < trackPoints.length; i++) {
-    const next = trackPoints[(i + 1) % trackPoints.length];
-    const d = trackPoints[i].distanceTo(next);
-    segLengths.push(d);
-    trackLength += d;
-    cumLengths.push(trackLength);
-  }
-
-  checkpointDists = [];
-  for (let i = 0; i < NUM_CHECKPOINTS; i++) {
-    checkpointDists.push((i / NUM_CHECKPOINTS) * trackLength);
-  }
-
-  // Sandy track surface
-  const trackGeo = new THREE.BufferGeometry();
-  const verts = [], uvs = [], indices = [];
-  for (let i = 0; i <= SAMPLES; i++) {
-    const idx = i % trackPoints.length;
-    const nextIdx = (i + 1) % trackPoints.length;
-    const p = trackPoints[idx];
-    const pn = trackPoints[nextIdx];
-    const fwd = new THREE.Vector3().subVectors(pn, p).normalize();
-    const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
-
-    const l = p.clone().add(right.clone().multiplyScalar(-TRACK_HALF));
-    const r = p.clone().add(right.clone().multiplyScalar(TRACK_HALF));
-    verts.push(l.x, p.y + 0.05, l.z, r.x, p.y + 0.05, r.z);
-    const u = cumLengths[idx] / trackLength;
-    uvs.push(0, u, 1, u);
-
-    if (i < SAMPLES) {
-      const bi = i * 2;
-      indices.push(bi, bi+1, bi+2, bi+1, bi+3, bi+2);
-    }
-  }
-  trackGeo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
-  trackGeo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
-  trackGeo.setIndex(indices);
-  trackGeo.computeVertexNormals();
-
-  const tCanvas = document.createElement('canvas');
-  tCanvas.width = 128; tCanvas.height = 128;
-  const tCtx = tCanvas.getContext('2d');
-  tCtx.fillStyle = '#8B7355'; tCtx.fillRect(0, 0, 128, 128);
-  tCtx.strokeStyle = '#A0926B'; tCtx.lineWidth = 2; tCtx.setLineDash([8, 8]);
-  tCtx.beginPath(); tCtx.moveTo(64, 0); tCtx.lineTo(64, 128); tCtx.stroke();
-  tCtx.strokeStyle = '#C4B48A'; tCtx.lineWidth = 3; tCtx.setLineDash([]);
-  tCtx.beginPath(); tCtx.moveTo(4, 0); tCtx.lineTo(4, 128); tCtx.stroke();
-  tCtx.beginPath(); tCtx.moveTo(124, 0); tCtx.lineTo(124, 128); tCtx.stroke();
-  const trackTex = new THREE.CanvasTexture(tCanvas);
-  trackTex.wrapS = THREE.RepeatWrapping; trackTex.wrapT = THREE.RepeatWrapping;
-  trackTex.repeat.set(1, 50);
-  const trackMat = new THREE.MeshStandardMaterial({ map: trackTex, roughness: 0.9 });
-  const trackMesh = new THREE.Mesh(trackGeo, trackMat);
-  scene.add(trackMesh);
-
-  // Start/finish line
-  const sfGeo = new THREE.PlaneGeometry(TRACK_WIDTH, 2);
-  const sfCanvas = document.createElement('canvas');
-  sfCanvas.width = 64; sfCanvas.height = 8;
-  const sfCtx = sfCanvas.getContext('2d');
-  for (let x = 0; x < 64; x += 4) {
-    for (let y = 0; y < 8; y += 4) {
-      sfCtx.fillStyle = (x/4 + y/4) % 2 === 0 ? '#fff' : '#000';
-      sfCtx.fillRect(x, y, 4, 4);
-    }
-  }
-  const sfTex = new THREE.CanvasTexture(sfCanvas);
-  sfTex.wrapS = THREE.RepeatWrapping;
-  const sfMat = new THREE.MeshStandardMaterial({ map: sfTex });
-  const sfMesh = new THREE.Mesh(sfGeo, sfMat);
-  const startP = trackPoints[0];
-  const startN = trackPoints[1];
-  sfMesh.position.set(startP.x, startP.y + 0.12, startP.z);
-  sfMesh.rotation.x = -Math.PI / 2;
-  const sfAngle = Math.atan2(startN.x - startP.x, startN.z - startP.z);
-  sfMesh.rotation.z = -sfAngle;
-  scene.add(sfMesh);
-
-  // Large sand ground — covers the whole area
-  const sandGeo = new THREE.PlaneGeometry(400, 400);
-  const sandMat = new THREE.MeshStandardMaterial({ color: 0xC2B280, roughness: 1 });
-  const sand = new THREE.Mesh(sandGeo, sandMat);
-  sand.rotation.x = -Math.PI / 2;
-  sand.position.y = -0.4;
-  scene.add(sand);
-
-  // Ocean — far to the right (positive X), stretches out
-  const waterGeo = new THREE.PlaneGeometry(300, 400);
-  const waterMat = new THREE.MeshStandardMaterial({
-    color: 0x0077be, transparent: true, opacity: 0.85,
-    roughness: 0.3, metalness: 0.1
-  });
-  const water = new THREE.Mesh(waterGeo, waterMat);
-  water.rotation.x = -Math.PI / 2;
-  water.position.set(190, -0.2, 0);
-  scene.add(water);
-
-  // Wet sand / shoreline strip
-  const shoreGeo = new THREE.PlaneGeometry(15, 400);
-  const shoreMat = new THREE.MeshStandardMaterial({ color: 0x9B8B6B, roughness: 0.7 });
-  const shore = new THREE.Mesh(shoreGeo, shoreMat);
-  shore.rotation.x = -Math.PI / 2;
-  shore.position.set(47, -0.35, 0);
-  scene.add(shore);
-
-  // Palm trees — on the inland side (negative X, away from ocean)
-  for (let i = 0; i < 25; i++) {
-    const angle = (i / 25) * Math.PI * 2;
-    const rad = 75 + Math.random() * 30;
-    const px = Math.cos(angle) * rad;
-    const pz = Math.sin(angle) * rad;
-    if (px < 30) {
-      addPalmTree(px, pz, 0);
-    }
-  }
-
-  // Beach umbrellas — scattered on the beach near ocean side
-  const umbrellaColors = [0xf85149, 0x1f6feb, 0xd29922, 0x3fb950, 0xdb61a2, 0xa371f7];
-  for (let i = 0; i < 6; i++) {
-    const ux = 38 + Math.random() * 8;
-    const uz = -50 + (i / 5) * 100;
-    const poleGeo = new THREE.CylinderGeometry(0.05, 0.05, 3, 4);
-    const poleMat = new THREE.MeshStandardMaterial({ color: 0x8b949e });
-    const pole = new THREE.Mesh(poleGeo, poleMat);
-    pole.position.set(ux, 1.5, uz);
-    scene.add(pole);
-    const coneGeo = new THREE.ConeGeometry(1.5, 1, 8);
-    const coneMat = new THREE.MeshStandardMaterial({ color: umbrellaColors[i] });
-    const cone = new THREE.Mesh(coneGeo, coneMat);
-    cone.position.set(ux, 3.2, uz);
-    cone.rotation.x = Math.PI;
-    scene.add(cone);
-  }
-
-  // Rocks — placed just OUTSIDE the track edges so opponents can be pushed into them
-  beachRocks = [];
-  const rockSpots = [0.08, 0.18, 0.28, 0.38, 0.5, 0.6, 0.7, 0.8, 0.9];
-  rockSpots.forEach((frac, idx) => {
-    const d = frac * trackLength;
-    const { pos, fwd } = getPointAtDist(d);
-    const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
-    // Place rocks just outside the track edge, alternating left and right
-    const sign = idx % 2 === 0 ? -1 : 1;
-    const offset = TRACK_HALF + 1.0 + Math.random() * 1.5;
-    const rockSize = 0.8 + Math.random() * 0.8;
-    const rockGeo = new THREE.DodecahedronGeometry(rockSize, 0);
-    const shade = 0x3a3a3a + Math.floor(Math.random() * 0x202020);
-    const rockMat = new THREE.MeshStandardMaterial({ color: shade, flatShading: true });
-    const rock = new THREE.Mesh(rockGeo, rockMat);
-    rock.position.set(
-      pos.x + right.x * sign * offset,
-      rockSize * 0.4,
-      pos.z + right.z * sign * offset
-    );
-    rock.rotation.set(Math.random(), Math.random(), Math.random());
-    scene.add(rock);
-    beachRocks.push({ mesh: rock, radius: rockSize });
-  });
-
-  // Guardrails only on the ocean side (right/positive lateral = toward ocean)
-  for (let d = 0; d < trackLength; d += 4) {
-    const { pos, fwd } = getPointAtDist(d);
-    const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
-    const postGeo = new THREE.CylinderGeometry(0.15, 0.15, 1.5, 4);
-    const postMat = new THREE.MeshStandardMaterial({ color: 0x1f6feb });
-    const postR = new THREE.Mesh(postGeo, postMat);
-    postR.position.set(
-      pos.x + right.x * (TRACK_HALF + 0.5),
-      pos.y + 0.75,
-      pos.z + right.z * (TRACK_HALF + 0.5)
-    );
-    scene.add(postR);
-    trackBarriers.push(postR);
-  }
-
-  generateBoostPads();
+  const ground = new THREE.Mesh(groundGeo, new THREE.MeshStandardMaterial({ color: 0x1a7f37, roughness: 1, flatShading: true }));
+  ground.rotation.x = -Math.PI / 2; ground.position.y = -0.5; scene.add(ground);
+  generateBoostPads(); generateBarriers(); generateScenery();
 }
 
 function addPalmTree(x, z, baseY) {
@@ -2146,7 +2120,11 @@ function createDirectionArrow() {
 }
 
 // ----- INIT -----
-function init() {
+async function init() {
+  // Load level data from JSON files
+  await loadLevelManifest();
+  await loadCustomLevel();
+
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x87ceeb);
   scene.fog = new THREE.Fog(0x87ceeb, 80, 200);
@@ -2980,54 +2958,46 @@ function usePowerup(r) {
   }
 
   switch (pw.name) {
-    case 'Force Push': {
+    case 'Taco Turbo': {
       r.boostTimer = pw.duration;
       // Visual: briefly grow
       r.mesh.scale.set(1.1, 1.1, 1.1);
       setTimeout(() => r.mesh.scale.set(1,1,1), pw.duration * 1000);
       break;
     }
-    case 'Bug Report': {
-      // Drop trap behind
+    case 'Guacamole Splat': {
+      // Drop guac trap behind
       const behindX = r.mesh.position.x - Math.sin(r.angle) * 3;
       const behindZ = r.mesh.position.z - Math.cos(r.angle) * 3;
       const trapGeo = new THREE.SphereGeometry(0.5, 8, 8);
-      const trapMat = new THREE.MeshStandardMaterial({ color: 0xf85149, emissive: 0xf85149, emissiveIntensity: 0.3 });
+      const trapMat = new THREE.MeshStandardMaterial({ color: 0x3fb950, emissive: 0x3fb950, emissiveIntensity: 0.3 });
       const trapMesh = new THREE.Mesh(trapGeo, trapMat);
       trapMesh.position.set(behindX, 0.5, behindZ);
       scene.add(trapMesh);
       traps.push({ mesh: trapMesh, life: 15, owner: r });
       break;
     }
-    case 'Pull Request': {
-      // Big homing missile
+    case 'Holy Guacamole': {
+      // Giant avocado homing projectile
       const missileGroup = new THREE.Group();
-      // Main body - large cone
-      const bodyGeo = new THREE.ConeGeometry(0.7, 3.0, 8);
-      const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1f6feb, emissive: 0x1f6feb, emissiveIntensity: 0.6 });
+      // Avocado body - green ellipsoid
+      const bodyGeo = new THREE.SphereGeometry(1.0, 10, 8);
+      bodyGeo.scale(0.7, 1.0, 0.7);
+      const bodyMat = new THREE.MeshStandardMaterial({ color: 0x2d5016, emissive: 0x2d5016, emissiveIntensity: 0.3 });
       const body = new THREE.Mesh(bodyGeo, bodyMat);
-      body.rotation.x = Math.PI / 2;
       missileGroup.add(body);
-      // Fins
-      const finGeo = new THREE.BoxGeometry(0.1, 1.0, 0.8);
-      const finMat = new THREE.MeshStandardMaterial({ color: 0x58a6ff, emissive: 0x58a6ff, emissiveIntensity: 0.3 });
-      [0, Math.PI/2, Math.PI, Math.PI*1.5].forEach(angle => {
-        const fin = new THREE.Mesh(finGeo, finMat);
-        fin.position.set(Math.cos(angle)*0.5, Math.sin(angle)*0.5, -1.0);
-        missileGroup.add(fin);
-      });
-      // Glowing tip
-      const tipGeo = new THREE.SphereGeometry(0.35, 6, 6);
-      const tipMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-      const tip = new THREE.Mesh(tipGeo, tipMat);
-      tip.position.set(0, 0, 1.5);
-      missileGroup.add(tip);
-      // Engine glow at back
-      const engineGeo = new THREE.SphereGeometry(0.4, 6, 6);
-      const engineMat = new THREE.MeshBasicMaterial({ color: 0xf0883e, transparent: true, opacity: 0.8 });
-      const engine = new THREE.Mesh(engineGeo, engineMat);
-      engine.position.set(0, 0, -1.5);
-      missileGroup.add(engine);
+      // Avocado pit (brown sphere inside)
+      const pitGeo = new THREE.SphereGeometry(0.4, 8, 8);
+      const pitMat = new THREE.MeshStandardMaterial({ color: 0x6a4c1e, emissive: 0x6a4c1e, emissiveIntensity: 0.2 });
+      const pit = new THREE.Mesh(pitGeo, pitMat);
+      pit.position.set(0, 0, 0.3);
+      missileGroup.add(pit);
+      // Inner flesh (lighter green ring)
+      const fleshGeo = new THREE.RingGeometry(0.3, 0.65, 12);
+      const fleshMat = new THREE.MeshBasicMaterial({ color: 0x7ec850, side: THREE.DoubleSide });
+      const flesh = new THREE.Mesh(fleshGeo, fleshMat);
+      flesh.position.set(0, 0, 0.71);
+      missileGroup.add(flesh);
 
       missileGroup.position.copy(r.mesh.position);
       missileGroup.position.y = 1.2;
@@ -3055,7 +3025,7 @@ function usePowerup(r) {
       });
       break;
     }
-    case 'Merge Conflict': {
+    case 'Burrito Blast': {
       // Zone around current position
       const zoneGeo = new THREE.CylinderGeometry(5, 5, 0.3, 16);
       const zoneMat = new THREE.MeshStandardMaterial({
@@ -3223,6 +3193,34 @@ function updatePickupRespawns() {
   });
 }
 
+function getPositionBasedPowerup(racer) {
+  // Determine racer's current position (1-based)
+  const sorted = [...racers].sort((a, b) => {
+    const pa = a.lap * trackLength + a.dist;
+    const pb = b.lap * trackLength + b.dist;
+    return pb - pa;
+  });
+  const pos = sorted.indexOf(racer) + 1;
+
+  if (pos === 1) {
+    // 1st place always gets Guacamole Splat (weakest — just a trap)
+    return POWERUP_TYPES.find(p => p.name === 'Guacamole Splat');
+  } else if (pos === 2) {
+    // 2nd place: fully random
+    return POWERUP_TYPES[Math.floor(Math.random() * POWERUP_TYPES.length)];
+  } else {
+    // 3rd/4th: weighted toward powerful items (avocado, burrito, taco)
+    const weights = [3, 1, 4, 3]; // Taco, Guac Splat, Holy Guac, Burrito
+    const total = weights.reduce((a, b) => a + b, 0);
+    let roll = Math.random() * total;
+    for (let i = 0; i < weights.length; i++) {
+      roll -= weights[i];
+      if (roll <= 0) return POWERUP_TYPES[i];
+    }
+    return POWERUP_TYPES[0];
+  }
+}
+
 function checkPickups() {
   racers.forEach(r => {
     if (r.powerup) return; // already has one
@@ -3230,13 +3228,13 @@ function checkPickups() {
       if (!pb.active) return;
       const dist = r.mesh.position.distanceTo(pb.mesh.position);
       if (dist < 2.5) {
-        r.powerup = POWERUP_TYPES[Math.floor(Math.random() * POWERUP_TYPES.length)];
+        r.powerup = getPositionBasedPowerup(r);
         pb.active = false;
         pb.mesh.visible = false;
         pb.respawnTimer = 8;
         if (r.isPlayer) {
           addScore(50, 'Powerup');
-          showToast(r.powerup.icon, `Got: ${r.powerup.name}`, 'Press SPACE to use!');
+          showToast(r.powerup.icon, `Got: ${r.powerup.name}`, r.powerup.desc);
         }
       }
     });
@@ -3463,9 +3461,9 @@ function updateHUD() {
   // Powerup display + crosshair
   if (player.powerup) {
     powerupEl.style.display = 'block';
-    powerupEl.innerHTML = `<span class="icon">${player.powerup.icon}</span>${player.powerup.name}`;
+    powerupEl.innerHTML = `<span class="pw-icon">${player.powerup.icon}</span><span class="pw-name">${player.powerup.name}</span><span class="pw-desc">${player.powerup.desc}</span><span class="pw-hint">Press SPACE to use</span>`;
     // Show crosshair for projectile powerups
-    const isProjectile = player.powerup.name === 'Pull Request';
+    const isProjectile = player.powerup.name === 'Holy Guacamole';
     crosshairEl.style.display = isProjectile ? 'block' : 'none';
   } else {
     powerupEl.style.display = 'none';
@@ -3538,6 +3536,16 @@ function updateMinimap() {
       ctx.stroke();
     }
   });
+}
+
+// ----- SPLASH SCREEN -----
+const splashEl = document.getElementById('splash-screen');
+if (splashEl) {
+  setTimeout(() => {
+    splashEl.style.opacity = '0';
+    document.getElementById('menu').style.display = '';
+    setTimeout(() => splashEl.remove(), 800);
+  }, 2500);
 }
 
 // ----- START -----

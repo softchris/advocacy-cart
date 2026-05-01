@@ -1,0 +1,62 @@
+{
+  "name": "Cosmic Merge",
+  "description": "A rainbow road through the stars — don't drift into the void!",
+  "emoji": "🌌",
+  "type": "space",
+  "laps": 5,
+  "trackWidth": 14,
+  "environment": {
+    "skyColor": "#050510",
+    "fogColor": "#050510",
+    "fogNear": 120,
+    "fogFar": 300,
+    "groundColor": null,
+    "groundSize": 0
+  },
+  "controlPoints": [
+    {"x": 0, "y": 0, "z": -80},
+    {"x": 15, "y": 5, "z": -60},
+    {"x": -10, "y": 15, "z": -35},
+    {"x": -40, "y": 25, "z": -15},
+    {"x": -35, "y": 10, "z": 15},
+    {"x": -10, "y": 0, "z": 30},
+    {"x": 20, "y": -5, "z": 25},
+    {"x": 50, "y": -10, "z": 10},
+    {"x": 55, "y": -15, "z": -20},
+    {"x": 35, "y": -10, "z": -45},
+    {"x": 10, "y": -5, "z": -55},
+    {"x": -15, "y": 0, "z": -50},
+    {"x": -35, "y": 5, "z": -60},
+    {"x": -30, "y": 3, "z": -75},
+    {"x": -10, "y": 1, "z": -80}
+  ],
+  "tiles": [
+    {"type": "road", "points": "auto"}
+  ],
+  "trackSurface": {
+    "color": null,
+    "rainbow": true
+  },
+  "obstacles": [],
+  "boostPads": [
+    {"trackFraction": 0.15},
+    {"trackFraction": 0.45},
+    {"trackFraction": 0.78}
+  ],
+  "scenery": {},
+  "barriers": {
+    "spacing": 5,
+    "sides": "both",
+    "color": "#58a6ff",
+    "glowing": true,
+    "emissiveIntensity": 0.5,
+    "opacity": 0.6
+  },
+  "specialFeatures": {
+    "waterPlane": null,
+    "stars": true,
+    "starCount": 500,
+    "rainbowTrack": true,
+    "terrainVariation": false
+  }
+}
