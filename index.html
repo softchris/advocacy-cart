@@ -6120,8 +6120,8 @@ function spawnFirework(x, y, z) {
 
 function updateCameraFor(racer, cam) {
   if (!racer) return;
-  const dist = 6;
-  const height = racer.mesh.position.y + 4.5;
+  const dist = 4;
+  const height = racer.mesh.position.y + 3;
   const behind = new THREE.Vector3(
     racer.mesh.position.x - Math.sin(racer.angle) * dist,
     height,
@@ -6129,9 +6129,9 @@ function updateCameraFor(racer, cam) {
   );
   cam.position.lerp(behind, 0.08);
   const lookAt = new THREE.Vector3(
-    racer.mesh.position.x + Math.sin(racer.angle) * 8,
-    racer.mesh.position.y + 2,
-    racer.mesh.position.z + Math.cos(racer.angle) * 8
+    racer.mesh.position.x + Math.sin(racer.angle) * 6,
+    racer.mesh.position.y + 1.5,
+    racer.mesh.position.z + Math.cos(racer.angle) * 6
   );
   cam.lookAt(lookAt);
 }
