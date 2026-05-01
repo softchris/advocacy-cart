@@ -4148,6 +4148,33 @@ function createKart(colorIdx, cartStyle, photoUrl, racerName) {
   // Store photo URL for podium scene
   group.userData.photoUrl = photoUrl || null;
 
+  // Thruster glow (hidden by default, shown when accelerating)
+  const thrusterGroup = new THREE.Group();
+  thrusterGroup.position.set(0, 0.4, -1.2);
+  // Left thruster
+  const thrustGeoL = new THREE.ConeGeometry(0.15, 0.8, 8);
+  const thrustMatL = new THREE.MeshBasicMaterial({ color: 0x58a6ff, transparent: true, opacity: 0.85 });
+  const thrustL = new THREE.Mesh(thrustGeoL, thrustMatL);
+  thrustL.rotation.x = Math.PI;
+  thrustL.position.set(-0.35, 0, 0);
+  thrusterGroup.add(thrustL);
+  // Right thruster
+  const thrustGeoR = new THREE.ConeGeometry(0.15, 0.8, 8);
+  const thrustMatR = new THREE.MeshBasicMaterial({ color: 0x58a6ff, transparent: true, opacity: 0.85 });
+  const thrustR = new THREE.Mesh(thrustGeoR, thrustMatR);
+  thrustR.rotation.x = Math.PI;
+  thrustR.position.set(0.35, 0, 0);
+  thrusterGroup.add(thrustR);
+  // Glow light
+  const thrustLight = new THREE.PointLight(0x58a6ff, 0, 5);
+  thrustLight.position.set(0, 0, -0.3);
+  thrusterGroup.add(thrustLight);
+  thrusterGroup.visible = false;
+  group.add(thrusterGroup);
+  group.userData.thrusterGroup = thrusterGroup;
+  group.userData.thrustLight = thrustLight;
+  group.userData.thrustCones = [thrustL, thrustR];
+
   scene.add(group);
   return group;
 }
@@ -4914,6 +4941,24 @@ function updatePlayer(r) {
   if (accelKey) { if (!r.airborne) r.speed = Math.min(r.speed + r.accel, maxSpd); }
   if (brakeKey) { if (!r.airborne) r.speed = Math.max(r.speed - BRAKE_FORCE, -0.2); }
 
+  // Thruster glow when accelerating
+  const tg = r.mesh.userData.thrusterGroup;
+  if (tg) {
+    const thrusting = !!accelKey || r.boostTimer > 0;
+    tg.visible = thrusting;
+    if (thrusting) {
+      const boostColor = r.boostTimer > 0 ? 0xf78166 : 0x58a6ff;
+      const intensity = r.boostTimer > 0 ? 3 : 1.5;
+      const coneScale = 0.8 + Math.random() * 0.4;
+      r.mesh.userData.thrustLight.color.set(boostColor);
+      r.mesh.userData.thrustLight.intensity = intensity;
+      r.mesh.userData.thrustCones.forEach(c => {
+        c.material.color.set(boostColor);
+        c.scale.y = coneScale;
+      });
+    }
+  }
+
   const turnFactor = Math.min(Math.abs(r.speed) / 0.3, 1) * airFactor;
   if (leftKey) r.angle += r.turnSpeed * turnFactor * (r.speed >= 0 ? 1 : -1);
   if (rightKey) r.angle -= r.turnSpeed * turnFactor * (r.speed >= 0 ? 1 : -1);
@@ -4998,6 +5043,22 @@ function updateAI(r) {
   // Accelerate/brake
   if (r.speed < targetSpeed) r.speed = Math.min(r.speed + r.accel * 0.9, maxSpd);
   else r.speed = Math.max(r.speed - FRICTION * 2, 0);
+
+  // AI thruster glow
+  const tg = r.mesh.userData.thrusterGroup;
+  if (tg) {
+    const thrusting = r.speed > r.maxSpeed * 0.3 || r.boostTimer > 0;
+    tg.visible = thrusting;
+    if (thrusting) {
+      const boostColor = r.boostTimer > 0 ? 0xf78166 : 0x58a6ff;
+      r.mesh.userData.thrustLight.color.set(boostColor);
+      r.mesh.userData.thrustLight.intensity = r.boostTimer > 0 ? 3 : 1.5;
+      r.mesh.userData.thrustCones.forEach(c => {
+        c.material.color.set(boostColor);
+        c.scale.y = 0.8 + Math.random() * 0.4;
+      });
+    }
+  }
 
   // Track boundary
   const proj = projectOntoTrack(r.mesh.position);
@@ -6121,7 +6182,7 @@ function spawnFirework(x, y, z) {
 function updateCameraFor(racer, cam) {
   if (!racer) return;
   const dist = 2.5;
-  const height = racer.mesh.position.y + 2;
+  const height = racer.mesh.position.y + 3;
   const behind = new THREE.Vector3(
     racer.mesh.position.x - Math.sin(racer.angle) * dist,
     height,
