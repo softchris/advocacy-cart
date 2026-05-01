@@ -1,0 +1,3272 @@
+{
+  "name": "Heart",
+  "description": "A custom track",
+  "emoji": "🔥",
+  "type": "circuit",
+  "laps": 5,
+  "trackWidth": 14,
+  "environment": {
+    "skyColor": "#ff7744",
+    "fogColor": "#ff7744",
+    "fogNear": 80,
+    "fogFar": 200,
+    "timeOfDay": "sunset",
+    "background": "dubai",
+    "music": "retro",
+    "groundColor": "#1a7f37",
+    "groundSize": 400
+  },
+  "controlPoints": [
+    {
+      "x": -20,
+      "y": 0,
+      "z": 55
+    },
+    {
+      "x": -50,
+      "y": 0,
+      "z": 20
+    },
+    {
+      "x": -65,
+      "y": 0,
+      "z": -15
+    },
+    {
+      "x": -70,
+      "y": 0,
+      "z": -50
+    },
+    {
+      "x": -55,
+      "y": 0,
+      "z": -80
+    },
+    {
+      "x": -35,
+      "y": 0,
+      "z": -90
+    },
+    {
+      "x": -10,
+      "y": 0,
+      "z": -85
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "z": -65
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": -50
+    },
+    {
+      "x": 55,
+      "y": 0,
+      "z": -75
+    },
+    {
+      "x": 80,
+      "y": 0,
+      "z": -95
+    },
+    {
+      "x": 115,
+      "y": 0,
+      "z": -90
+    },
+    {
+      "x": 130,
+      "y": 0,
+      "z": -50
+    },
+    {
+      "x": 130,
+      "y": 0,
+      "z": -15
+    },
+    {
+      "x": 105,
+      "y": 0,
+      "z": 15
+    },
+    {
+      "x": 75,
+      "y": 0,
+      "z": 35
+    },
+    {
+      "x": 45,
+      "y": 0,
+      "z": 55
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": 70
+    }
+  ],
+  "tiles": [
+    {
+      "gx": -2,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": 11,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": 16,
+      "gz": -20,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": -20,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": -20,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": -20,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": -20,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": 16,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 8,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 13,
+      "type": "sand"
+    },
+    {
+      "gx": -5,
+      "gz": 10,
+      "type": "sand"
+    },
+    {
+      "gx": -6,
+      "gz": 8,
+      "type": "sand"
+    },
+    {
+      "gx": -9,
+      "gz": 5,
+      "type": "sand"
+    },
+    {
+      "gx": -10,
+      "gz": 3,
+      "type": "sand"
+    },
+    {
+      "gx": 16,
+      "gz": -19,
+      "type": "sand"
+    },
+    {
+      "gx": 22,
+      "gz": -18,
+      "type": "sand"
+    },
+    {
+      "gx": 16,
+      "gz": 6,
+      "type": "sand"
+    },
+    {
+      "gx": 15,
+      "gz": 6,
+      "type": "sand"
+    },
+    {
+      "gx": 14,
+      "gz": 7,
+      "type": "sand"
+    },
+    {
+      "gx": 11,
+      "gz": 9,
+      "type": "sand"
+    },
+    {
+      "gx": 2,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": -10,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -9,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -8,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -8,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -7,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -6,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": 0,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": 1,
+      "type": "water"
+    },
+    {
+      "gx": -13,
+      "gz": 3,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": 5,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": 7,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": 8,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": 6,
+      "type": "water"
+    },
+    {
+      "gx": -13,
+      "gz": 5,
+      "type": "water"
+    },
+    {
+      "gx": -13,
+      "gz": 4,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": 3,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": 2,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": 1,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -9,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -10,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -11,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -12,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -13,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -14,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -12,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -11,
+      "type": "water"
+    },
+    {
+      "gx": -18,
+      "gz": -9,
+      "type": "water"
+    },
+    {
+      "gx": -18,
+      "gz": -8,
+      "type": "water"
+    },
+    {
+      "gx": -18,
+      "gz": -7,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -7,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -6,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": 0,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": 1,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": 2,
+      "type": "water"
+    },
+    {
+      "gx": -13,
+      "gz": 6,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": 5,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": 4,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": 3,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": 2,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": 0,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -18,
+      "gz": -6,
+      "type": "water"
+    },
+    {
+      "gx": -18,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -18,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": 4,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": 7,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": 8,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": -14,
+      "type": "water"
+    },
+    {
+      "gx": -7,
+      "gz": -14,
+      "type": "water"
+    },
+    {
+      "gx": -6,
+      "gz": -13,
+      "type": "water"
+    },
+    {
+      "gx": -5,
+      "gz": -13,
+      "type": "water"
+    },
+    {
+      "gx": -5,
+      "gz": -12,
+      "type": "water"
+    },
+    {
+      "gx": -4,
+      "gz": -12,
+      "type": "water"
+    },
+    {
+      "gx": -7,
+      "gz": -13,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -14,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -13,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -12,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -11,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -11,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": -12,
+      "type": "water"
+    },
+    {
+      "gx": -7,
+      "gz": -12,
+      "type": "water"
+    },
+    {
+      "gx": -7,
+      "gz": -11,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": -11,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": -10,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -10,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -9,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -9,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -8,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -7,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -6,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -6,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -7,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -8,
+      "type": "water"
+    },
+    {
+      "gx": -6,
+      "gz": -12,
+      "type": "water"
+    },
+    {
+      "gx": -5,
+      "gz": -11,
+      "type": "water"
+    },
+    {
+      "gx": -6,
+      "gz": -11,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -12,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -10,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": -13,
+      "type": "water"
+    },
+    {
+      "gx": -6,
+      "gz": -14,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -10,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -9,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -8,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": -6,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": -7,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": -8,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": -9,
+      "type": "water"
+    },
+    {
+      "gx": -7,
+      "gz": -10,
+      "type": "water"
+    },
+    {
+      "gx": -4,
+      "gz": -11,
+      "type": "water"
+    },
+    {
+      "gx": -5,
+      "gz": -10,
+      "type": "water"
+    },
+    {
+      "gx": -6,
+      "gz": -10,
+      "type": "water"
+    },
+    {
+      "gx": -6,
+      "gz": -9,
+      "type": "water"
+    },
+    {
+      "gx": -7,
+      "gz": -9,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -7,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -6,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 8,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 8,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 11,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 11,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": -20,
+      "type": "road"
+    },
+    {
+      "gx": 16,
+      "gz": -21,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": -21,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": -20,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": -20,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 27,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 27,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": 27,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": 27,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 27,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": 27,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": 27,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": 27,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": 26,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 11,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 8,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": 16,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 8,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 11,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": -19,
+      "type": "road"
+    },
+    {
+      "gx": 16,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": -18,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 11,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": -11,
+      "type": "road"
+    }
+  ],
+  "trackSurface": {
+    "color": "#2d333b",
+    "laneMarking": "#484f58",
+    "edgeColor": "#f0f6fc"
+  },
+  "obstacles": {
+    "rocks": [
+      {
+        "x": -20,
+        "z": -75,
+        "size": 1
+      },
+      {
+        "x": -55,
+        "z": -50,
+        "size": 1
+      },
+      {
+        "x": -25,
+        "z": 25,
+        "size": 1
+      },
+      {
+        "x": 75,
+        "z": 20,
+        "size": 1
+      },
+      {
+        "x": 115,
+        "z": -55,
+        "size": 1
+      }
+    ],
+    "poles": [],
+    "ramps": [
+      {
+        "x": 110,
+        "z": 5,
+        "angle": 0,
+        "launchVel": 0.6
+      },
+      {
+        "x": 25,
+        "z": 60,
+        "angle": 0,
+        "launchVel": 0.6
+      }
+    ]
+  },
+  "boostPads": [
+    {
+      "x": 5,
+      "z": 55
+    },
+    {
+      "x": 10,
+      "z": 35
+    },
+    {
+      "x": 20,
+      "z": -30
+    },
+    {
+      "x": 20,
+      "z": -40
+    },
+    {
+      "x": 15,
+      "z": 10
+    }
+  ],
+  "scenery": {
+    "items": [
+      {
+        "type": "palm",
+        "x": 20,
+        "z": -10
+      },
+      {
+        "type": "palm",
+        "x": 10,
+        "z": -15
+      },
+      {
+        "type": "palm",
+        "x": 25,
+        "z": -5
+      },
+      {
+        "type": "palm",
+        "x": 15,
+        "z": -5
+      },
+      {
+        "type": "palm",
+        "x": 20,
+        "z": -15
+      }
+    ]
+  },
+  "barriers": {
+    "spacing": 6,
+    "sides": "both",
+    "color": "#f85149",
+    "glowing": false
+  },
+  "specialFeatures": {
+    "waterPlane": null,
+    "stars": true,
+    "rainbowTrack": false,
+    "terrainVariation": false
+  },
+  "heightMap": [
+    {
+      "gx": 26,
+      "gz": 15,
+      "h": 10
+    },
+    {
+      "gx": 26,
+      "gz": 14,
+      "h": 25
+    },
+    {
+      "gx": 27,
+      "gz": 14,
+      "h": 15
+    },
+    {
+      "gx": 28,
+      "gz": 13,
+      "h": 25
+    },
+    {
+      "gx": 28,
+      "gz": 12,
+      "h": 5
+    },
+    {
+      "gx": 29,
+      "gz": 12,
+      "h": 35
+    },
+    {
+      "gx": 29,
+      "gz": 11,
+      "h": 10
+    },
+    {
+      "gx": 30,
+      "gz": 11,
+      "h": 25
+    },
+    {
+      "gx": 30,
+      "gz": 10,
+      "h": 20
+    },
+    {
+      "gx": 31,
+      "gz": 10,
+      "h": 15
+    },
+    {
+      "gx": 31,
+      "gz": 9,
+      "h": 25
+    },
+    {
+      "gx": 32,
+      "gz": 9,
+      "h": 5
+    },
+    {
+      "gx": 32,
+      "gz": 8,
+      "h": 45
+    },
+    {
+      "gx": 32,
+      "gz": 7,
+      "h": 15
+    },
+    {
+      "gx": 33,
+      "gz": 6,
+      "h": 30
+    },
+    {
+      "gx": 33,
+      "gz": 5,
+      "h": 25
+    },
+    {
+      "gx": 34,
+      "gz": 4,
+      "h": 25
+    },
+    {
+      "gx": 34,
+      "gz": 3,
+      "h": 35
+    },
+    {
+      "gx": 34,
+      "gz": 2,
+      "h": 15
+    },
+    {
+      "gx": 34,
+      "gz": 1,
+      "h": 20
+    },
+    {
+      "gx": 34,
+      "gz": 0,
+      "h": 30
+    },
+    {
+      "gx": 34,
+      "gz": -1,
+      "h": 35
+    },
+    {
+      "gx": 35,
+      "gz": -1,
+      "h": 5
+    },
+    {
+      "gx": 35,
+      "gz": -2,
+      "h": 20
+    },
+    {
+      "gx": 35,
+      "gz": -3,
+      "h": 15
+    },
+    {
+      "gx": 35,
+      "gz": -4,
+      "h": 25
+    },
+    {
+      "gx": 35,
+      "gz": -5,
+      "h": 15
+    },
+    {
+      "gx": 35,
+      "gz": -6,
+      "h": 20
+    },
+    {
+      "gx": 35,
+      "gz": -7,
+      "h": 10
+    },
+    {
+      "gx": 36,
+      "gz": -8,
+      "h": 20
+    },
+    {
+      "gx": 35,
+      "gz": -9,
+      "h": 15
+    },
+    {
+      "gx": 35,
+      "gz": -10,
+      "h": 15
+    },
+    {
+      "gx": 35,
+      "gz": -11,
+      "h": 20
+    },
+    {
+      "gx": 35,
+      "gz": -12,
+      "h": 20
+    },
+    {
+      "gx": 35,
+      "gz": -13,
+      "h": 10
+    },
+    {
+      "gx": 34,
+      "gz": -13,
+      "h": 15
+    },
+    {
+      "gx": 34,
+      "gz": -14,
+      "h": 25
+    },
+    {
+      "gx": 34,
+      "gz": -15,
+      "h": 20
+    },
+    {
+      "gx": 34,
+      "gz": -16,
+      "h": 15
+    },
+    {
+      "gx": 33,
+      "gz": -16,
+      "h": 5
+    },
+    {
+      "gx": 33,
+      "gz": -17,
+      "h": 25
+    },
+    {
+      "gx": 33,
+      "gz": -18,
+      "h": 25
+    },
+    {
+      "gx": 33,
+      "gz": -19,
+      "h": 15
+    },
+    {
+      "gx": 32,
+      "gz": -19,
+      "h": 5
+    },
+    {
+      "gx": 32,
+      "gz": -20,
+      "h": 30
+    },
+    {
+      "gx": 32,
+      "gz": -21,
+      "h": 35
+    },
+    {
+      "gx": 31,
+      "gz": -21,
+      "h": 25
+    },
+    {
+      "gx": 25,
+      "gz": 15,
+      "h": 30
+    },
+    {
+      "gx": 25,
+      "gz": 16,
+      "h": 20
+    },
+    {
+      "gx": 24,
+      "gz": 16,
+      "h": 40
+    },
+    {
+      "gx": 24,
+      "gz": 17,
+      "h": 15
+    },
+    {
+      "gx": 23,
+      "gz": 17,
+      "h": 30
+    },
+    {
+      "gx": 22,
+      "gz": 17,
+      "h": 5
+    },
+    {
+      "gx": 22,
+      "gz": 18,
+      "h": 30
+    },
+    {
+      "gx": 21,
+      "gz": 18,
+      "h": 15
+    },
+    {
+      "gx": 20,
+      "gz": 19,
+      "h": 30
+    },
+    {
+      "gx": 19,
+      "gz": 19,
+      "h": 20
+    },
+    {
+      "gx": 19,
+      "gz": 20,
+      "h": 10
+    },
+    {
+      "gx": 18,
+      "gz": 20,
+      "h": 50
+    },
+    {
+      "gx": 17,
+      "gz": 20,
+      "h": 30
+    },
+    {
+      "gx": 16,
+      "gz": 20,
+      "h": 30
+    },
+    {
+      "gx": 15,
+      "gz": 20,
+      "h": 15
+    },
+    {
+      "gx": 14,
+      "gz": 20,
+      "h": 15
+    },
+    {
+      "gx": 13,
+      "gz": 20,
+      "h": 20
+    },
+    {
+      "gx": 12,
+      "gz": 20,
+      "h": 20
+    },
+    {
+      "gx": 11,
+      "gz": 21,
+      "h": 30
+    },
+    {
+      "gx": 10,
+      "gz": 21,
+      "h": 50
+    },
+    {
+      "gx": 9,
+      "gz": 21,
+      "h": 25
+    },
+    {
+      "gx": 8,
+      "gz": 21,
+      "h": 25
+    },
+    {
+      "gx": 7,
+      "gz": 21,
+      "h": 10
+    },
+    {
+      "gx": 6,
+      "gz": 21,
+      "h": 5
+    },
+    {
+      "gx": 5,
+      "gz": 21,
+      "h": 10
+    },
+    {
+      "gx": 4,
+      "gz": 21,
+      "h": 10
+    },
+    {
+      "gx": 3,
+      "gz": 21,
+      "h": 25
+    },
+    {
+      "gx": 2,
+      "gz": 21,
+      "h": 20
+    },
+    {
+      "gx": 2,
+      "gz": 20,
+      "h": 5
+    },
+    {
+      "gx": 1,
+      "gz": 20,
+      "h": 15
+    },
+    {
+      "gx": 0,
+      "gz": 20,
+      "h": 10
+    },
+    {
+      "gx": -1,
+      "gz": 20,
+      "h": 15
+    },
+    {
+      "gx": -2,
+      "gz": 20,
+      "h": 5
+    },
+    {
+      "gx": -2,
+      "gz": 19,
+      "h": 5
+    },
+    {
+      "gx": -3,
+      "gz": 19,
+      "h": 15
+    },
+    {
+      "gx": -4,
+      "gz": 19,
+      "h": 5
+    },
+    {
+      "gx": -4,
+      "gz": 18,
+      "h": 5
+    },
+    {
+      "gx": -5,
+      "gz": 18,
+      "h": 10
+    },
+    {
+      "gx": -6,
+      "gz": 18,
+      "h": 10
+    },
+    {
+      "gx": -6,
+      "gz": 17,
+      "h": 5
+    },
+    {
+      "gx": -7,
+      "gz": 17,
+      "h": 15
+    },
+    {
+      "gx": -8,
+      "gz": 17,
+      "h": 10
+    },
+    {
+      "gx": -8,
+      "gz": 16,
+      "h": 5
+    },
+    {
+      "gx": -9,
+      "gz": 16,
+      "h": 15
+    },
+    {
+      "gx": -10,
+      "gz": 16,
+      "h": 30
+    },
+    {
+      "gx": -11,
+      "gz": 16,
+      "h": 40
+    },
+    {
+      "gx": -12,
+      "gz": 16,
+      "h": 5
+    },
+    {
+      "gx": -12,
+      "gz": 15,
+      "h": 5
+    },
+    {
+      "gx": -13,
+      "gz": 14,
+      "h": 5
+    },
+    {
+      "gx": -14,
+      "gz": 13,
+      "h": 5
+    },
+    {
+      "gx": -15,
+      "gz": 13,
+      "h": 5
+    },
+    {
+      "gx": -16,
+      "gz": 12,
+      "h": 5
+    },
+    {
+      "gx": -16,
+      "gz": 11,
+      "h": 5
+    },
+    {
+      "gx": -17,
+      "gz": 11,
+      "h": 15
+    },
+    {
+      "gx": -17,
+      "gz": 10,
+      "h": 5
+    },
+    {
+      "gx": -18,
+      "gz": 10,
+      "h": 10
+    },
+    {
+      "gx": -18,
+      "gz": 9,
+      "h": 25
+    },
+    {
+      "gx": -19,
+      "gz": 9,
+      "h": 5
+    },
+    {
+      "gx": -19,
+      "gz": 8,
+      "h": 15
+    },
+    {
+      "gx": -19,
+      "gz": 7,
+      "h": 15
+    },
+    {
+      "gx": -20,
+      "gz": 6,
+      "h": 10
+    },
+    {
+      "gx": -20,
+      "gz": 5,
+      "h": 20
+    },
+    {
+      "gx": -20,
+      "gz": 4,
+      "h": 5
+    },
+    {
+      "gx": -20,
+      "gz": 3,
+      "h": 5
+    },
+    {
+      "gx": -21,
+      "gz": 3,
+      "h": 10
+    },
+    {
+      "gx": -21,
+      "gz": 2,
+      "h": 15
+    },
+    {
+      "gx": -21,
+      "gz": 1,
+      "h": 25
+    },
+    {
+      "gx": -21,
+      "gz": 0,
+      "h": 20
+    },
+    {
+      "gx": -21,
+      "gz": -1,
+      "h": 10
+    },
+    {
+      "gx": -21,
+      "gz": -2,
+      "h": 40
+    },
+    {
+      "gx": -22,
+      "gz": -3,
+      "h": 30
+    },
+    {
+      "gx": -22,
+      "gz": -4,
+      "h": 45
+    },
+    {
+      "gx": -22,
+      "gz": -5,
+      "h": 20
+    },
+    {
+      "gx": -21,
+      "gz": -5,
+      "h": 15
+    },
+    {
+      "gx": -21,
+      "gz": -6,
+      "h": 25
+    },
+    {
+      "gx": -21,
+      "gz": -7,
+      "h": 30
+    },
+    {
+      "gx": -21,
+      "gz": -8,
+      "h": 35
+    },
+    {
+      "gx": -21,
+      "gz": -9,
+      "h": 30
+    },
+    {
+      "gx": -21,
+      "gz": -10,
+      "h": 25
+    },
+    {
+      "gx": -21,
+      "gz": -11,
+      "h": 15
+    },
+    {
+      "gx": -21,
+      "gz": -12,
+      "h": 5
+    },
+    {
+      "gx": -20,
+      "gz": -12,
+      "h": 15
+    },
+    {
+      "gx": -20,
+      "gz": -13,
+      "h": 15
+    },
+    {
+      "gx": -20,
+      "gz": -14,
+      "h": 15
+    },
+    {
+      "gx": -20,
+      "gz": -15,
+      "h": 10
+    },
+    {
+      "gx": -19,
+      "gz": -16,
+      "h": 30
+    },
+    {
+      "gx": -19,
+      "gz": -17,
+      "h": 15
+    },
+    {
+      "gx": -18,
+      "gz": -17,
+      "h": 5
+    },
+    {
+      "gx": -18,
+      "gz": -18,
+      "h": 15
+    },
+    {
+      "gx": -17,
+      "gz": -19,
+      "h": 25
+    },
+    {
+      "gx": -17,
+      "gz": -20,
+      "h": 10
+    },
+    {
+      "gx": -16,
+      "gz": -20,
+      "h": 20
+    },
+    {
+      "gx": -16,
+      "gz": -21,
+      "h": 30
+    },
+    {
+      "gx": -15,
+      "gz": -21,
+      "h": 25
+    },
+    {
+      "gx": -15,
+      "gz": -22,
+      "h": 40
+    }
+  ]
+}

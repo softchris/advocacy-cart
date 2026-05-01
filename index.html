@@ -413,13 +413,25 @@ canvas { display: block; }
   <div class="subtitle">🥑 Advocate Kart Racing 🏁</div>
   <div id="menu-options">
     <div class="menu-option selected" data-action="race">🏎️ New Race</div>
-    <div class="menu-option" data-action="2p">👥 2 Player</div>
     <div class="menu-option" data-action="leaderboard">🏆 Leaderboard</div>
     <div class="menu-option" data-action="credits">📜 Credits</div>
   </div>
   <div class="controls-info">
     <kbd>↑</kbd> <kbd>↓</kbd> Navigate &nbsp; <kbd>Enter</kbd> Select
   </div>
+</div>
+
+<!-- Leaderboard Screen -->
+
+<!-- Mode Select (1P / 2P) -->
+<div id="mode-select" class="select-screen">
+  <h2>🏎️ How Many Players?</h2>
+  <div class="select-sub">Choose your race mode</div>
+  <div id="mode-options" style="display:flex;gap:24px;justify-content:center;margin:32px 0;">
+    <div class="menu-option mode-option selected" data-mode="1p" style="padding:24px 48px;font-size:24px;">🎮 1 Player</div>
+    <div class="menu-option mode-option" data-mode="2p" style="padding:24px 48px;font-size:24px;">👥 2 Players</div>
+  </div>
+  <div class="select-nav-hint"><kbd>←</kbd> <kbd>→</kbd> navigate &nbsp; <kbd>Enter</kbd> confirm</div>
 </div>
 
 <!-- Leaderboard Screen -->
@@ -558,6 +570,17 @@ canvas { display: block; }
   <div style="display:flex; gap:16px; justify-content:center; margin-top:8px;">
     <button id="restart-btn">🔄 Race Again</button>
     <button id="mainmenu-btn" style="background:linear-gradient(135deg,#6e40c9,#8b5cf6); border:none; color:#fff; font-size:20px; padding:12px 32px; border-radius:12px; cursor:pointer; font-weight:bold; text-transform:uppercase; letter-spacing:1px;">🏠 Main Menu</button>
+  </div>
+</div>
+
+<!-- Waiting for podium overlay (2P) -->
+<div id="waiting-overlay" style="display:none; position:fixed; top:0; right:0; width:320px; padding:18px 22px; z-index:200; pointer-events:none;">
+  <div style="background:rgba(13,17,23,0.92); border:2px solid #58a6ff; border-radius:16px; padding:18px 20px; backdrop-filter:blur(8px);">
+    <div style="text-align:center; margin-bottom:12px;">
+      <div style="font-size:22px; font-weight:bold; color:#58a6ff; text-transform:uppercase; letter-spacing:1px;">⏳ Waiting for Podium</div>
+      <div style="font-size:14px; color:#8b949e; margin-top:4px;" id="waiting-spots">2 spots left</div>
+    </div>
+    <div id="waiting-racers" style="font-family:'Segoe UI',sans-serif;"></div>
   </div>
 </div>
 
@@ -973,6 +996,8 @@ let roadTileSet = new Set();  // "gx,gz" keys of road tiles for boundary detecti
 let raceStartTime = 0;
 let raceElapsed = 0;
 let victoryCelebration = null; // { startTime, orbitAngle, fireworkTimer, phase }
+let podiumGroup = null; // THREE.Group holding podium scene
+let crowdGroup = null;  // THREE.Group holding cheering octocats
 let hasRoadTiles = false;     // true if level has road tiles painted
 let ringMeshes = [];          // { mesh, glow, pos, idx } for checkpoint ring effects
 let ringPassedFlags = [];     // per-lap tracking of which rings player passed through
@@ -999,9 +1024,9 @@ window.addEventListener('keydown', e => {
       }
       if (e.code === 'Enter') {
         e.preventDefault();
+        e.stopImmediatePropagation();
         const action = opts[menuSelection]?.dataset.action;
-        if (action === 'race') showCharSelect();
-        else if (action === '2p') { isMultiplayer = true; selectingForPlayer = 1; showCharSelect(); }
+        if (action === 'race') showModeSelect();
         else if (action === 'leaderboard') showLeaderboardScreen();
         else if (action === 'credits') showCreditsScreen();
       }
@@ -1024,6 +1049,36 @@ window.addEventListener('keydown', e => {
         else if (action === 'mainmenu') { resumeGame(); gameState = 'MENU'; hudEl.style.display = 'none'; const hp2 = document.getElementById('hud-p2'); if(hp2) hp2.style.display='none'; menuEl.style.display = 'flex'; isMultiplayer = false; selectingForPlayer = 1; MUSIC.stop(); }
       }
       if (e.code === 'Escape') { e.preventDefault(); resumeGame(); }
+      return;
+    }
+    // Leaderboard screen — Enter or Escape goes back
+    if (gameState === 'LEADERBOARD') {
+      if (e.code === 'Enter' || e.code === 'Escape') {
+        e.preventDefault();
+        document.getElementById('leaderboard-screen').style.display = 'none';
+        gameState = 'MENU'; menuEl.style.display = 'flex';
+      }
+      return;
+    }
+    // Credits screen — Enter or Escape goes back
+    if (gameState === 'CREDITS') {
+      if (e.code === 'Enter' || e.code === 'Escape') {
+        e.preventDefault();
+        document.getElementById('credits-screen').style.display = 'none';
+        gameState = 'MENU'; menuEl.style.display = 'flex';
+      }
+      return;
+    }
+    // Finish screen — arrow keys to select button, Enter to confirm
+    if (gameState === 'FINISHED' && finishEl.style.display === 'flex') {
+      const btns = [document.getElementById('restart-btn'), document.getElementById('mainmenu-btn')];
+      if (!finishEl.dataset.sel) finishEl.dataset.sel = '0';
+      let sel = parseInt(finishEl.dataset.sel);
+      if (e.code === 'ArrowLeft' || e.code === 'ArrowUp') { sel = 0; e.preventDefault(); }
+      if (e.code === 'ArrowRight' || e.code === 'ArrowDown') { sel = 1; e.preventDefault(); }
+      finishEl.dataset.sel = sel;
+      btns.forEach((b, i) => { b.style.outline = i === sel ? '3px solid #fff' : 'none'; b.style.outlineOffset = '4px'; });
+      if (e.code === 'Enter') { e.preventDefault(); btns[sel].click(); }
       return;
     }
     // Escape to pause during racing/countdown
@@ -1182,11 +1237,14 @@ async function loadLevelManifest() {
     const resp = await fetch('levels/manifest.json');
     const manifest = await resp.json();
     const levelPromises = manifest.levels.map(async (path) => {
-      const r = await fetch(path);
-      const data = await r.json();
-      return data;
+      try {
+        const r = await fetch(path);
+        if (!r.ok) return null;
+        const data = await r.json();
+        return data;
+      } catch (e) { console.warn('Failed to load level:', path, e); return null; }
     });
-    const allLevels = await Promise.all(levelPromises);
+    const allLevels = (await Promise.all(levelPromises)).filter(Boolean);
     LEVELS = allLevels.map((data, i) => {
       levelDataCache[i] = data;
       return { name: data.name, desc: data.description, emoji: data.emoji, type: data.type };
@@ -1459,12 +1517,45 @@ function updatePlayerBanner() {
   banner.style.display = 'block';
   if (selectingForPlayer === 1) {
     banner.style.background = 'linear-gradient(90deg, #238636, #3fb950)';
-    banner.textContent = '🎮 PLAYER 1 — Controls: W A S D + E (powerup)';
+    banner.textContent = '🎮 PLAYER 1 — Controls: W A S D + Q (powerup)';
   } else {
     banner.style.background = 'linear-gradient(90deg, #1f6feb, #58a6ff)';
     banner.textContent = '🎮 PLAYER 2 — Controls: ↑ ↓ ← → + Space (powerup)';
   }
 }
+
+let modeSelection = 0; // 0 = 1P, 1 = 2P
+
+function showModeSelect() {
+  selectionPhase = 'mode';
+  gameState = 'SELECTING';
+  menuEl.style.display = 'none';
+  modeSelection = 0;
+  document.getElementById('mode-select').classList.add('active');
+  updateModeSelection();
+}
+
+function updateModeSelection() {
+  document.querySelectorAll('#mode-options .mode-option').forEach((o, i) => {
+    o.classList.toggle('selected', i === modeSelection);
+  });
+}
+
+function confirmModeSelect() {
+  document.getElementById('mode-select').classList.remove('active');
+  if (modeSelection === 1) {
+    isMultiplayer = true;
+    selectingForPlayer = 1;
+  } else {
+    isMultiplayer = false;
+  }
+  showCharSelect();
+}
+
+// Mode select click handlers
+document.querySelectorAll('#mode-options .mode-option').forEach((opt, i) => {
+  opt.addEventListener('click', () => { modeSelection = i; updateModeSelection(); confirmModeSelect(); });
+});
 
 function showCharSelect() {
   updatePlayerBanner();
@@ -1598,17 +1689,24 @@ function confirmSelections() {
 
 // Selection keyboard navigation
 window.addEventListener('keydown', e => {
-  if (selectionPhase === 'char') {
+  if (selectionPhase === 'mode') {
+    if (e.code === 'ArrowRight' || e.code === 'ArrowDown') { modeSelection = 1; updateModeSelection(); e.preventDefault(); }
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowUp') { modeSelection = 0; updateModeSelection(); e.preventDefault(); }
+    if (e.code === 'Enter') { confirmModeSelect(); e.preventDefault(); }
+    if (e.code === 'Escape') { document.getElementById('mode-select').classList.remove('active'); selectionPhase = ''; gameState = 'MENU'; menuEl.style.display = 'flex'; e.preventDefault(); }
+  } else if (selectionPhase === 'char') {
     const cols = 8;
     if (e.code === 'ArrowRight') { selectedCharIdx = Math.min(selectedCharIdx + 1, ADVOCATES.length - 1); updateCharSelection(); e.preventDefault(); }
     if (e.code === 'ArrowLeft') { selectedCharIdx = Math.max(selectedCharIdx - 1, 0); updateCharSelection(); e.preventDefault(); }
     if (e.code === 'ArrowDown') { selectedCharIdx = Math.min(selectedCharIdx + cols, ADVOCATES.length - 1); updateCharSelection(); e.preventDefault(); }
     if (e.code === 'ArrowUp') { selectedCharIdx = Math.max(selectedCharIdx - cols, 0); updateCharSelection(); e.preventDefault(); }
     if (e.code === 'Enter') { showCartSelect(); e.preventDefault(); }
+    if (e.code === 'Escape') { document.getElementById('char-select').classList.remove('active'); showModeSelect(); e.preventDefault(); }
   } else if (selectionPhase === 'cart') {
     if (e.code === 'ArrowRight') { selectedCartIdx = Math.min(selectedCartIdx + 1, CART_TYPES.length - 1); updateCartSelection(); e.preventDefault(); }
     if (e.code === 'ArrowLeft') { selectedCartIdx = Math.max(selectedCartIdx - 1, 0); updateCartSelection(); e.preventDefault(); }
     if (e.code === 'Enter') { showColorSelect(); e.preventDefault(); }
+    if (e.code === 'Escape') { stopKartPreview(); document.getElementById('cart-select').classList.remove('active'); showCharSelect(); e.preventDefault(); }
   } else if (selectionPhase === 'color') {
     const cols = 5;
     if (e.code === 'ArrowRight') { selectedColorIdx = Math.min(selectedColorIdx + 1, COLOR_THEMES.length - 1); updateColorSelection(); e.preventDefault(); }
@@ -1616,10 +1714,14 @@ window.addEventListener('keydown', e => {
     if (e.code === 'ArrowDown') { selectedColorIdx = Math.min(selectedColorIdx + cols, COLOR_THEMES.length - 1); updateColorSelection(); e.preventDefault(); }
     if (e.code === 'ArrowUp') { selectedColorIdx = Math.max(selectedColorIdx - cols, 0); updateColorSelection(); e.preventDefault(); }
     if (e.code === 'Enter') { confirmSelections(); e.preventDefault(); }
+    if (e.code === 'Escape') { document.getElementById('color-select').classList.remove('active'); showCartSelect(); e.preventDefault(); }
   } else if (selectionPhase === 'level') {
     if (e.code === 'ArrowRight') { selectedLevelIdx = Math.min(selectedLevelIdx + 1, LEVELS.length - 1); updateLevelSelection(); e.preventDefault(); }
     if (e.code === 'ArrowLeft') { selectedLevelIdx = Math.max(selectedLevelIdx - 1, 0); updateLevelSelection(); e.preventDefault(); }
+    if (e.code === 'ArrowDown') { selectedLevelIdx = Math.min(selectedLevelIdx + 1, LEVELS.length - 1); updateLevelSelection(); e.preventDefault(); }
+    if (e.code === 'ArrowUp') { selectedLevelIdx = Math.max(selectedLevelIdx - 1, 0); updateLevelSelection(); e.preventDefault(); }
     if (e.code === 'Enter') { confirmLevel(); e.preventDefault(); }
+    if (e.code === 'Escape') { document.getElementById('level-select').classList.remove('active'); document.getElementById('color-select').classList.add('active'); selectionPhase = 'color'; e.preventDefault(); }
   }
 });
 
@@ -1627,8 +1729,7 @@ window.addEventListener('keydown', e => {
 document.querySelectorAll('#menu-options .menu-option').forEach(opt => {
   opt.addEventListener('click', () => {
     const action = opt.dataset.action;
-    if (action === 'race') showCharSelect();
-    else if (action === '2p') { isMultiplayer = true; selectingForPlayer = 1; showCharSelect(); }
+    if (action === 'race') showModeSelect();
     else if (action === 'leaderboard') showLeaderboardScreen();
     else if (action === 'credits') showCreditsScreen();
   });
@@ -1663,12 +1764,13 @@ document.getElementById('mainmenu-btn').addEventListener('click', () => {
   MUSIC.stop();
   SFX.stopEngine();
 });
-document.getElementById('lb-back-btn').addEventListener('click', () => { document.getElementById('leaderboard-screen').style.display = 'none'; menuEl.style.display = 'flex'; });
-document.getElementById('credits-back-btn').addEventListener('click', () => { document.getElementById('credits-screen').style.display = 'none'; menuEl.style.display = 'flex'; });
+document.getElementById('lb-back-btn').addEventListener('click', () => { document.getElementById('leaderboard-screen').style.display = 'none'; gameState = 'MENU'; menuEl.style.display = 'flex'; });
+document.getElementById('credits-back-btn').addEventListener('click', () => { document.getElementById('credits-screen').style.display = 'none'; gameState = 'MENU'; menuEl.style.display = 'flex'; });
 
 // Leaderboard/Credits screens
 function showLeaderboardScreen() {
   menuEl.style.display = 'none';
+  gameState = 'LEADERBOARD';
   const screen = document.getElementById('leaderboard-screen');
   screen.style.display = 'flex';
   const content = document.getElementById('lb-history-content');
@@ -1686,6 +1788,7 @@ function showLeaderboardScreen() {
 
 function showCreditsScreen() {
   menuEl.style.display = 'none';
+  gameState = 'CREDITS';
   document.getElementById('credits-screen').style.display = 'flex';
 }
 
@@ -4042,6 +4145,9 @@ function createKart(colorIdx, cartStyle, photoUrl, racerName) {
     group.add(nameSprite);
   }
 
+  // Store photo URL for podium scene
+  group.userData.photoUrl = photoUrl || null;
+
   scene.add(group);
   return group;
 }
@@ -4171,6 +4277,11 @@ function resetRace() {
   raceElapsed = 0;
   raceStartTime = 0;
   victoryCelebration = null;
+  window._finishOrder = [];
+  document.getElementById('waiting-overlay').style.display = 'none';
+  // Clean up podium/crowd from previous race
+  if (podiumGroup) { scene.remove(podiumGroup); podiumGroup = null; }
+  if (crowdGroup) { scene.remove(crowdGroup); crowdGroup = null; }
   // Clean up particles and explosions
   particles.forEach(p => { p.mesh.visible = false; particlePool.push(p.mesh); });
   particles = [];
@@ -4486,9 +4597,11 @@ let lastTime = 0;
 let accumulator = 0;
 
 function renderViews() {
-  if (!isMultiplayer) {
+  if (!isMultiplayer || gameState === 'FINISHED') {
     renderer.setViewport(0, 0, window.innerWidth, window.innerHeight);
     renderer.setScissorTest(false);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
     renderer.render(scene, camera);
     return;
   }
@@ -4534,11 +4647,15 @@ function gameLoop(time = 0) {
     }
   });
 
-  // Victory celebration camera + fireworks
+  // Victory celebration camera + fireworks — single camera view (no split)
   if (victoryCelebration) {
     updateVictoryCelebration(time);
     updateParticles(dt);
-    renderViews();
+    renderer.setScissorTest(false);
+    renderer.setViewport(0, 0, window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.render(scene, camera);
     return;
   }
 
@@ -4588,9 +4705,20 @@ function fixedUpdate() {
     }
 
     if (r.isPlayer) {
-      updatePlayer(r);
+      if (r._finished) {
+        // Finished racers coast to a stop
+        r.speed *= 0.96;
+        if (Math.abs(r.speed) < 0.01) r.speed = 0;
+      } else {
+        updatePlayer(r);
+      }
     } else {
-      updateAI(r);
+      if (r._finished) {
+        r.speed *= 0.96;
+        if (Math.abs(r.speed) < 0.01) r.speed = 0;
+      } else {
+        updateAI(r);
+      }
     }
 
     updateRacerPosition(r);
@@ -4769,7 +4897,7 @@ function updatePlayer(r) {
     if (isP1) {
       accelKey = keys['KeyW']; brakeKey = keys['KeyS'];
       leftKey = keys['KeyA']; rightKey = keys['KeyD'];
-      powerupKey = 'KeyE';
+      powerupKey = 'KeyQ';
     } else {
       accelKey = keys['ArrowUp']; brakeKey = keys['ArrowDown'];
       leftKey = keys['ArrowLeft']; rightKey = keys['ArrowRight'];
@@ -4911,7 +5039,7 @@ function updateRacerPosition(r) {
       // Landing impact — small speed penalty for hard landings
       if (r.airTime > 1.5) {
         r.speed *= 0.7;
-        if (r.isPlayer) SFX.collisionRock();
+        if (r.isPlayer) SFX.menuSelect();
       } else {
         if (r.isPlayer && r.airTime > 0.5) {
           showToast('🪂', 'Smooth Landing!', 'Nice air time!');
@@ -5542,7 +5670,7 @@ function checkLapsAndCheckpoints() {
         }
       }
 
-      if (r.lap >= TOTAL_LAPS) {
+      if (r.lap >= TOTAL_LAPS && !r._finished) {
         finishRace(r);
       }
     }
@@ -5617,86 +5745,292 @@ function getRacePositions() {
 }
 
 function finishRace(winner) {
+  // Track finish order
+  if (!window._finishOrder) window._finishOrder = [];
+  window._finishOrder.push(winner);
+  winner._finished = true;
+  winner._finishPlace = window._finishOrder.length;
+
   if (isMultiplayer) {
-    // Track finished humans — race continues until all humans done
-    if (!winner._finished) winner._finished = true;
-    const allHumansFinished = racers.filter(r => r.isPlayer).every(r => r._finished || r.lap >= TOTAL_LAPS);
-    if (!allHumansFinished) {
-      const pLabel = winner.playerIndex === 0 ? 'P1' : (winner.playerIndex === 1 ? 'P2' : RACER_NAMES[winner.colorIdx]);
-      showToast('🏁', `${pLabel} FINISHED!`, '');
+    const finishedCount = window._finishOrder.length;
+    const pLabel = winner.isPlayer
+      ? (winner.playerIndex === 0 ? 'PLAYER 1' : 'PLAYER 2')
+      : RACER_NAMES[winner.colorIdx];
+    const placeSuf = ['st','nd','rd','th'][Math.min(finishedCount - 1, 3)];
+
+    if (finishedCount < 3) {
+      showToast('🏁', `${pLabel} — ${finishedCount}${placeSuf}!`, `${3 - finishedCount} podium spot${3 - finishedCount > 1 ? 's' : ''} left`);
+      SFX.lapComplete();
+      // Show waiting overlay for finished human players
+      if (winner.isPlayer) {
+        const waitEl = document.getElementById('waiting-overlay');
+        waitEl.style.display = 'block';
+        document.getElementById('waiting-spots').textContent = `${3 - finishedCount} podium spot${3 - finishedCount > 1 ? 's' : ''} left`;
+      }
       return;
     }
-
-    gameState = 'FINISHED';
-    hudEl.style.display = 'none';
-    document.getElementById('hud-p2').style.display = 'none';
-    const pos = getRacePositions();
-    const p1Pos = pos.indexOf(racers[0]) + 1;
-    const p2Pos = pos.indexOf(racers[1]) + 1;
-
-    SFX.stopEngine();
-    MUSIC.stop();
-
-    const finalMins = Math.floor(raceElapsed / 60);
-    const finalSecs = raceElapsed % 60;
-    const timeStr = `${finalMins}:${finalSecs < 10 ? '0' : ''}${finalSecs.toFixed(2)}`;
-
-    if (p1Pos < p2Pos) {
-      finishTitle.textContent = '🏆 PLAYER 1 WINS!';
-    } else if (p2Pos < p1Pos) {
-      finishTitle.textContent = '🏆 PLAYER 2 WINS!';
-    } else {
-      finishTitle.textContent = '🤝 IT\'S A TIE!';
-    }
-    finishResult.textContent = `P1: ${p1Pos}${['st','nd','rd','th'][Math.min(p1Pos-1,3)]} • P2: ${p2Pos}${['st','nd','rd','th'][Math.min(p2Pos-1,3)]}`;
-    document.getElementById('finish-time').textContent = `⏱ Race Time: ${timeStr}`;
-    finishEl.style.display = 'flex';
-    SFX.winFanfare();
-    return;
+    // 3rd finisher triggers podium
+    showToast('🏁', `${pLabel} — ${finishedCount}${placeSuf}!`, 'Podium complete!');
   }
 
   gameState = 'FINISHED';
   hudEl.style.display = 'none';
-  const pos = getRacePositions();
+  if (isMultiplayer) {
+    document.getElementById('hud-p2').style.display = 'none';
+    document.getElementById('waiting-overlay').style.display = 'none';
+  }
+
+  // Use actual finish order for podium; fall back to distance-based for unfinished
+  const finishOrder = window._finishOrder || [];
+  const unfinished = racers.filter(r => !r._finished).sort((a, b) => {
+    return (b.lap * trackLength + b.dist) - (a.lap * trackLength + a.dist);
+  });
+  const pos = [...finishOrder, ...unfinished];
   const playerPos = pos.indexOf(racers[0]) + 1;
-  // Placement bonus
-  const placementBonus = [500, 300, 200, 100];
-  const bonus = placementBonus[Math.min(playerPos - 1, 3)];
-  addScore(bonus, 'Finish');
-  // Record race
-  raceHistory.push({ position: playerPos, score: playerScore, track: LEVELS[selectedLevelIdx].name, date: new Date().toLocaleDateString() });
+
+  if (!isMultiplayer) {
+    const placementBonus = [500, 300, 200, 100];
+    addScore(placementBonus[Math.min(playerPos - 1, 3)], 'Finish');
+    raceHistory.push({ position: playerPos, score: playerScore, track: LEVELS[selectedLevelIdx].name, date: new Date().toLocaleDateString() });
+  }
+
   SFX.stopEngine();
   MUSIC.stop();
 
-  // Format final time
   const finalMins = Math.floor(raceElapsed / 60);
   const finalSecs = raceElapsed % 60;
   const timeStr = `${finalMins}:${finalSecs < 10 ? '0' : ''}${finalSecs.toFixed(2)}`;
 
-  if (playerPos === 1) {
-    // Victory celebration — lift kart, orbit camera, fireworks, then show UI
-    SFX.winFanfare();
-    const playerKart = racers[0].mesh;
-    const celebStartY = playerKart.position.y;
-    victoryCelebration = {
-      startTime: performance.now(),
-      startY: celebStartY,
-      orbitAngle: racers[0].angle,
-      fireworkTimer: 0,
-      phase: 'lift', // lift → orbit → reveal
-      timeStr: timeStr,
-      playerPos: playerPos,
-    };
-  } else {
-    // Lose — show results immediately
-    SFX.loseTune();
-    showFinishScreen(playerPos, timeStr);
+  SFX.winFanfare();
+  buildPodiumScene(pos);
+
+  victoryCelebration = {
+    startTime: performance.now(),
+    orbitAngle: 0,
+    fireworkTimer: 0,
+    timeStr: timeStr,
+    playerPos: playerPos,
+    podiumCenter: podiumGroup ? podiumGroup.position.clone() : new THREE.Vector3(0, 0, 0),
+  };
+}
+
+function buildPodiumScene(positions) {
+  // Remove old podium/crowd
+  if (podiumGroup) { scene.remove(podiumGroup); podiumGroup = null; }
+  if (crowdGroup) { scene.remove(crowdGroup); crowdGroup = null; }
+
+  // Place podium near the start/finish line
+  const basePos = trackPoints[0].clone();
+  const fwd = new THREE.Vector3().subVectors(trackPoints[1], trackPoints[0]).normalize();
+  const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0,1,0), fwd).normalize();
+  // Offset podium to the side of the track
+  const podiumPos = basePos.clone().add(right.clone().multiplyScalar(25)).add(new THREE.Vector3(0, 0, 0));
+
+  podiumGroup = new THREE.Group();
+  podiumGroup.position.copy(podiumPos);
+  scene.add(podiumGroup);
+
+  // Podium platform heights: 1st=6, 2nd=4, 3rd=2.5
+  const podiumHeights = [6, 4, 2.5];
+  const podiumXOffsets = [0, -5, 5]; // 1st center, 2nd left, 3rd right
+  const podiumWidths = [3.5, 3, 3];
+  const podiumColors = [0xd29922, 0x8b949e, 0x8b4513]; // gold, silver, bronze
+  const placeLabels = ['1st', '2nd', '3rd'];
+
+  const top3 = positions.slice(0, 3);
+
+  top3.forEach((racer, i) => {
+    const h = podiumHeights[i];
+    const xOff = podiumXOffsets[i];
+    const w = podiumWidths[i];
+
+    // Podium block
+    const blockGeo = new THREE.BoxGeometry(w, h, w);
+    const blockMat = new THREE.MeshPhongMaterial({ color: podiumColors[i], shininess: 80 });
+    const block = new THREE.Mesh(blockGeo, blockMat);
+    block.position.set(xOff, h / 2, 0);
+    block.castShadow = true;
+    block.receiveShadow = true;
+    podiumGroup.add(block);
+
+    // Place label on front of podium
+    const labelCanvas = document.createElement('canvas');
+    labelCanvas.width = 256; labelCanvas.height = 128;
+    const lctx = labelCanvas.getContext('2d');
+    lctx.fillStyle = 'rgba(0,0,0,0.5)';
+    lctx.fillRect(0, 0, 256, 128);
+    lctx.fillStyle = '#ffffff';
+    lctx.font = 'bold 72px system-ui, sans-serif';
+    lctx.textAlign = 'center'; lctx.textBaseline = 'middle';
+    lctx.fillText(placeLabels[i], 128, 64);
+    const labelTex = new THREE.CanvasTexture(labelCanvas);
+    const labelMat = new THREE.SpriteMaterial({ map: labelTex, transparent: true });
+    const labelSprite = new THREE.Sprite(labelMat);
+    labelSprite.scale.set(3, 1.5, 1);
+    labelSprite.position.set(xOff, h * 0.4, w / 2 + 0.5);
+    podiumGroup.add(labelSprite);
+
+    // Clone the racer's kart and place it on top of the podium
+    const kartClone = racer.mesh.clone();
+    kartClone.position.set(xOff, h + 0.1, 0);
+    kartClone.rotation.set(0, Math.PI, 0); // face forward
+    kartClone.userData.spinSpeed = i === 0 ? 0.02 : 0.01;
+    podiumGroup.add(kartClone);
+
+    // Name + photo label floating above kart
+    const nameCanvas = document.createElement('canvas');
+    nameCanvas.width = 512; nameCanvas.height = 192;
+    const nctx = nameCanvas.getContext('2d');
+
+    const racerName = RACER_NAMES[racer.colorIdx] || `Racer ${racer.colorIdx + 1}`;
+    const isHuman = racer.isPlayer;
+    let displayName = racerName;
+    if (isMultiplayer && isHuman) {
+      displayName = (racer.playerIndex === 0 ? 'P1: ' : 'P2: ') + racerName;
+    }
+
+    // Background
+    nctx.fillStyle = 'rgba(13,17,23,0.85)';
+    nctx.beginPath();
+    nctx.roundRect(0, 0, 512, 192, 20);
+    nctx.fill();
+    // Border
+    const borderColors = ['#d29922', '#8b949e', '#cd7f32'];
+    nctx.strokeStyle = borderColors[i];
+    nctx.lineWidth = 4;
+    nctx.beginPath();
+    nctx.roundRect(2, 2, 508, 188, 18);
+    nctx.stroke();
+    // Name text
+    nctx.fillStyle = '#e6edf3';
+    nctx.font = 'bold 42px system-ui, sans-serif';
+    nctx.textAlign = 'center'; nctx.textBaseline = 'middle';
+    nctx.fillText(displayName, 256, 96);
+    // Trophy for 1st
+    if (i === 0) {
+      nctx.font = '56px system-ui, sans-serif';
+      nctx.fillText('🏆', 256, 36);
+    }
+
+    const nameTex = new THREE.CanvasTexture(nameCanvas);
+    const nameMat = new THREE.SpriteMaterial({ map: nameTex, transparent: true, depthTest: false });
+    const nameSprite = new THREE.Sprite(nameMat);
+    nameSprite.scale.set(8, 3, 1);
+    nameSprite.position.set(xOff, h + 5.5, 0);
+    nameSprite.renderOrder = 1000;
+    podiumGroup.add(nameSprite);
+
+    // Photo sprite (load from racer's photo if available)
+    const photoUrl = racer.mesh.userData?.photoUrl;
+    if (photoUrl) {
+      const photoTexLoader = new THREE.TextureLoader();
+      photoTexLoader.load(photoUrl, (tex) => {
+        const photoMat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false });
+        const photoSprite = new THREE.Sprite(photoMat);
+        photoSprite.scale.set(3, 3, 1);
+        photoSprite.position.set(xOff, h + 8.5, 0);
+        photoSprite.renderOrder = 1001;
+        podiumGroup.add(photoSprite);
+      }, undefined, () => {});
+    }
+  });
+
+  // Spotlight on the podium
+  const spotLight = new THREE.SpotLight(0xffffff, 2, 60, Math.PI / 4, 0.3);
+  spotLight.position.set(0, 25, 15);
+  spotLight.target.position.set(0, 0, 0);
+  podiumGroup.add(spotLight);
+  podiumGroup.add(spotLight.target);
+
+  // Build cheering crowd
+  buildCrowd(podiumPos, fwd, right);
+}
+
+function buildCrowd(podiumPos, fwd, right) {
+  crowdGroup = new THREE.Group();
+  crowdGroup.position.copy(podiumPos);
+  scene.add(crowdGroup);
+
+  // Semi-circle of octocats in front of the podium
+  const crowdCount = 30;
+  const crowdRadius = 15;
+  const crowdColors = [0xf78166, 0x3fb950, 0x58a6ff, 0xd29922, 0xdb61a2, 0xa371f7, 0x7ee787, 0x1f6feb];
+
+  for (let i = 0; i < crowdCount; i++) {
+    const angle = (Math.PI * 0.15) + (Math.PI * 0.7) * (i / (crowdCount - 1));
+    const radius = crowdRadius + (Math.random() - 0.5) * 5;
+    const x = Math.sin(angle) * radius;
+    const z = Math.cos(angle) * radius + 5;
+
+    const octoGroup = new THREE.Group();
+    octoGroup.position.set(x, 0, z);
+
+    // Body (rounded cylinder shape)
+    const bodyColor = crowdColors[Math.floor(Math.random() * crowdColors.length)];
+    const bodyGeo = new THREE.CylinderGeometry(0.5, 0.5, 1.2, 8);
+    const bodyMat = new THREE.MeshPhongMaterial({ color: bodyColor });
+    const body = new THREE.Mesh(bodyGeo, bodyMat);
+    body.position.y = 1.2;
+    octoGroup.add(body);
+
+    // Head
+    const headGeo = new THREE.SphereGeometry(0.55, 8, 8);
+    const headMat = new THREE.MeshPhongMaterial({ color: bodyColor });
+    const head = new THREE.Mesh(headGeo, headMat);
+    head.position.y = 2.2;
+    octoGroup.add(head);
+
+    // Eyes
+    const eyeGeo = new THREE.SphereGeometry(0.1, 6, 6);
+    const eyeMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const pupilGeo = new THREE.SphereGeometry(0.06, 6, 6);
+    const pupilMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+
+    [-0.18, 0.18].forEach(xOff => {
+      const eye = new THREE.Mesh(eyeGeo, eyeMat);
+      eye.position.set(xOff, 2.3, 0.45);
+      octoGroup.add(eye);
+      const pupil = new THREE.Mesh(pupilGeo, pupilMat);
+      pupil.position.set(xOff, 2.3, 0.52);
+      octoGroup.add(pupil);
+    });
+
+    // Tentacle arms (two simple cylinders raised up for cheering)
+    [-0.6, 0.6].forEach(side => {
+      const armGeo = new THREE.CylinderGeometry(0.08, 0.12, 0.8, 6);
+      const armMat = new THREE.MeshPhongMaterial({ color: bodyColor });
+      const arm = new THREE.Mesh(armGeo, armMat);
+      arm.position.set(side, 2.0, 0);
+      arm.rotation.z = side > 0 ? -0.5 : 0.5;
+      octoGroup.add(arm);
+    });
+
+    // Face toward podium
+    octoGroup.lookAt(podiumPos.x, 0, podiumPos.z);
+    octoGroup.rotation.y += Math.PI; // flip to face podium
+
+    // Store animation data
+    octoGroup.userData.cheerOffset = Math.random() * Math.PI * 2;
+    octoGroup.userData.cheerSpeed = 3 + Math.random() * 2;
+    octoGroup.userData.baseY = 0;
+
+    crowdGroup.add(octoGroup);
   }
 }
 
-function showFinishScreen(playerPos, timeStr) {
-  finishTitle.textContent = playerPos === 1 ? '🏆 YOU WIN!' : '🏁 Race Over!';
-  finishResult.textContent = `You finished ${playerPos}${['st','nd','rd','th'][Math.min(playerPos-1,3)]}! — Score: ⭐ ${playerScore} pts`;
+function showFinishScreen(positions, timeStr) {
+  const playerPos = positions ? positions.indexOf(racers[0]) + 1 : 1;
+  if (isMultiplayer) {
+    const p1Pos = positions.indexOf(racers[0]) + 1;
+    const p2Pos = positions.indexOf(racers[1]) + 1;
+    if (p1Pos < p2Pos) finishTitle.textContent = '🏆 PLAYER 1 WINS!';
+    else if (p2Pos < p1Pos) finishTitle.textContent = '🏆 PLAYER 2 WINS!';
+    else finishTitle.textContent = '🤝 IT\'S A TIE!';
+    finishResult.textContent = `P1: ${p1Pos}${['st','nd','rd','th'][Math.min(p1Pos-1,3)]} • P2: ${p2Pos}${['st','nd','rd','th'][Math.min(p2Pos-1,3)]}`;
+  } else {
+    finishTitle.textContent = playerPos === 1 ? '🏆 YOU WIN!' : '🏁 Race Over!';
+    finishResult.textContent = `You finished ${playerPos}${['st','nd','rd','th'][Math.min(playerPos-1,3)]}! — Score: ⭐ ${playerScore} pts`;
+  }
   document.getElementById('finish-time').textContent = `⏱ Race Time: ${timeStr}`;
   finishEl.style.display = 'flex';
 }
@@ -5705,44 +6039,60 @@ function updateVictoryCelebration(time) {
   if (!victoryCelebration) return;
   const vc = victoryCelebration;
   const elapsed = (time - vc.startTime) / 1000;
-  const playerKart = racers[0].mesh;
+  const center = vc.podiumCenter;
 
-  // Phase 1: Lift kart (0-1.5s)
-  if (elapsed < 1.5) {
-    const liftT = elapsed / 1.5;
-    playerKart.position.y = vc.startY + liftT * 5;
-    playerKart.rotation.y += 0.02;
-  }
-  // Phase 2: Orbit camera around kart + fireworks (1.5-6s)
-  else if (elapsed < 6) {
-    playerKart.position.y = vc.startY + 5;
-    playerKart.rotation.y += 0.015;
-    vc.orbitAngle += 0.025;
+  // Slow orbit around podium for entire duration
+  vc.orbitAngle += 0.012;
 
-    // Camera orbits around kart
-    const orbitR = 12;
-    const orbitH = playerKart.position.y + 4;
-    camera.position.set(
-      playerKart.position.x + Math.sin(vc.orbitAngle) * orbitR,
-      orbitH,
-      playerKart.position.z + Math.cos(vc.orbitAngle) * orbitR
+  const orbitR = 22;
+  const orbitH = 12 + Math.sin(elapsed * 0.3) * 2; // gentle bob
+  camera.position.set(
+    center.x + Math.sin(vc.orbitAngle) * orbitR,
+    orbitH,
+    center.z + Math.cos(vc.orbitAngle) * orbitR
+  );
+  camera.lookAt(center.x, 5, center.z);
+
+  // Fireworks throughout
+  vc.fireworkTimer += 1;
+  if (vc.fireworkTimer % 6 === 0) {
+    spawnFirework(
+      center.x + (Math.random() - 0.5) * 30,
+      10 + Math.random() * 15,
+      center.z + (Math.random() - 0.5) * 30
     );
-    camera.lookAt(playerKart.position.x, playerKart.position.y + 1, playerKart.position.z);
-
-    // Spawn firework particles
-    vc.fireworkTimer += 1;
-    if (vc.fireworkTimer % 8 === 0) {
-      spawnFirework(
-        playerKart.position.x + (Math.random() - 0.5) * 20,
-        playerKart.position.y + 5 + Math.random() * 10,
-        playerKart.position.z + (Math.random() - 0.5) * 20
-      );
-    }
   }
-  // Phase 3: Show finish screen (6s+)
-  else {
+
+  // Animate crowd cheering (jumping + arms waving)
+  if (crowdGroup) {
+    crowdGroup.children.forEach(octo => {
+      const ud = octo.userData;
+      const cheerT = time * 0.001 * ud.cheerSpeed + ud.cheerOffset;
+      // Bounce up and down
+      octo.position.y = ud.baseY + Math.abs(Math.sin(cheerT)) * 0.6;
+      // Wave arms by rotating arm meshes
+      octo.children.forEach(child => {
+        if (child.geometry?.type === 'CylinderGeometry' || child.geometry?.parameters?.radiusTop === 0.08) {
+          child.rotation.z += Math.sin(cheerT * 2) * 0.02;
+        }
+      });
+    });
+  }
+
+  // Spin karts on podium
+  if (podiumGroup) {
+    podiumGroup.children.forEach(child => {
+      if (child.userData?.spinSpeed) {
+        child.rotation.y += child.userData.spinSpeed;
+      }
+    });
+  }
+
+  // Show finish screen after 8 seconds
+  if (elapsed > 8) {
+    const positions = getRacePositions();
     victoryCelebration = null;
-    showFinishScreen(vc.playerPos, vc.timeStr);
+    showFinishScreen(positions, vc.timeStr);
   }
 }
 
@@ -5770,8 +6120,8 @@ function spawnFirework(x, y, z) {
 
 function updateCameraFor(racer, cam) {
   if (!racer) return;
-  const dist = 12;
-  const height = racer.mesh.position.y + 10;
+  const dist = 6;
+  const height = racer.mesh.position.y + 4.5;
   const behind = new THREE.Vector3(
     racer.mesh.position.x - Math.sin(racer.angle) * dist,
     height,
@@ -5927,7 +6277,7 @@ function updateHUD() {
   // Powerup display + crosshair
   if (player.powerup) {
     powerupEl.style.display = 'block';
-    powerupEl.innerHTML = `<span class="pw-icon">${player.powerup.icon}</span><span class="pw-name">${player.powerup.name}</span><span class="pw-desc">${player.powerup.desc}</span><span class="pw-hint">Press ${isMultiplayer ? 'E' : 'SPACE'} to use</span>`;
+    powerupEl.innerHTML = `<span class="pw-icon">${player.powerup.icon}</span><span class="pw-name">${player.powerup.name}</span><span class="pw-desc">${player.powerup.desc}</span><span class="pw-hint">Press ${isMultiplayer ? 'Q' : 'SPACE'} to use</span>`;
     const isProjectile = player.powerup.name === 'Holy Guacamole';
     crosshairEl.style.display = isProjectile ? 'block' : 'none';
   } else {
@@ -5987,9 +6337,33 @@ function updateHUD() {
       p2pw.style.display = 'none';
     }
   }
-}
 
-// ----- MINIMAP -----
+  // Update waiting overlay for 2P
+  if (isMultiplayer && document.getElementById('waiting-overlay').style.display === 'block') {
+    const finishOrder = window._finishOrder || [];
+    const spotsLeft = 3 - finishOrder.length;
+    document.getElementById('waiting-spots').textContent = `${spotsLeft} podium spot${spotsLeft > 1 ? 's' : ''} left`;
+    const still = racers.filter(r => !r._finished);
+    let html = '';
+    still.sort((a, b) => (b.lap * trackLength + b.dist) - (a.lap * trackLength + a.dist));
+    still.forEach((r, i) => {
+      const name = r.isPlayer ? (r.playerIndex === 0 ? 'Player 1' : 'Player 2') : RACER_NAMES[r.colorIdx];
+      const colorHex = '#' + RACER_COLORS[r.colorIdx].toString(16).padStart(6, '0');
+      const lapNum = Math.min(r.lap + 1, TOTAL_LAPS);
+      const elapsed = raceElapsed;
+      const mins = Math.floor(elapsed / 60);
+      const secs = elapsed % 60;
+      const timeStr = `${mins}:${secs < 10 ? '0' : ''}${secs.toFixed(1)}`;
+      html += `<div style="display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid rgba(88,166,255,0.15); color:#e6edf3; font-size:15px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:${colorHex}; flex-shrink:0;"></span>
+        <span style="flex:1; font-weight:${r.isPlayer ? 'bold' : 'normal'};">${name}</span>
+        <span style="color:#8b949e; font-size:13px;">L${lapNum}/${TOTAL_LAPS}</span>
+        <span style="color:#58a6ff; font-size:13px; font-family:monospace;">${timeStr}</span>
+      </div>`;
+    });
+    document.getElementById('waiting-racers').innerHTML = html;
+  }
+}
 function updateMinimap() {
   const ctx = minimapCtx;
   const W = 180, H = 180;

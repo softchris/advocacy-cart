@@ -1,0 +1,8180 @@
+{
+  "name": "Tidal Branch",
+  "description": "Beach paradise — but watch out for the waves!",
+  "emoji": "🏖️",
+  "type": "beach",
+  "laps": 5,
+  "trackWidth": 14,
+  "environment": {
+    "skyColor": "#87ceeb",
+    "fogColor": "#87ceeb",
+    "fogNear": 120,
+    "fogFar": 300,
+    "timeOfDay": "midday",
+    "background": "forest",
+    "groundColor": "#c2b280",
+    "groundSize": 400
+  },
+  "controlPoints": [
+    {
+      "x": -30,
+      "y": 0,
+      "z": 30
+    },
+    {
+      "x": -15,
+      "y": 0,
+      "z": 45
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "z": 55
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": 45
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": 25
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": 15
+    },
+    {
+      "x": -25,
+      "y": 0,
+      "z": 0
+    },
+    {
+      "x": -40,
+      "y": 0,
+      "z": -20
+    },
+    {
+      "x": -35,
+      "y": 0,
+      "z": -45
+    },
+    {
+      "x": 100,
+      "y": 0,
+      "z": -75
+    },
+    {
+      "x": 120,
+      "y": 0,
+      "z": -30
+    },
+    {
+      "x": 95,
+      "y": 0,
+      "z": -5
+    },
+    {
+      "x": 100,
+      "y": 0,
+      "z": 90
+    },
+    {
+      "x": -60,
+      "y": 0,
+      "z": 100
+    },
+    {
+      "x": -165,
+      "y": 0,
+      "z": 55
+    },
+    {
+      "x": -175,
+      "y": 0,
+      "z": -20
+    }
+  ],
+  "tiles": [
+    {
+      "gx": -17,
+      "gz": 20,
+      "type": "sand"
+    },
+    {
+      "gx": -24,
+      "gz": 16,
+      "type": "sand"
+    },
+    {
+      "gx": -34,
+      "gz": 10,
+      "type": "sand"
+    },
+    {
+      "gx": -36,
+      "gz": -3,
+      "type": "sand"
+    },
+    {
+      "gx": -14,
+      "gz": 1,
+      "type": "sand"
+    },
+    {
+      "gx": 0,
+      "gz": 9,
+      "type": "sand"
+    },
+    {
+      "gx": -2,
+      "gz": -10,
+      "type": "sand"
+    },
+    {
+      "gx": 1,
+      "gz": -11,
+      "type": "sand"
+    },
+    {
+      "gx": 2,
+      "gz": -11,
+      "type": "sand"
+    },
+    {
+      "gx": 3,
+      "gz": -11,
+      "type": "sand"
+    },
+    {
+      "gx": 5,
+      "gz": -12,
+      "type": "sand"
+    },
+    {
+      "gx": 8,
+      "gz": -13,
+      "type": "sand"
+    },
+    {
+      "gx": 9,
+      "gz": -13,
+      "type": "sand"
+    },
+    {
+      "gx": 10,
+      "gz": -13,
+      "type": "sand"
+    },
+    {
+      "gx": 11,
+      "gz": -13,
+      "type": "sand"
+    },
+    {
+      "gx": 14,
+      "gz": -14,
+      "type": "sand"
+    },
+    {
+      "gx": 22,
+      "gz": -2,
+      "type": "sand"
+    },
+    {
+      "gx": 22,
+      "gz": 9,
+      "type": "sand"
+    },
+    {
+      "gx": -5,
+      "gz": 20,
+      "type": "sand"
+    },
+    {
+      "gx": -6,
+      "gz": 20,
+      "type": "sand"
+    },
+    {
+      "gx": -7,
+      "gz": 20,
+      "type": "sand"
+    },
+    {
+      "gx": -9,
+      "gz": 22,
+      "type": "sand"
+    },
+    {
+      "gx": 1,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -32,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -32,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -32,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -32,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -33,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -33,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -33,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -33,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -33,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": -32,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": -34,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": -34,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -34,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -34,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -35,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": -35,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -35,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -35,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -32,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -32,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -12,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -20,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -23,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": -22,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": -24,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -29,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -30,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -31,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -32,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -32,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -32,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": 14,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 20,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 20,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 20,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 20,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 20,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 21,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 21,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 21,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 21,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": -13,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": -13,
+      "type": "grass"
+    },
+    {
+      "gx": 20,
+      "gz": -13,
+      "type": "grass"
+    },
+    {
+      "gx": 21,
+      "gz": -13,
+      "type": "grass"
+    },
+    {
+      "gx": 21,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 20,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -7,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": -5,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -4,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -1,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -2,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -8,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": -10,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": -11,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": -13,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": -13,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": -13,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": -13,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -13,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": -12,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": -3,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -11,
+      "gz": 1,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": 1,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": 0,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": 0,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": 1,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": 1,
+      "type": "water"
+    },
+    {
+      "gx": -8,
+      "gz": 1,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": 0,
+      "type": "water"
+    },
+    {
+      "gx": -9,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -13,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -18,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -13,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -13,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -10,
+      "gz": 0,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -17,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -18,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -11,
+      "gz": -6,
+      "type": "water"
+    },
+    {
+      "gx": -12,
+      "gz": -6,
+      "type": "water"
+    },
+    {
+      "gx": -13,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -13,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -15,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -14,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -13,
+      "gz": -6,
+      "type": "water"
+    },
+    {
+      "gx": -16,
+      "gz": -1,
+      "type": "water"
+    },
+    {
+      "gx": -18,
+      "gz": -2,
+      "type": "water"
+    },
+    {
+      "gx": -19,
+      "gz": -3,
+      "type": "water"
+    },
+    {
+      "gx": -19,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -20,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -21,
+      "gz": -4,
+      "type": "water"
+    },
+    {
+      "gx": -21,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": -22,
+      "gz": -5,
+      "type": "water"
+    },
+    {
+      "gx": 10,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 12,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 13,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 14,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 17,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": 19,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": 15,
+      "type": "grass"
+    },
+    {
+      "gx": 18,
+      "gz": 16,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": -9,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": -6,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 13,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 12,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 10,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 11,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 9,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": -13,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -14,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -15,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -16,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -17,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -18,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -19,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -21,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -26,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -27,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -28,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -33,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -34,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -33,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -33,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": 19,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 19,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 19,
+      "type": "grass"
+    },
+    {
+      "gx": 4,
+      "gz": 19,
+      "type": "grass"
+    },
+    {
+      "gx": 5,
+      "gz": 19,
+      "type": "grass"
+    },
+    {
+      "gx": 6,
+      "gz": 19,
+      "type": "grass"
+    },
+    {
+      "gx": 7,
+      "gz": 19,
+      "type": "grass"
+    },
+    {
+      "gx": 8,
+      "gz": 19,
+      "type": "grass"
+    },
+    {
+      "gx": 9,
+      "gz": 19,
+      "type": "grass"
+    },
+    {
+      "gx": 10,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 11,
+      "gz": 18,
+      "type": "grass"
+    },
+    {
+      "gx": 15,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 17,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": 16,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -25,
+      "gz": -3,
+      "type": "sand"
+    },
+    {
+      "gx": -18,
+      "gz": 2,
+      "type": "sand"
+    },
+    {
+      "gx": -34,
+      "gz": -3,
+      "type": "sand"
+    },
+    {
+      "gx": -33,
+      "gz": -3,
+      "type": "sand"
+    },
+    {
+      "gx": -30,
+      "gz": -2,
+      "type": "sand"
+    },
+    {
+      "gx": 5,
+      "gz": 11,
+      "type": "sand"
+    },
+    {
+      "gx": -3,
+      "gz": 2,
+      "type": "sand"
+    },
+    {
+      "gx": -9,
+      "gz": -9,
+      "type": "sand"
+    },
+    {
+      "gx": -5,
+      "gz": -11,
+      "type": "sand"
+    },
+    {
+      "gx": 15,
+      "gz": -14,
+      "type": "sand"
+    },
+    {
+      "gx": 16,
+      "gz": -14,
+      "type": "sand"
+    },
+    {
+      "gx": 23,
+      "gz": -12,
+      "type": "sand"
+    },
+    {
+      "gx": 25,
+      "gz": -6,
+      "type": "sand"
+    },
+    {
+      "gx": 24,
+      "gz": -5,
+      "type": "sand"
+    },
+    {
+      "gx": 18,
+      "gz": 2,
+      "type": "sand"
+    },
+    {
+      "gx": 17,
+      "gz": 1,
+      "type": "sand"
+    },
+    {
+      "gx": 17,
+      "gz": 0,
+      "type": "sand"
+    },
+    {
+      "gx": 22,
+      "gz": 17,
+      "type": "sand"
+    },
+    {
+      "gx": 11,
+      "gz": 21,
+      "type": "sand"
+    },
+    {
+      "gx": 12,
+      "gz": 21,
+      "type": "sand"
+    },
+    {
+      "gx": -20,
+      "gz": 17,
+      "type": "sand"
+    },
+    {
+      "gx": -21,
+      "gz": 17,
+      "type": "sand"
+    },
+    {
+      "gx": -29,
+      "gz": 15,
+      "type": "sand"
+    },
+    {
+      "gx": -35,
+      "gz": 9,
+      "type": "sand"
+    },
+    {
+      "gx": -31,
+      "gz": -5,
+      "type": "sand"
+    },
+    {
+      "gx": -19,
+      "gz": 2,
+      "type": "sand"
+    },
+    {
+      "gx": -16,
+      "gz": 3,
+      "type": "sand"
+    },
+    {
+      "gx": -14,
+      "gz": 4,
+      "type": "sand"
+    },
+    {
+      "gx": -7,
+      "gz": -1,
+      "type": "sand"
+    },
+    {
+      "gx": -8,
+      "gz": -2,
+      "type": "sand"
+    },
+    {
+      "gx": -9,
+      "gz": -3,
+      "type": "sand"
+    },
+    {
+      "gx": -3,
+      "gz": 7,
+      "type": "sand"
+    },
+    {
+      "gx": -2,
+      "gz": 7,
+      "type": "sand"
+    },
+    {
+      "gx": 2,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 3,
+      "gz": 8,
+      "type": "grass"
+    },
+    {
+      "gx": 2,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": 1,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": 0,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 7,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -2,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -3,
+      "gz": 6,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -4,
+      "gz": 4,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 5,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -5,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 3,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -9,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -10,
+      "gz": 2,
+      "type": "grass"
+    },
+    {
+      "gx": -6,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 1,
+      "type": "grass"
+    },
+    {
+      "gx": -7,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -8,
+      "gz": 0,
+      "type": "grass"
+    },
+    {
+      "gx": -1,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -16,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -16,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -17,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -17,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -17,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -16,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -18,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -18,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -20,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -20,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -19,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -19,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -21,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -21,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -20,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -22,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -22,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -23,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -23,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -22,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -24,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -24,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -25,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -25,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -26,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -26,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -27,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -27,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -26,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -29,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -29,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -28,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -28,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -30,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -30,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -29,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -31,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -31,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -32,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -32,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -33,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -33,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -32,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -34,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -34,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -35,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -35,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -36,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -36,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -38,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -38,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -38,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -38,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -38,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -38,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -38,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -38,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": -38,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -36,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": -36,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -37,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -36,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -35,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": -35,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": -36,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": -35,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": -36,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -35,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -34,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": -34,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -34,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -33,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": -33,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -33,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -32,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -32,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -33,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": -32,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": -33,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": -32,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": -31,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": -31,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": -32,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": -31,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": -30,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": -30,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": -29,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": -29,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": -30,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": -29,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": -28,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": -28,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": -28,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": -27,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": -27,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": -28,
+      "gz": 16,
+      "type": "road"
+    },
+    {
+      "gx": -27,
+      "gz": 16,
+      "type": "road"
+    },
+    {
+      "gx": -26,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": -26,
+      "gz": 16,
+      "type": "road"
+    },
+    {
+      "gx": -25,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": -25,
+      "gz": 16,
+      "type": "road"
+    },
+    {
+      "gx": -26,
+      "gz": 17,
+      "type": "road"
+    },
+    {
+      "gx": -25,
+      "gz": 17,
+      "type": "road"
+    },
+    {
+      "gx": -24,
+      "gz": 17,
+      "type": "road"
+    },
+    {
+      "gx": -24,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": -23,
+      "gz": 17,
+      "type": "road"
+    },
+    {
+      "gx": -23,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": -22,
+      "gz": 17,
+      "type": "road"
+    },
+    {
+      "gx": -22,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": -22,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": -21,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": -21,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": -20,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": -20,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": -19,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": -19,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": -18,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": -18,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": -17,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": -17,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": -16,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": -16,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": -16,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": -15,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -14,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": -13,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": -12,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": -11,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 22,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 8,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 8,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": 21,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 11,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 11,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 16,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 16,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 16,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": 17,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": 17,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 17,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 16,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 16,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 17,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 16,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 17,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 18,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 19,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 20,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 13,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 14,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 15,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 16,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 25,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 24,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 19,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": -17,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 17,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 18,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 16,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 16,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 15,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 14,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": -16,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 12,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 13,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 11,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 11,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 10,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 9,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 8,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 8,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": -15,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 7,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": -14,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": -13,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": -12,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": -11,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": -10,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": -9,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": -8,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": -7,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": -10,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": -6,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -9,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": -5,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -8,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": -7,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -6,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -5,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": 6,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": 6,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 7,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 8,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 5,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 1,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 2,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 0,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": -3,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -2,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": -4,
+      "gz": 10,
+      "type": "road"
+    },
+    {
+      "gx": -1,
+      "gz": 9,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 11,
+      "type": "road"
+    },
+    {
+      "gx": 3,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": 4,
+      "gz": 12,
+      "type": "road"
+    },
+    {
+      "gx": -24,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -23,
+      "gz": 0,
+      "type": "road"
+    },
+    {
+      "gx": -22,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -21,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -21,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -20,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -22,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": -23,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": -24,
+      "gz": 1,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 2,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 3,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 4,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": 5,
+      "type": "road"
+    },
+    {
+      "gx": 23,
+      "gz": -4,
+      "type": "road"
+    },
+    {
+      "gx": 22,
+      "gz": -3,
+      "type": "road"
+    },
+    {
+      "gx": 21,
+      "gz": -2,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": -1,
+      "type": "road"
+    },
+    {
+      "gx": 20,
+      "gz": 0,
+      "type": "road"
+    }
+  ],
+  "trackSurface": {
+    "color": "#8B7355",
+    "laneMarking": "#A0926B",
+    "edgeColor": "#C4B48A"
+  },
+  "obstacles": {
+    "rocks": [
+      {
+        "x": 0,
+        "z": 0,
+        "size": 1
+      },
+      {
+        "x": 0,
+        "z": 0,
+        "size": 1
+      },
+      {
+        "x": 0,
+        "z": 0,
+        "size": 1
+      },
+      {
+        "x": 0,
+        "z": 0,
+        "size": 1
+      },
+      {
+        "x": 0,
+        "z": 0,
+        "size": 1
+      },
+      {
+        "x": 0,
+        "z": 0,
+        "size": 1
+      },
+      {
+        "x": 0,
+        "z": 0,
+        "size": 1
+      },
+      {
+        "x": 0,
+        "z": 0,
+        "size": 1
+      },
+      {
+        "x": 0,
+        "z": 0,
+        "size": 1
+      }
+    ],
+    "poles": [],
+    "ramps": []
+  },
+  "boostPads": [
+    {
+      "trackFraction": 0.15
+    },
+    {
+      "trackFraction": 0.45
+    },
+    {
+      "trackFraction": 0.78
+    }
+  ],
+  "scenery": {
+    "items": []
+  },
+  "barriers": {
+    "spacing": 6,
+    "sides": "both",
+    "color": "#1f6feb",
+    "glowing": false
+  },
+  "specialFeatures": {
+    "waterPlane": null,
+    "stars": false,
+    "rainbowTrack": false,
+    "terrainVariation": false
+  },
+  "heightMap": []
+}

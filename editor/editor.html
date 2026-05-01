@@ -1,0 +1,2129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdvoCart — Level Editor</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: #0d1117; color: #c9d1d9; overflow: hidden; height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+/* Toolbar */
+#toolbar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 16px; background: #161b22;
+  border-bottom: 1px solid #30363d; flex-shrink: 0;
+}
+#toolbar input[type="text"] {
+  background: #0d1117; border: 1px solid #30363d; color: #c9d1d9;
+  padding: 6px 12px; border-radius: 6px; font-size: 14px;
+}
+#toolbar input[type="text"]:focus { border-color: #58a6ff; outline: none; }
+#toolbar button {
+  background: #238636; color: #fff; border: none; padding: 6px 14px;
+  border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+#toolbar button:hover { background: #2ea043; }
+#toolbar button.secondary { background: #21262d; border: 1px solid #30363d; color: #c9d1d9; }
+#toolbar button.secondary:hover { background: #30363d; }
+#toolbar button.danger { background: #da3633; }
+#toolbar button.danger:hover { background: #f85149; }
+#toolbar .separator { width: 1px; height: 24px; background: #30363d; }
+#toolbar label { font-size: 12px; color: #8b949e; display: flex; align-items: center; gap: 4px; }
+#toolbar input[type="number"] {
+  background: #0d1117; border: 1px solid #30363d; color: #c9d1d9;
+  padding: 4px 8px; border-radius: 4px; width: 50px; font-size: 12px;
+}
+
+/* Main area */
+#main {
+  display: flex; flex: 1; overflow: hidden;
+}
+
+/* Canvas area */
+#canvas-container {
+  flex: 1; position: relative; overflow: hidden;
+  background: #010409;
+}
+#editor-canvas {
+  display: block; cursor: crosshair;
+}
+#canvas-info {
+  position: absolute; bottom: 8px; left: 8px;
+  font-size: 11px; color: #484f58;
+}
+
+/* Right sidebar */
+#sidebar {
+  width: 260px; background: #161b22; border-left: 1px solid #30363d;
+  overflow-y: auto; flex-shrink: 0; padding: 12px;
+}
+#sidebar h3 {
+  font-size: 12px; color: #8b949e; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 8px; margin-top: 16px;
+}
+#sidebar h3:first-child { margin-top: 0; }
+
+.tool-group {
+  display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px;
+}
+.tool-btn {
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  background: #21262d; border: 2px solid #30363d; border-radius: 8px;
+  cursor: pointer; font-size: 20px; transition: all 0.15s;
+}
+.tool-btn:hover { border-color: #58a6ff; }
+.tool-btn.active { border-color: #3fb950; background: #0d2818; }
+.tool-btn .tool-label {
+  font-size: 9px; color: #8b949e; display: block; margin-top: 2px;
+}
+
+/* Settings panel */
+.setting-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.setting-row label {
+  font-size: 12px; color: #8b949e; width: 70px; flex-shrink: 0;
+}
+.setting-row input, .setting-row select {
+  background: #0d1117; border: 1px solid #30363d; color: #c9d1d9;
+  padding: 4px 8px; border-radius: 4px; font-size: 12px; flex: 1;
+}
+.setting-row input:focus, .setting-row select:focus { border-color: #58a6ff; outline: none; }
+.emoji-opt {
+  cursor: pointer; font-size: 18px; padding: 2px 4px; border-radius: 4px;
+  border: 1px solid transparent; transition: all 0.1s;
+}
+.emoji-opt:hover { background: #30363d; border-color: #58a6ff; }
+.emoji-opt.active { background: #238636; border-color: #3fb950; }
+
+/* Control point list */
+#cp-list {
+  max-height: 200px; overflow-y: auto; margin-bottom: 8px;
+}
+.cp-item {
+  display: flex; align-items: center; gap: 4px; padding: 3px 6px;
+  font-size: 11px; border-radius: 4px; cursor: pointer;
+}
+.cp-item:hover { background: #21262d; }
+.cp-item.selected { background: #0d2818; border: 1px solid #3fb950; }
+.cp-item input {
+  background: #0d1117; border: 1px solid #30363d; color: #c9d1d9;
+  padding: 2px 4px; border-radius: 3px; width: 40px; font-size: 10px;
+}
+
+/* Mode indicator */
+#mode-indicator {
+  position: absolute; top: 8px; left: 8px;
+  background: rgba(13,17,23,0.9); border: 1px solid #30363d;
+  padding: 6px 12px; border-radius: 6px; font-size: 12px; color: #58a6ff;
+}
+
+/* Undo hint */
+#undo-hint {
+  position: absolute; top: 8px; right: 270px;
+  font-size: 11px; color: #484f58;
+}
+/* Preview overlay */
+#preview-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: #0d1117; display: none;
+  flex-direction: column;
+}
+#preview-overlay canvas { flex: 1; display: block; }
+#preview-toolbar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 16px; background: #161b22;
+  border-bottom: 1px solid #30363d;
+}
+#preview-toolbar button {
+  background: #238636; color: #fff; border: none; padding: 6px 14px;
+  border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+#preview-toolbar button:hover { background: #2ea043; }
+#preview-toolbar span { color: #8b949e; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<!-- Toolbar -->
+<div id="toolbar">
+  <input type="text" id="level-name" placeholder="Level Name" value="My Level" style="width:140px;">
+  <div class="separator"></div>
+  <button id="btn-save" class="secondary">💾 Save</button>
+  <button id="btn-load" class="secondary">📂 Load</button>
+  <button id="btn-export">📤 Export JSON</button>
+  <button id="btn-test">🎮 Test in Game</button>
+  <button id="btn-preview" class="secondary">👁️ Preview 3D</button>
+  <div class="separator"></div>
+  <label>Laps: <input type="number" id="input-laps" value="5" min="1" max="99"></label>
+  <label>Width: <input type="number" id="input-width" value="14" min="6" max="30"></label>
+  <div class="separator"></div>
+  <button id="btn-undo" class="secondary" title="Undo (Ctrl+Z)">↩</button>
+  <button id="btn-redo" class="secondary" title="Redo (Ctrl+Shift+Z)">↪</button>
+</div>
+
+<!-- Main area -->
+<div id="main">
+  <div id="canvas-container">
+    <canvas id="editor-canvas"></canvas>
+    <div id="mode-indicator">Mode: Select</div>
+    <div id="canvas-info">Scroll to zoom • Middle-drag to pan • Click to place</div>
+    <div id="undo-hint">Ctrl+Z undo • Ctrl+Shift+Z redo • Del remove</div>
+  </div>
+  <div id="sidebar">
+    <h3>🛠️ Tools</h3>
+    <div class="tool-group" id="tool-modes">
+      <div class="tool-btn active" data-mode="select" title="Select/Move">🖱️</div>
+      <div class="tool-btn" data-mode="path" title="Place Control Points">📍</div>
+      <div class="tool-btn" data-mode="paint" title="Paint Tiles">🖌️</div>
+      <div class="tool-btn" data-mode="object" title="Place Objects">📦</div>
+      <div class="tool-btn" data-mode="terrain" title="Terrain Elevation">⛰️</div>
+    </div>
+
+    <div id="terrain-controls" style="display:none; margin-bottom: 12px;">
+      <div class="setting-row">
+        <label>Brush:</label>
+        <input type="range" id="terrain-brush" min="1" max="5" value="1" style="flex:1;">
+        <span id="terrain-brush-val" style="font-size:11px;width:20px;">1</span>
+      </div>
+      <div class="setting-row">
+        <label>Strength:</label>
+        <input type="range" id="terrain-strength" min="1" max="10" value="3" style="flex:1;">
+        <span id="terrain-strength-val" style="font-size:11px;width:20px;">3</span>
+      </div>
+      <div style="font-size:11px; color:#8b949e; margin-top:4px;">
+        Click = raise &nbsp;|&nbsp; Shift+Click = lower
+      </div>
+    </div>
+
+    <h3>🎨 Tile Palette</h3>
+    <div class="tool-group" id="tile-palette">
+      <div class="tool-btn active" data-tile="road" title="Road">🛣️</div>
+      <div class="tool-btn" data-tile="water" title="Water">🌊</div>
+      <div class="tool-btn" data-tile="sand" title="Sand">🏜️</div>
+      <div class="tool-btn" data-tile="grass" title="Grass">🌿</div>
+      <div class="tool-btn" data-tile="eraser" title="Eraser">🧹</div>
+    </div>
+    <label style="font-size:12px;color:#8b949e;margin-top:4px;display:block;">Brush Size</label>
+    <div class="tool-group" id="brush-size-palette">
+      <div class="tool-btn active" data-brush="1" title="1×1" style="font-size:11px;font-weight:bold;">1×1</div>
+      <div class="tool-btn" data-brush="2" title="2×2" style="font-size:11px;font-weight:bold;">2×2</div>
+      <div class="tool-btn" data-brush="4" title="4×4" style="font-size:11px;font-weight:bold;">4×4</div>
+    </div>
+
+    <h3>📦 Objects</h3>
+    <div class="tool-group" id="object-palette">
+      <div class="tool-btn active" data-obj="rock" title="Rock">🪨</div>
+      <div class="tool-btn" data-obj="pole" title="Pole">🔵</div>
+      <div class="tool-btn" data-obj="boost" title="Speed Boost">⚡</div>
+      <div class="tool-btn" data-obj="ramp" title="Ramp">🔺</div>
+      <div class="tool-btn" data-obj="start" title="Start/Finish">🏁</div>
+      <div class="tool-btn" data-obj="palm" title="Palm Tree">🌴</div>
+      <div class="tool-btn" data-obj="pine" title="Pine Tree">🌲</div>
+      <div class="tool-btn" data-obj="umbrella" title="Umbrella">☂️</div>
+    </div>
+
+    <h3>📍 Control Points</h3>
+    <div id="cp-list"></div>
+    <button id="btn-clear-path" class="secondary" style="width:100%;padding:4px;font-size:11px;margin-bottom:8px;">Clear All Points</button>
+
+    <h3>⚙️ Level Settings</h3>
+    <div class="setting-row">
+      <label>Desc:</label>
+      <input type="text" id="input-desc" value="A custom track">
+    </div>
+    <div class="setting-row">
+      <label>Emoji:</label>
+      <input type="text" id="input-emoji" value="🏁" style="width:40px;" readonly>
+      <div id="emoji-picker" style="display:flex;flex-wrap:wrap;gap:2px;max-width:180px;margin-left:4px;">
+        <span class="emoji-opt" data-e="🏁">🏁</span><span class="emoji-opt" data-e="🏎️">🏎️</span>
+        <span class="emoji-opt" data-e="🌊">🌊</span><span class="emoji-opt" data-e="🏖️">🏖️</span>
+        <span class="emoji-opt" data-e="🌌">🌌</span><span class="emoji-opt" data-e="🚀">🚀</span>
+        <span class="emoji-opt" data-e="🌋">🌋</span><span class="emoji-opt" data-e="⛰️">⛰️</span>
+        <span class="emoji-opt" data-e="🏙️">🏙️</span><span class="emoji-opt" data-e="🌆">🌆</span>
+        <span class="emoji-opt" data-e="🌅">🌅</span><span class="emoji-opt" data-e="🌄">🌄</span>
+        <span class="emoji-opt" data-e="🏜️">🏜️</span><span class="emoji-opt" data-e="🌲">🌲</span>
+        <span class="emoji-opt" data-e="🐙">🐙</span><span class="emoji-opt" data-e="🥑">🥑</span>
+        <span class="emoji-opt" data-e="🌮">🌮</span><span class="emoji-opt" data-e="⚡">⚡</span>
+        <span class="emoji-opt" data-e="🔥">🔥</span><span class="emoji-opt" data-e="💎">💎</span>
+        <span class="emoji-opt" data-e="🌈">🌈</span><span class="emoji-opt" data-e="🎮">🎮</span>
+        <span class="emoji-opt" data-e="👾">👾</span><span class="emoji-opt" data-e="🪐">🪐</span>
+        <span class="emoji-opt" data-e="🗽">🗽</span><span class="emoji-opt" data-e="🗼">🗼</span>
+        <span class="emoji-opt" data-e="🎢">🎢</span><span class="emoji-opt" data-e="🏆">🏆</span>
+      </div>
+    </div>
+    <div class="setting-row">
+      <label>Type:</label>
+      <select id="input-type">
+        <option value="circuit">Circuit</option>
+        <option value="space">Space</option>
+        <option value="beach">Beach</option>
+      </select>
+    </div>
+    <div class="setting-row">
+      <label>Time:</label>
+      <select id="input-time-of-day">
+        <option value="midday">☀️ Midday</option>
+        <option value="sunset">🌅 Sunset</option>
+        <option value="sunrise">🌄 Sunrise</option>
+        <option value="night">🌙 Night</option>
+      </select>
+    </div>
+    <div class="setting-row">
+      <label>Sky:</label>
+      <input type="color" id="input-sky" value="#87ceeb" style="width:40px;padding:0;height:24px;">
+    </div>
+    <div class="setting-row">
+      <label>Ground:</label>
+      <input type="color" id="input-ground" value="#1a7f37" style="width:40px;padding:0;height:24px;">
+    </div>
+    <div class="setting-row">
+      <label>Fog Near:</label>
+      <input type="number" id="input-fog-near" value="80" min="10" max="500">
+    </div>
+    <div class="setting-row">
+      <label>Fog Far:</label>
+      <input type="number" id="input-fog-far" value="200" min="50" max="1000">
+    </div>
+    <div class="setting-row">
+      <label>Background:</label>
+      <select id="input-background">
+        <option value="none">None</option>
+        <option value="mountains">⛰️ Mountains</option>
+        <option value="new-york">🗽 New York</option>
+        <option value="london">🇬🇧 London</option>
+        <option value="dubai">🏗️ Dubai</option>
+        <option value="tokyo">🗼 Tokyo</option>
+        <option value="paris">🗼 Paris</option>
+        <option value="atlanta">🍑 Atlanta</option>
+        <option value="forest">🌲 Forest</option>
+        <option value="desert">🏜️ Desert</option>
+        <option value="space-earth">🌍 Space: Earth</option>
+        <option value="space-planets">🪐 Space: Planets</option>
+        <option value="space-galaxy">🌌 Space: Galaxy</option>
+      </select>
+    </div>
+    <div class="setting-row">
+      <label>Music:</label>
+      <select id="input-music">
+        <option value="none">🔇 None</option>
+        <option value="beach">🏖️ Freeway Fumes</option>
+        <option value="space">🚀 Cyberpunk Moonlight Sonata</option>
+        <option value="city">🌆 Shortcuts</option>
+        <option value="retro">🕹️ Pixel Sprinter</option>
+        <option value="epic">⚔️ Rhythm Factory</option>
+      </select>
+      <button id="btn-preview-music" type="button" style="margin-left:6px;padding:4px 10px;cursor:pointer;border-radius:4px;border:1px solid #444;background:#238636;color:#fff;font-size:13px;" title="Preview track">▶</button>
+    </div>
+
+    <h3>✨ Special Features</h3>
+    <div class="setting-row">
+      <label>Surface:</label>
+      <select id="input-surface">
+        <option value="flat">🟢 Flat</option>
+        <option value="rolling">🏔️ Rolling Hills</option>
+        <option value="canyon">🏜️ Canyon</option>
+        <option value="coaster">🎢 Roller Coaster</option>
+        <option value="valleys">🌄 Valleys</option>
+        <option value="mountain-pass">⛰️ Mountain Pass</option>
+      </select>
+    </div>
+    <div class="setting-row">
+      <label>Area:</label>
+      <select id="input-surface-size">
+        <option value="20">Small (20×20)</option>
+        <option value="30" selected>Medium (30×30)</option>
+        <option value="50">Large (50×50)</option>
+        <option value="80">Huge (80×80)</option>
+      </select>
+      <button id="btn-apply-surface" class="secondary" style="margin-left:6px;padding:4px 10px;font-size:12px;">Apply</button>
+    </div>
+    <div class="setting-row">
+      <label style="width:auto;"><input type="checkbox" id="chk-rainbow"> Rainbow Track</label>
+    </div>
+    <div class="setting-row">
+      <label style="width:auto;"><input type="checkbox" id="chk-stars"> Stars</label>
+    </div>
+    <div class="setting-row">
+      <label style="width:auto;"><input type="checkbox" id="chk-terrain"> Terrain Variation</label>
+    </div>
+    <div class="setting-row">
+      <label style="width:auto;"><input type="checkbox" id="chk-water"> Water Plane</label>
+    </div>
+
+    <div class="setting-row" style="margin-top:16px;">
+      <label style="width:auto;"><input type="checkbox" id="chk-snap" checked> Grid Snap</label>
+    </div>
+  </div>
+</div>
+
+<!-- 3D Preview overlay -->
+<div id="preview-overlay">
+  <div id="preview-toolbar">
+    <button id="btn-preview-close">← Back to Editor</button>
+    <span>Drag to orbit • Scroll to zoom • Right-drag to pan</span>
+  </div>
+</div>
+
+<!-- Hidden file input for loading -->
+<input type="file" id="file-input" accept=".json" style="display:none;">
+
+<script>
+// ============================================================
+//  ADVOCART LEVEL EDITOR
+// ============================================================
+
+const canvas = document.getElementById('editor-canvas');
+const ctx = canvas.getContext('2d');
+const container = document.getElementById('canvas-container');
+
+// State
+let viewX = 0, viewY = 0, zoom = 3;
+let currentMode = 'select'; // select, path, paint, object
+let currentTile = 'road';
+let paintBrushSize = 1;
+let currentObject = 'rock';
+let gridSnap = true;
+const GRID_SIZE = 5;
+
+// Level data
+let controlPoints = []; // {x, y, z}  (y is elevation)
+let tiles = []; // {gx, gz, type}  grid coords
+let objects = []; // {type, x, z, size}
+let heightMap = {}; // key: "gx,gz" → height value
+let selectedCP = -1;
+let selectedObj = -1;
+let selectedElevation = null; // "gx,gz" key or null
+let dragging = false;
+let dragTarget = null;
+let dragStartX = 0, dragStartY = 0;
+let panning = false;
+let painting = false;
+let terrainPainting = false;
+let panStartX = 0, panStartY = 0, panStartViewX = 0, panStartViewY = 0;
+
+// Multi-selection (drag-select)
+let dragSelecting = false;
+let dragSelectStartScreen = null; // {x, y} screen coords
+let dragSelectEndScreen = null;
+let multiSelectedCPs = new Set();
+let multiSelectedObjs = new Set();
+let multiSelectedTiles = new Set(); // "gx,gz" keys
+let multiSelectedElevations = new Set(); // "gx,gz" keys
+
+function clearMultiSelection() {
+  multiSelectedCPs.clear();
+  multiSelectedObjs.clear();
+  multiSelectedTiles.clear();
+  multiSelectedElevations.clear();
+}
+
+// Undo/Redo
+let undoStack = [];
+let redoStack = [];
+
+function saveState() {
+  undoStack.push(JSON.stringify({ controlPoints, tiles, objects, heightMap }));
+  if (undoStack.length > 50) undoStack.shift();
+  redoStack = [];
+}
+
+function undo() {
+  if (undoStack.length === 0) return;
+  redoStack.push(JSON.stringify({ controlPoints, tiles, objects, heightMap }));
+  const state = JSON.parse(undoStack.pop());
+  controlPoints = state.controlPoints;
+  tiles = state.tiles;
+  objects = state.objects;
+  heightMap = state.heightMap || {};
+  updateCPList();
+  render();
+}
+
+function redo() {
+  if (redoStack.length === 0) return;
+  undoStack.push(JSON.stringify({ controlPoints, tiles, objects, heightMap }));
+  const state = JSON.parse(redoStack.pop());
+  controlPoints = state.controlPoints;
+  tiles = state.tiles;
+  objects = state.objects;
+  heightMap = state.heightMap || {};
+  updateCPList();
+  render();
+}
+
+// Coordinate transforms
+function worldToScreen(wx, wz) {
+  const sx = (wx - viewX) * zoom + canvas.width / 2;
+  const sy = (wz - viewY) * zoom + canvas.height / 2;
+  return [sx, sy];
+}
+
+function screenToWorld(sx, sy) {
+  const wx = (sx - canvas.width / 2) / zoom + viewX;
+  const wz = (sy - canvas.height / 2) / zoom + viewY;
+  return [wx, wz];
+}
+
+function snapToGrid(v) {
+  return gridSnap ? Math.round(v / GRID_SIZE) * GRID_SIZE : v;
+}
+
+// Catmull-Rom spline evaluation
+function catmullRomPoint(p0, p1, p2, p3, t) {
+  const t2 = t * t, t3 = t2 * t;
+  const x = 0.5 * ((2*p1.x) + (-p0.x + p2.x)*t + (2*p0.x - 5*p1.x + 4*p2.x - p3.x)*t2 + (-p0.x + 3*p1.x - 3*p2.x + p3.x)*t3);
+  const z = 0.5 * ((2*p1.z) + (-p0.z + p2.z)*t + (2*p0.z - 5*p1.z + 4*p2.z - p3.z)*t2 + (-p0.z + 3*p1.z - 3*p2.z + p3.z)*t3);
+  return { x, z };
+}
+
+function getSplinePoints(pts, segments) {
+  if (pts.length < 2) return [];
+  const result = [];
+  const n = pts.length;
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i - 1 + n) % n];
+    const p1 = pts[i];
+    const p2 = pts[(i + 1) % n];
+    const p3 = pts[(i + 2) % n];
+    for (let t = 0; t < segments; t++) {
+      result.push(catmullRomPoint(p0, p1, p2, p3, t / segments));
+    }
+  }
+  return result;
+}
+
+// Rendering
+function render() {
+  canvas.width = container.clientWidth;
+  canvas.height = container.clientHeight;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Grid
+  ctx.strokeStyle = '#21262d';
+  ctx.lineWidth = 1;
+  const [minWX, minWZ] = screenToWorld(0, 0);
+  const [maxWX, maxWZ] = screenToWorld(canvas.width, canvas.height);
+  const gridStep = GRID_SIZE;
+  const startGX = Math.floor(minWX / gridStep) * gridStep;
+  const startGZ = Math.floor(minWZ / gridStep) * gridStep;
+
+  for (let gx = startGX; gx <= maxWX; gx += gridStep) {
+    const [sx] = worldToScreen(gx, 0);
+    ctx.beginPath(); ctx.moveTo(sx, 0); ctx.lineTo(sx, canvas.height); ctx.stroke();
+  }
+  for (let gz = startGZ; gz <= maxWZ; gz += gridStep) {
+    const [, sy] = worldToScreen(0, gz);
+    ctx.beginPath(); ctx.moveTo(0, sy); ctx.lineTo(canvas.width, sy); ctx.stroke();
+  }
+
+  // Origin cross
+  ctx.strokeStyle = '#30363d'; ctx.lineWidth = 2;
+  const [ox, oy] = worldToScreen(0, 0);
+  ctx.beginPath(); ctx.moveTo(ox - 10, oy); ctx.lineTo(ox + 10, oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox, oy - 10); ctx.lineTo(ox, oy + 10); ctx.stroke();
+
+  // Tiles
+  tiles.forEach(tile => {
+    const [sx, sy] = worldToScreen(tile.gx * GRID_SIZE, tile.gz * GRID_SIZE);
+    const size = GRID_SIZE * zoom;
+    let color;
+    switch (tile.type) {
+      case 'road': color = 'rgba(130, 135, 145, 0.85)'; break;
+      case 'water': color = 'rgba(0, 119, 190, 0.6)'; break;
+      case 'sand': color = 'rgba(194, 178, 128, 0.7)'; break;
+      case 'grass': color = 'rgba(26, 127, 55, 0.7)'; break;
+      default: color = 'rgba(100,100,100,0.5)';
+    }
+    ctx.fillStyle = color;
+    ctx.fillRect(sx - size/2, sy - size/2, size, size);
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+    ctx.strokeRect(sx - size/2, sy - size/2, size, size);
+  });
+
+  // Height map visualization
+  const hmKeys = Object.keys(heightMap);
+  if (hmKeys.length > 0) {
+    hmKeys.forEach(key => {
+      const h = heightMap[key];
+      if (h === 0) return;
+      const [gx, gz] = key.split(',').map(Number);
+      const [sx, sy] = worldToScreen(gx * GRID_SIZE, gz * GRID_SIZE);
+      const size = GRID_SIZE * zoom;
+      // Color gradient: negative=blue, 0=transparent, positive=green→brown→white
+      let color;
+      if (h < 0) {
+        const t = Math.min(Math.abs(h) / 15, 1);
+        color = `rgba(30, 80, 200, ${0.2 + t * 0.5})`;
+      } else {
+        const t = Math.min(h / 15, 1);
+        if (t < 0.5) {
+          color = `rgba(60, 160, 60, ${0.2 + t * 0.6})`;
+        } else {
+          const r = Math.floor(60 + (t - 0.5) * 2 * 140);
+          const g = Math.floor(160 - (t - 0.5) * 2 * 100);
+          color = `rgba(${r}, ${g}, 40, ${0.3 + t * 0.4})`;
+        }
+      }
+      ctx.fillStyle = color;
+      ctx.fillRect(sx - size/2, sy - size/2, size, size);
+      // Highlight if selected
+      if (key === selectedElevation) {
+        ctx.strokeStyle = '#f0e040';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(sx - size/2, sy - size/2, size, size);
+      }
+      // Height label
+      ctx.fillStyle = '#c9d1d9';
+      ctx.font = `${Math.max(8, 10 * Math.min(zoom / 3, 1))}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(h.toFixed(1), sx, sy + 4);
+    });
+    ctx.textAlign = 'left';
+  }
+
+  // Spline preview
+  if (controlPoints.length >= 2) {
+    const spline = getSplinePoints(controlPoints, 20);
+    if (spline.length > 0) {
+      ctx.strokeStyle = '#58a6ff';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 5]);
+      ctx.beginPath();
+      spline.forEach((p, i) => {
+        const [sx, sy] = worldToScreen(p.x, p.z);
+        i === 0 ? ctx.moveTo(sx, sy) : ctx.lineTo(sx, sy);
+      });
+      ctx.closePath();
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Track width preview
+      const trackW = parseInt(document.getElementById('input-width').value) || 14;
+      ctx.strokeStyle = 'rgba(88, 166, 255, 0.2)';
+      ctx.lineWidth = trackW * zoom;
+      ctx.beginPath();
+      spline.forEach((p, i) => {
+        const [sx, sy] = worldToScreen(p.x, p.z);
+        i === 0 ? ctx.moveTo(sx, sy) : ctx.lineTo(sx, sy);
+      });
+      ctx.closePath();
+      ctx.stroke();
+      ctx.lineWidth = 1;
+    }
+  }
+
+  // Control points
+  controlPoints.forEach((cp, i) => {
+    const [sx, sy] = worldToScreen(cp.x, cp.z);
+    const r = i === selectedCP ? 8 : 6;
+    ctx.fillStyle = i === selectedCP ? '#3fb950' : '#f78166';
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(sx, sy, r, 0, Math.PI * 2);
+    ctx.fill(); ctx.stroke();
+    // Label
+    ctx.fillStyle = '#c9d1d9';
+    ctx.font = '10px sans-serif';
+    ctx.fillText(`${i} (y:${cp.y})`, sx + 10, sy - 5);
+  });
+
+  // Objects
+  objects.forEach((obj, i) => {
+    const [sx, sy] = worldToScreen(obj.x, obj.z);
+    const r = i === selectedObj ? 10 : 8;
+    let emoji;
+    switch (obj.type) {
+      case 'rock': emoji = '🪨'; break;
+      case 'pole': emoji = '🔵'; break;
+      case 'boost': emoji = '⚡'; break;
+      case 'ramp': emoji = '🔺'; break;
+      case 'start': emoji = '🏁'; break;
+      case 'palm': emoji = '🌴'; break;
+      case 'pine': emoji = '🌲'; break;
+      case 'umbrella': emoji = '☂️'; break;
+      default: emoji = '❓';
+    }
+    ctx.font = `${r * 2}px sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText(emoji, sx, sy + r * 0.7);
+    if (i === selectedObj) {
+      ctx.strokeStyle = '#3fb950'; ctx.lineWidth = 2;
+      ctx.strokeRect(sx - r, sy - r, r * 2, r * 2);
+    }
+    if (multiSelectedObjs.has(i)) {
+      ctx.strokeStyle = '#58a6ff'; ctx.lineWidth = 2;
+      ctx.setLineDash([4, 3]);
+      ctx.strokeRect(sx - r - 2, sy - r - 2, r * 2 + 4, r * 2 + 4);
+      ctx.setLineDash([]);
+    }
+  });
+
+  // Multi-selection highlights for control points
+  multiSelectedCPs.forEach(i => {
+    if (i >= controlPoints.length) return;
+    const [sx, sy] = worldToScreen(controlPoints[i].x, controlPoints[i].z);
+    ctx.strokeStyle = '#58a6ff'; ctx.lineWidth = 2;
+    ctx.setLineDash([4, 3]);
+    ctx.beginPath(); ctx.arc(sx, sy, 12, 0, Math.PI * 2); ctx.stroke();
+    ctx.setLineDash([]);
+  });
+
+  // Multi-selection highlights for tiles
+  if (multiSelectedTiles.size > 0) {
+    const size = GRID_SIZE * zoom;
+    multiSelectedTiles.forEach(key => {
+      const [gx, gz] = key.split(',').map(Number);
+      const [sx, sy] = worldToScreen(gx * GRID_SIZE, gz * GRID_SIZE);
+      ctx.strokeStyle = '#58a6ff'; ctx.lineWidth = 2;
+      ctx.setLineDash([4, 3]);
+      ctx.strokeRect(sx - size/2, sy - size/2, size, size);
+      ctx.setLineDash([]);
+    });
+  }
+
+  // Multi-selection highlights for elevations
+  if (multiSelectedElevations.size > 0) {
+    const size = GRID_SIZE * zoom;
+    multiSelectedElevations.forEach(key => {
+      const [gx, gz] = key.split(',').map(Number);
+      const [sx, sy] = worldToScreen(gx * GRID_SIZE, gz * GRID_SIZE);
+      ctx.strokeStyle = '#f0e040'; ctx.lineWidth = 2;
+      ctx.setLineDash([4, 3]);
+      ctx.strokeRect(sx - size/2, sy - size/2, size, size);
+      ctx.setLineDash([]);
+    });
+  }
+
+  // Drag-select rectangle
+  if (dragSelecting && dragSelectStartScreen && dragSelectEndScreen) {
+    const rx = Math.min(dragSelectStartScreen.x, dragSelectEndScreen.x);
+    const ry = Math.min(dragSelectStartScreen.y, dragSelectEndScreen.y);
+    const rw = Math.abs(dragSelectEndScreen.x - dragSelectStartScreen.x);
+    const rh = Math.abs(dragSelectEndScreen.y - dragSelectStartScreen.y);
+    ctx.fillStyle = 'rgba(88, 166, 255, 0.1)';
+    ctx.fillRect(rx, ry, rw, rh);
+    ctx.strokeStyle = '#58a6ff'; ctx.lineWidth = 1.5;
+    ctx.setLineDash([6, 3]);
+    ctx.strokeRect(rx, ry, rw, rh);
+    ctx.setLineDash([]);
+  }
+
+  ctx.textAlign = 'left';
+}
+
+// CP list in sidebar
+function updateCPList() {
+  const list = document.getElementById('cp-list');
+  list.innerHTML = '';
+  controlPoints.forEach((cp, i) => {
+    const div = document.createElement('div');
+    div.className = 'cp-item' + (i === selectedCP ? ' selected' : '');
+    div.innerHTML = `<span>#${i}</span> x:<input type="number" value="${cp.x}" data-i="${i}" data-f="x" step="5"> z:<input type="number" value="${cp.z}" data-i="${i}" data-f="z" step="5"> y:<input type="number" value="${cp.y}" data-i="${i}" data-f="y" step="1">`;
+    div.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT') { selectedCP = i; updateCPList(); render(); }
+    });
+    div.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('change', (e) => {
+        saveState();
+        const idx = parseInt(e.target.dataset.i);
+        const field = e.target.dataset.f;
+        controlPoints[idx][field] = parseFloat(e.target.value) || 0;
+        render();
+      });
+    });
+    list.appendChild(div);
+  });
+}
+
+// Event handlers
+canvas.addEventListener('mousedown', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  const [wx, wz] = screenToWorld(mx, my);
+
+  // Middle mouse = pan
+  if (e.button === 1) {
+    e.preventDefault();
+    panning = true;
+    panStartX = e.clientX; panStartY = e.clientY;
+    panStartViewX = viewX; panStartViewY = viewY;
+    return;
+  }
+
+  if (e.button !== 0) return;
+
+  if (currentMode === 'select') {
+    // Check if clicking on a control point
+    selectedCP = -1; selectedObj = -1; selectedElevation = null;
+    clearMultiSelection();
+    for (let i = 0; i < controlPoints.length; i++) {
+      const [sx, sy] = worldToScreen(controlPoints[i].x, controlPoints[i].z);
+      if (Math.hypot(mx - sx, my - sy) < 10) {
+        selectedCP = i; dragTarget = { type: 'cp', index: i };
+        dragging = true; break;
+      }
+    }
+    if (!dragging) {
+      for (let i = 0; i < objects.length; i++) {
+        const [sx, sy] = worldToScreen(objects[i].x, objects[i].z);
+        if (Math.hypot(mx - sx, my - sy) < 12) {
+          selectedObj = i; dragTarget = { type: 'obj', index: i };
+          dragging = true; break;
+        }
+      }
+    }
+    if (!dragging && selectedCP < 0 && selectedObj < 0) {
+      const gx = Math.round(wx / GRID_SIZE);
+      const gz = Math.round(wz / GRID_SIZE);
+      const key = `${gx},${gz}`;
+      if (heightMap[key] && heightMap[key] !== 0) {
+        selectedElevation = key;
+      } else {
+        // Start drag-select rectangle
+        dragSelecting = true;
+        dragSelectStartScreen = { x: mx, y: my };
+        dragSelectEndScreen = { x: mx, y: my };
+      }
+    }
+    dragStartX = wx; dragStartY = wz;
+    updateCPList(); render();
+  } else if (currentMode === 'path') {
+    saveState();
+    const sx = snapToGrid(wx), sz = snapToGrid(wz);
+    controlPoints.push({ x: sx, y: 0, z: sz });
+    selectedCP = controlPoints.length - 1;
+    updateCPList(); render();
+  } else if (currentMode === 'paint') {
+    saveState();
+    painting = true;
+    const gx = Math.round(wx / GRID_SIZE);
+    const gz = Math.round(wz / GRID_SIZE);
+    paintBrushAt(gx, gz);
+    render();
+  } else if (currentMode === 'object') {
+    saveState();
+    const sx = snapToGrid(wx), sz = snapToGrid(wz);
+    objects.push({ type: currentObject, x: sx, z: sz, size: 1.0 });
+    render();
+  } else if (currentMode === 'terrain') {
+    saveState();
+    terrainPainting = true;
+    applyTerrainBrush(wx, wz, e.shiftKey);
+    render();
+  }
+});
+
+canvas.addEventListener('mousemove', (e) => {
+  if (panning) {
+    const dx = (e.clientX - panStartX) / zoom;
+    const dy = (e.clientY - panStartY) / zoom;
+    viewX = panStartViewX - dx;
+    viewY = panStartViewY - dy;
+    render();
+    return;
+  }
+  if (dragSelecting) {
+    const rect = canvas.getBoundingClientRect();
+    dragSelectEndScreen = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    render();
+    return;
+  }
+  if (painting && currentMode === 'paint') {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const [wx, wz] = screenToWorld(mx, my);
+    const gx = Math.round(wx / GRID_SIZE);
+    const gz = Math.round(wz / GRID_SIZE);
+    paintBrushAt(gx, gz);
+    render();
+    return;
+  }
+  if (terrainPainting && currentMode === 'terrain') {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const [wx, wz] = screenToWorld(mx, my);
+    applyTerrainBrush(wx, wz, e.shiftKey);
+    render();
+    return;
+  }
+  if (dragging && dragTarget) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    let [wx, wz] = screenToWorld(mx, my);
+    if (gridSnap) { wx = snapToGrid(wx); wz = snapToGrid(wz); }
+    if (dragTarget.type === 'cp') {
+      controlPoints[dragTarget.index].x = wx;
+      controlPoints[dragTarget.index].z = wz;
+    } else if (dragTarget.type === 'obj') {
+      objects[dragTarget.index].x = wx;
+      objects[dragTarget.index].z = wz;
+    }
+    updateCPList(); render();
+  }
+});
+
+canvas.addEventListener('mouseup', (e) => {
+  if (panning) { panning = false; return; }
+  if (painting) { painting = false; return; }
+  if (terrainPainting) { terrainPainting = false; return; }
+  if (dragSelecting) {
+    dragSelecting = false;
+    if (!dragSelectStartScreen || !dragSelectEndScreen) return;
+    // Compute selection rectangle in screen coords
+    const sx1 = Math.min(dragSelectStartScreen.x, dragSelectEndScreen.x);
+    const sy1 = Math.min(dragSelectStartScreen.y, dragSelectEndScreen.y);
+    const sx2 = Math.max(dragSelectStartScreen.x, dragSelectEndScreen.x);
+    const sy2 = Math.max(dragSelectStartScreen.y, dragSelectEndScreen.y);
+    // Only count as drag-select if rectangle is big enough (not just a click)
+    if (sx2 - sx1 < 5 && sy2 - sy1 < 5) {
+      dragSelectStartScreen = null; dragSelectEndScreen = null;
+      render(); return;
+    }
+    clearMultiSelection();
+    // Select control points within rect
+    controlPoints.forEach((cp, i) => {
+      const [px, py] = worldToScreen(cp.x, cp.z);
+      if (px >= sx1 && px <= sx2 && py >= sy1 && py <= sy2) multiSelectedCPs.add(i);
+    });
+    // Select objects within rect
+    objects.forEach((obj, i) => {
+      const [px, py] = worldToScreen(obj.x, obj.z);
+      if (px >= sx1 && px <= sx2 && py >= sy1 && py <= sy2) multiSelectedObjs.add(i);
+    });
+    // Select tiles within rect
+    tiles.forEach((tile, i) => {
+      const [px, py] = worldToScreen(tile.gx * GRID_SIZE, tile.gz * GRID_SIZE);
+      if (px >= sx1 && px <= sx2 && py >= sy1 && py <= sy2) multiSelectedTiles.add(`${tile.gx},${tile.gz}`);
+    });
+    // Select elevations within rect
+    Object.keys(heightMap).forEach(key => {
+      if (!heightMap[key] || heightMap[key] === 0) return;
+      const [gx, gz] = key.split(',').map(Number);
+      const [px, py] = worldToScreen(gx * GRID_SIZE, gz * GRID_SIZE);
+      if (px >= sx1 && px <= sx2 && py >= sy1 && py <= sy2) multiSelectedElevations.add(key);
+    });
+    const totalSelected = multiSelectedCPs.size + multiSelectedObjs.size + multiSelectedTiles.size + multiSelectedElevations.size;
+    if (totalSelected > 0) {
+      document.getElementById('mode-indicator').textContent = `Selected: ${totalSelected} items (Backspace to delete)`;
+    }
+    dragSelectStartScreen = null; dragSelectEndScreen = null;
+    render();
+    return;
+  }
+  if (dragging) {
+    saveState();
+    dragging = false; dragTarget = null;
+  }
+});
+
+canvas.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const factor = e.deltaY > 0 ? 0.9 : 1.1;
+  zoom = Math.max(0.5, Math.min(20, zoom * factor));
+  render();
+}, { passive: false });
+
+// Prevent context menu
+canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+  if (e.code === 'Delete' || e.code === 'Backspace') {
+    e.preventDefault();
+    const hasMulti = multiSelectedCPs.size + multiSelectedObjs.size + multiSelectedTiles.size + multiSelectedElevations.size > 0;
+    if (hasMulti) {
+      saveState();
+      // Delete control points (reverse order to keep indices valid)
+      [...multiSelectedCPs].sort((a, b) => b - a).forEach(i => controlPoints.splice(i, 1));
+      // Delete objects (reverse order)
+      [...multiSelectedObjs].sort((a, b) => b - a).forEach(i => objects.splice(i, 1));
+      // Delete tiles
+      if (multiSelectedTiles.size > 0) {
+        tiles = tiles.filter(t => !multiSelectedTiles.has(`${t.gx},${t.gz}`));
+      }
+      // Delete elevations
+      multiSelectedElevations.forEach(key => delete heightMap[key]);
+      clearMultiSelection();
+      selectedCP = -1; selectedObj = -1; selectedElevation = null;
+      document.getElementById('mode-indicator').textContent = 'Mode: Select';
+      updateCPList(); render();
+    } else if (selectedCP >= 0) {
+      saveState();
+      controlPoints.splice(selectedCP, 1);
+      selectedCP = -1;
+      updateCPList(); render();
+    } else if (selectedObj >= 0) {
+      saveState();
+      objects.splice(selectedObj, 1);
+      selectedObj = -1;
+      render();
+    } else if (selectedElevation) {
+      saveState();
+      delete heightMap[selectedElevation];
+      selectedElevation = null;
+      render();
+    }
+  }
+  if ((e.ctrlKey || e.metaKey) && e.code === 'KeyZ') {
+    e.preventDefault();
+    if (e.shiftKey) redo(); else undo();
+  }
+});
+
+// Paint brush helper (supports 1x1, 2x2, 4x4)
+function paintBrushAt(centerGX, centerGZ) {
+  const half = Math.floor(paintBrushSize / 2);
+  for (let dx = 0; dx < paintBrushSize; dx++) {
+    for (let dz = 0; dz < paintBrushSize; dz++) {
+      const gx = centerGX - half + dx;
+      const gz = centerGZ - half + dz;
+      if (currentTile === 'eraser') {
+        tiles = tiles.filter(t => t.gx !== gx || t.gz !== gz);
+      } else {
+        const existing = tiles.find(t => t.gx === gx && t.gz === gz);
+        if (!existing || existing.type !== currentTile) {
+          tiles = tiles.filter(t => t.gx !== gx || t.gz !== gz);
+          tiles.push({ gx, gz, type: currentTile });
+        }
+      }
+    }
+  }
+}
+
+// Brush size palette
+document.querySelectorAll('#brush-size-palette .tool-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#brush-size-palette .tool-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    paintBrushSize = parseInt(btn.dataset.brush);
+  });
+});
+
+// Emoji picker
+document.querySelectorAll('#emoji-picker .emoji-opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#emoji-picker .emoji-opt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('input-emoji').value = btn.dataset.e;
+  });
+});
+
+// Terrain brush
+function applyTerrainBrush(wx, wz, lower) {
+  const brushSize = parseInt(document.getElementById('terrain-brush').value) || 1;
+  const strength = (parseInt(document.getElementById('terrain-strength').value) || 3) * 0.5;
+  const centerGX = Math.round(wx / GRID_SIZE);
+  const centerGZ = Math.round(wz / GRID_SIZE);
+  const delta = lower ? -strength : strength;
+
+  for (let dx = -(brushSize - 1); dx <= (brushSize - 1); dx++) {
+    for (let dz = -(brushSize - 1); dz <= (brushSize - 1); dz++) {
+      const dist = Math.sqrt(dx * dx + dz * dz);
+      if (dist > brushSize) continue;
+      const falloff = 1 - (dist / brushSize) * 0.5;
+      const gx = centerGX + dx;
+      const gz = centerGZ + dz;
+      const key = `${gx},${gz}`;
+      heightMap[key] = (heightMap[key] || 0) + delta * falloff;
+      heightMap[key] = Math.round(heightMap[key] * 10) / 10;
+    }
+  }
+}
+
+// Terrain control sliders
+document.getElementById('terrain-brush').addEventListener('input', (e) => {
+  document.getElementById('terrain-brush-val').textContent = e.target.value;
+});
+document.getElementById('terrain-strength').addEventListener('input', (e) => {
+  document.getElementById('terrain-strength-val').textContent = e.target.value;
+});
+
+// Surface preset — modify control point Y values and surrounding heightMap
+document.getElementById('btn-apply-surface').addEventListener('click', () => {
+  saveState();
+  const preset = document.getElementById('input-surface').value;
+  const radius = parseInt(document.getElementById('input-surface-size').value);
+
+  // Center on current view or origin
+  const centerGX = Math.round(-viewX / GRID_SIZE);
+  const centerGZ = Math.round(-viewY / GRID_SIZE);
+
+  // Fill heightMap over a large area — this is the terrain, not control points
+  for (let gx = centerGX - radius; gx <= centerGX + radius; gx++) {
+    for (let gz = centerGZ - radius; gz <= centerGZ + radius; gz++) {
+      const key = `${gx},${gz}`;
+      // Normalized coords relative to area center (0-1 range)
+      const nx = (gx - centerGX + radius) / (radius * 2);
+      const nz = (gz - centerGZ + radius) / (radius * 2);
+      // Distance from center (0 at center, 1 at edge)
+      const dx = (gx - centerGX) / radius;
+      const dz = (gz - centerGZ) / radius;
+      const distFromCenter = Math.sqrt(dx * dx + dz * dz);
+      // Fade out near edges so terrain blends with flat ground
+      const edgeFade = Math.max(0, 1 - Math.pow(distFromCenter, 2));
+
+      let h = 0;
+      switch (preset) {
+        case 'flat':
+          heightMap[key] = 0;
+          continue;
+
+        case 'rolling':
+          h = (Math.sin(gx * 0.3) * 4 + Math.cos(gz * 0.25) * 3 +
+               Math.sin((gx + gz) * 0.15) * 2.5) * edgeFade;
+          break;
+
+        case 'canyon': {
+          const valleyAxis = Math.abs(Math.sin(gz * 0.08) * 6 + gx - centerGX);
+          const valleyWidth = 4;
+          if (valleyAxis < valleyWidth) {
+            h = -2 * edgeFade;
+          } else {
+            const wallH = Math.min((valleyAxis - valleyWidth) * 2.5, 18);
+            h = (wallH + Math.random() * 2) * edgeFade;
+          }
+          break;
+        }
+
+        case 'coaster':
+          h = (Math.sin(gx * 0.2) * 10 + Math.sin(gz * 0.25) * 8 +
+               Math.cos((gx - gz) * 0.15) * 6 +
+               Math.sin(gx * 0.5) * 3) * edgeFade;
+          break;
+
+        case 'valleys': {
+          const ridge = Math.sin(gx * 0.18 + gz * 0.12) * 8;
+          const valley = Math.sin(gz * 0.22 - gx * 0.08) * 5;
+          h = (ridge + valley + Math.abs(Math.sin(gx * 0.35)) * 4) * edgeFade;
+          break;
+        }
+
+        case 'mountain-pass': {
+          const mountain = Math.max(0, 18 - distFromCenter * 20) +
+                          Math.sin(gx * 0.15) * 4 + Math.cos(gz * 0.12) * 3;
+          const passWidth = 5;
+          const passFactor = Math.max(0, 1 - Math.abs(gx - centerGX) / passWidth);
+          h = Math.max(0, mountain * edgeFade - passFactor * 12);
+          break;
+        }
+      }
+
+      heightMap[key] = Math.round(h * 10) / 10;
+    }
+  }
+
+  render();
+});
+
+// Tool mode buttons
+document.querySelectorAll('#tool-modes .tool-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#tool-modes .tool-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentMode = btn.dataset.mode;
+    document.getElementById('mode-indicator').textContent = `Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)}`;
+    document.getElementById('terrain-controls').style.display = currentMode === 'terrain' ? 'block' : 'none';
+  });
+});
+
+// Tile palette buttons
+document.querySelectorAll('#tile-palette .tool-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#tile-palette .tool-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentTile = btn.dataset.tile;
+    // Auto switch to paint mode
+    document.querySelectorAll('#tool-modes .tool-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('#tool-modes [data-mode="paint"]').classList.add('active');
+    currentMode = 'paint';
+    document.getElementById('mode-indicator').textContent = 'Mode: Paint';
+  });
+});
+
+// Object palette buttons
+document.querySelectorAll('#object-palette .tool-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#object-palette .tool-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentObject = btn.dataset.obj;
+    // Auto switch to object mode
+    document.querySelectorAll('#tool-modes .tool-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('#tool-modes [data-mode="object"]').classList.add('active');
+    currentMode = 'object';
+    document.getElementById('mode-indicator').textContent = 'Mode: Object';
+  });
+});
+
+// Grid snap
+document.getElementById('chk-snap').addEventListener('change', (e) => { gridSnap = e.target.checked; });
+
+// Clear path
+document.getElementById('btn-clear-path').addEventListener('click', () => {
+  saveState();
+  controlPoints = []; selectedCP = -1; selectedElevation = null;
+  updateCPList(); render();
+});
+
+// Undo/Redo buttons
+document.getElementById('btn-undo').addEventListener('click', undo);
+document.getElementById('btn-redo').addEventListener('click', redo);
+
+// Export JSON
+function buildLevelJSON() {
+  const name = document.getElementById('level-name').value || 'My Level';
+  const desc = document.getElementById('input-desc').value || '';
+  const emoji = document.getElementById('input-emoji').value || '🏁';
+  const type = document.getElementById('input-type').value;
+  const laps = parseInt(document.getElementById('input-laps').value) || 5;
+  const trackWidth = parseInt(document.getElementById('input-width').value) || 14;
+  const timeOfDay = document.getElementById('input-time-of-day').value;
+  const skyColor = document.getElementById('input-sky').value;
+  const groundColor = document.getElementById('input-ground').value;
+  const fogNear = parseInt(document.getElementById('input-fog-near').value) || 80;
+  const fogFar = parseInt(document.getElementById('input-fog-far').value) || 200;
+  const background = document.getElementById('input-background').value;
+  const music = document.getElementById('input-music').value;
+  const rainbow = document.getElementById('chk-rainbow').checked;
+  const stars = document.getElementById('chk-stars').checked;
+  const terrain = document.getElementById('chk-terrain').checked;
+  const waterPlane = document.getElementById('chk-water').checked;
+
+  // Build boost pads from objects
+  const boostPads = objects.filter(o => o.type === 'boost').map(o => ({ x: o.x, z: o.z }));
+  // Build obstacles
+  const rocks = objects.filter(o => o.type === 'rock').map(o => ({ x: o.x, z: o.z, size: o.size || 1.2 }));
+  const poles = objects.filter(o => o.type === 'pole').map(o => ({ x: o.x, z: o.z }));
+  const ramps = objects.filter(o => o.type === 'ramp').map(o => ({ x: o.x, z: o.z, angle: o.angle || 0, launchVel: 0.6 }));
+  // Build scenery
+  const palms = objects.filter(o => o.type === 'palm').map(o => ({ x: o.x, z: o.z }));
+  const pines = objects.filter(o => o.type === 'pine').map(o => ({ x: o.x, z: o.z }));
+  const umbrellas = objects.filter(o => o.type === 'umbrella').map(o => ({ x: o.x, z: o.z }));
+
+  const json = {
+    name, description: desc, emoji, type, laps, trackWidth,
+    environment: {
+      skyColor, fogColor: skyColor, fogNear, fogFar, timeOfDay, background, music,
+      groundColor: type === 'space' ? null : groundColor,
+      groundSize: type === 'space' ? 0 : 400
+    },
+    controlPoints: controlPoints.map(cp => ({ x: cp.x, y: cp.y, z: cp.z })),
+    tiles: tiles.map(t => ({ gx: t.gx, gz: t.gz, type: t.type })),
+    trackSurface: rainbow ? { color: null, rainbow: true } : {
+      color: type === 'beach' ? '#8B7355' : '#2d333b',
+      laneMarking: type === 'beach' ? '#A0926B' : '#484f58',
+      edgeColor: type === 'beach' ? '#C4B48A' : '#f0f6fc'
+    },
+    obstacles: {
+      rocks: rocks.map(r => ({ x: r.x, z: r.z, size: r.size || 1.2 })),
+      poles: poles.map(p => ({ x: p.x, z: p.z })),
+      ramps: ramps.map(r => ({ x: r.x, z: r.z, angle: r.angle || 0, launchVel: r.launchVel || 0.6 }))
+    },
+    boostPads: boostPads.length > 0
+      ? boostPads.map(bp => ({ x: bp.x, z: bp.z }))
+      : [{ trackFraction: 0.15 }, { trackFraction: 0.45 }, { trackFraction: 0.78 }],
+    scenery: {
+      items: [
+        ...palms.map(p => ({ type: 'palm', x: p.x, z: p.z })),
+        ...pines.map(p => ({ type: 'pine', x: p.x, z: p.z })),
+        ...umbrellas.map(u => ({ type: 'umbrella', x: u.x, z: u.z }))
+      ]
+    },
+    barriers: {
+      spacing: 6, sides: 'both',
+      color: type === 'space' ? '#58a6ff' : type === 'beach' ? '#1f6feb' : '#f85149',
+      glowing: type === 'space'
+    },
+    specialFeatures: {
+      waterPlane: waterPlane ? { width: 300, height: 400, x: 190, y: -0.2, z: 0, color: '#0077be', opacity: 0.85 } : null,
+      stars, rainbowTrack: rainbow, terrainVariation: terrain
+    },
+    heightMap: Object.keys(heightMap).length > 0
+      ? Object.entries(heightMap).filter(([,v]) => v !== 0).map(([k, v]) => {
+          const [gx, gz] = k.split(',').map(Number);
+          return { gx, gz, h: v };
+        })
+      : []
+  };
+
+  return json;
+}
+
+document.getElementById('btn-export').addEventListener('click', () => {
+  const json = buildLevelJSON();
+  const blob = new Blob([JSON.stringify(json, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `${json.name.replace(/\s+/g, '-').toLowerCase()}.json`;
+  a.click(); URL.revokeObjectURL(url);
+});
+
+// Time-of-day auto-suggest sky colors
+document.getElementById('input-time-of-day').addEventListener('change', function() {
+  const suggestions = {
+    midday:  { sky: '#87ceeb' },
+    sunset:  { sky: '#ff7744' },
+    sunrise: { sky: '#ffaa77' },
+    night:   { sky: '#101830' }
+  };
+  const s = suggestions[this.value];
+  if (s) {
+    document.getElementById('input-sky').value = s.sky;
+  }
+});
+
+// Save to levels/ directory via server API
+document.getElementById('btn-save').addEventListener('click', async () => {
+  const json = buildLevelJSON();
+  const filename = json.name.replace(/[^a-zA-Z0-9_-]/g, '-').toLowerCase() + '.json';
+
+  // Check if file exists
+  try {
+    const checkResp = await fetch(`/api/level-exists?filename=${encodeURIComponent(filename)}`);
+    const checkData = await checkResp.json();
+    if (checkData.exists) {
+      if (!confirm(`Level "${filename}" already exists in levels/. Overwrite?`)) return;
+    } else {
+      if (!confirm(`Create new level "levels/${filename}"?`)) return;
+    }
+  } catch (e) {
+    alert('Server not reachable. Run: node server.js');
+    return;
+  }
+
+  try {
+    const resp = await fetch('/api/save-level', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename, data: json })
+    });
+    const result = await resp.json();
+    if (result.ok) {
+      alert(`Level saved to levels/${filename}` + (result.created ? ' (new)' : ' (overwritten)'));
+    } else {
+      alert('Save failed: ' + result.error);
+    }
+  } catch (e) {
+    alert('Save failed: ' + e.message);
+  }
+});
+
+// Load from levels/ directory (show picker)
+document.getElementById('btn-load').addEventListener('click', async () => {
+  try {
+    const resp = await fetch('/api/list-levels');
+    const levels = await resp.json();
+    if (levels.length === 0) {
+      alert('No levels found in levels/ directory.');
+      document.getElementById('file-input').click();
+      return;
+    }
+    const choices = levels.map((l, i) => `${i + 1}. ${l.emoji} ${l.name} (${l.filename})`).join('\n');
+    const pick = prompt(`Choose a level to load:\n${choices}\n\nEnter number (or cancel to load from file):`);
+    if (!pick) { document.getElementById('file-input').click(); return; }
+    const idx = parseInt(pick) - 1;
+    if (idx < 0 || idx >= levels.length) { alert('Invalid choice'); return; }
+    const levelResp = await fetch(`levels/${levels[idx].filename}`);
+    const data = await levelResp.json();
+    loadLevelData(data);
+  } catch (e) {
+    alert('Could not list levels from server. Loading from file instead.');
+    document.getElementById('file-input').click();
+  }
+});
+
+document.getElementById('file-input').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      loadLevelData(data);
+    } catch (err) {
+      alert('Invalid JSON file: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+function loadLevelData(data) {
+  saveState();
+  document.getElementById('level-name').value = data.name || 'Loaded Level';
+  document.getElementById('input-desc').value = data.description || '';
+  document.getElementById('input-emoji').value = data.emoji || '🏁';
+  document.getElementById('input-type').value = data.type || 'circuit';
+  document.getElementById('input-laps').value = data.laps || 5;
+  document.getElementById('input-width').value = data.trackWidth || 14;
+  if (data.environment) {
+    document.getElementById('input-sky').value = data.environment.skyColor || '#87ceeb';
+    document.getElementById('input-ground').value = data.environment.groundColor || '#1a7f37';
+    document.getElementById('input-fog-near').value = data.environment.fogNear || 80;
+    document.getElementById('input-fog-far').value = data.environment.fogFar || 200;
+    document.getElementById('input-time-of-day').value = data.environment.timeOfDay || 'midday';
+    document.getElementById('input-background').value = data.environment.background || 'none';
+    document.getElementById('input-music').value = data.environment.music || 'none';
+  }
+  if (data.specialFeatures) {
+    document.getElementById('chk-rainbow').checked = !!data.specialFeatures.rainbowTrack;
+    document.getElementById('chk-stars').checked = !!data.specialFeatures.stars;
+    document.getElementById('chk-terrain').checked = !!data.specialFeatures.terrainVariation;
+    document.getElementById('chk-water').checked = !!data.specialFeatures.waterPlane;
+  }
+  controlPoints = (data.controlPoints || []).map(p => ({ x: p.x, y: p.y || 0, z: p.z }));
+  objects = [];
+  if (data.obstacles && data.obstacles.rocks) {
+    data.obstacles.rocks.forEach(r => objects.push({ type: 'rock', x: r.x || 0, z: r.z || 0, size: r.size || 1.0 }));
+  }
+  if (data.obstacles && data.obstacles.poles) {
+    data.obstacles.poles.forEach(p => objects.push({ type: 'pole', x: p.x || 0, z: p.z || 0, size: 1.0 }));
+  }
+  if (data.obstacles && data.obstacles.ramps) {
+    data.obstacles.ramps.forEach(r => objects.push({ type: 'ramp', x: r.x || 0, z: r.z || 0, angle: r.angle || 0, size: 1.0 }));
+  }
+  if (data.boostPads) {
+    data.boostPads.forEach(bp => {
+      if (bp.x !== undefined) objects.push({ type: 'boost', x: bp.x, z: bp.z, size: 1.0 });
+    });
+  }
+  if (data.scenery && data.scenery.items) {
+    data.scenery.items.forEach(s => objects.push({ type: s.type, x: s.x, z: s.z, size: 1.0 }));
+  }
+  tiles = (data.tiles || []).filter(t => t.gx !== undefined).map(t => ({ gx: t.gx, gz: t.gz, type: t.type }));
+  heightMap = {};
+  if (data.heightMap && Array.isArray(data.heightMap)) {
+    data.heightMap.forEach(h => { heightMap[`${h.gx},${h.gz}`] = h.h; });
+  }
+  selectedCP = -1; selectedObj = -1; selectedElevation = null;
+  updateCPList(); render();
+}
+
+// Test in Game — save to file then open game
+document.getElementById('btn-test').addEventListener('click', async () => {
+  const json = buildLevelJSON();
+  const filename = 'custom-test.json';
+  try {
+    const resp = await fetch('/api/save-level', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename, data: json })
+    });
+    const result = await resp.json();
+    if (result.ok) {
+      window.open('index.html?level=custom-test', '_blank');
+    } else {
+      alert('Save failed: ' + result.error);
+    }
+  } catch (e) {
+    alert('Server not reachable. Run: node server.js');
+  }
+});
+
+// Resize
+function resize() {
+  canvas.width = container.clientWidth;
+  canvas.height = container.clientHeight;
+  render();
+}
+window.addEventListener('resize', resize);
+
+// Init
+resize();
+
+// Load level from query param if provided (e.g., editor.html?load=level1)
+(async () => {
+  const params = new URLSearchParams(window.location.search);
+  const loadFile = params.get('load');
+  if (loadFile) {
+    try {
+      const resp = await fetch(`levels/${loadFile}.json`);
+      if (resp.ok) {
+        const data = await resp.json();
+        loadLevelData(data);
+      }
+    } catch (e) { /* ignore */ }
+  }
+})();
+
+// ============================================================
+//  3D PREVIEW MODE
+// ============================================================
+let threeLoaded = null; // cached load promise
+let previewActive = false;
+let previewRenderer = null, previewScene = null, previewCamera = null, previewControls = null;
+let previewAnimId = null, previewResizeHandler = null;
+
+function loadThreeJS() {
+  if (threeLoaded) return threeLoaded;
+  threeLoaded = new Promise((resolve, reject) => {
+    const s1 = document.createElement('script');
+    s1.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js';
+    s1.onload = () => {
+      const s2 = document.createElement('script');
+      s2.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js';
+      s2.onload = () => resolve();
+      s2.onerror = reject;
+      document.head.appendChild(s2);
+    };
+    s1.onerror = reject;
+    document.head.appendChild(s1);
+  });
+  return threeLoaded;
+}
+
+function sampleHeightFromMap(hmData, wx, wz) {
+  if (!hmData || hmData.length === 0) return 0;
+  const gs = GRID_SIZE;
+  const gx = wx / gs, gz = wz / gs;
+  let totalW = 0, totalH = 0;
+  for (const h of hmData) {
+    const dx = gx - h.gx, dz = gz - h.gz;
+    const d2 = dx * dx + dz * dz;
+    if (d2 < 0.01) return h.h;
+    if (d2 < 9) { // within 3 grid cells
+      const w = 1 / d2;
+      totalW += w;
+      totalH += w * h.h;
+    }
+  }
+  return totalW > 0 ? totalH / totalW : 0;
+}
+
+document.getElementById('btn-preview').addEventListener('click', async () => {
+  const json = buildLevelJSON();
+  if (json.controlPoints.length < 3) {
+    alert('Need at least 3 control points for preview.');
+    return;
+  }
+
+  const overlay = document.getElementById('preview-overlay');
+  overlay.style.display = 'flex';
+
+  try {
+    await loadThreeJS();
+  } catch (e) {
+    alert('Failed to load Three.js: ' + e.message);
+    overlay.style.display = 'none';
+    return;
+  }
+
+  buildPreviewScene(json, overlay);
+});
+
+document.getElementById('btn-preview-close').addEventListener('click', () => {
+  closePreview();
+});
+
+function closePreview() {
+  previewActive = false;
+  if (previewAnimId) cancelAnimationFrame(previewAnimId);
+  if (previewControls) previewControls.dispose();
+  if (previewRenderer) {
+    previewRenderer.dispose();
+    previewRenderer.domElement.remove();
+  }
+  if (previewResizeHandler) window.removeEventListener('resize', previewResizeHandler);
+  if (previewScene) {
+    previewScene.traverse(obj => {
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) {
+        if (obj.material.map) obj.material.map.dispose();
+        obj.material.dispose();
+      }
+    });
+  }
+  previewScene = previewCamera = previewControls = previewRenderer = null;
+  previewAnimId = previewResizeHandler = null;
+  document.getElementById('preview-overlay').style.display = 'none';
+}
+
+function buildPreviewScene(json, overlay) {
+  const env = json.environment || {};
+  const hmData = json.heightMap || [];
+  const gs = GRID_SIZE;
+
+  // Scene
+  previewScene = new THREE.Scene();
+  previewScene.background = new THREE.Color(env.skyColor || '#87ceeb');
+  if (env.fogColor) previewScene.fog = new THREE.Fog(new THREE.Color(env.fogColor), env.fogNear || 80, env.fogFar || 200);
+
+  // Time-of-day lighting presets
+  const tod = env.timeOfDay || 'midday';
+  const TOD_PRESETS = {
+    midday:  { ambientColor: 0xffffff, ambientInt: 0.6, sunColor: 0xffffff, sunInt: 1.0, sunPos: [50, 80, 30] },
+    sunset:  { ambientColor: 0xffa366, ambientInt: 0.35, sunColor: 0xff6622, sunInt: 0.7, sunPos: [80, 20, 40] },
+    sunrise: { ambientColor: 0xffd4a8, ambientInt: 0.4, sunColor: 0xff8844, sunInt: 0.6, sunPos: [-80, 18, 30] },
+    night:   { ambientColor: 0x4466aa, ambientInt: 0.35, sunColor: 0xaabbdd, sunInt: 0.45, sunPos: [30, 60, 20] }
+  };
+  const tp = TOD_PRESETS[tod] || TOD_PRESETS.midday;
+
+  // Apply time-of-day sky/fog overrides
+  const todSkyColors = { midday: null, sunset: '#ff7744', sunrise: '#ffaa77', night: '#101830' };
+  if (todSkyColors[tod]) {
+    previewScene.background = new THREE.Color(todSkyColors[tod]);
+    if (previewScene.fog) previewScene.fog.color.set(todSkyColors[tod]);
+  }
+
+  // For dark/space levels, push fog way back so geometry is visible
+  const bgType = env.background || 'none';
+  const isSpaceBg = bgType.startsWith('space-');
+  if (isSpaceBg || tod === 'night') {
+    if (previewScene.fog) {
+      previewScene.fog.near = Math.max(previewScene.fog.near, 200);
+      previewScene.fog.far = Math.max(previewScene.fog.far, 600);
+    }
+  }
+
+  // Lights — boost for preview visibility, especially dark levels
+  const lightBoost = (tod === 'night' || isSpaceBg) ? 1.8 : 1.0;
+  previewScene.add(new THREE.AmbientLight(tp.ambientColor, tp.ambientInt * lightBoost));
+  const sun = new THREE.DirectionalLight(tp.sunColor, tp.sunInt * lightBoost);
+  sun.position.set(tp.sunPos[0], tp.sunPos[1], tp.sunPos[2]);
+  previewScene.add(sun);
+
+  // Add hemisphere light for more natural feel
+  const hemi = new THREE.HemisphereLight(tp.sunColor, 0x444444, 0.3 * lightBoost);
+  previewScene.add(hemi);
+
+  // Camera
+  previewCamera = new THREE.PerspectiveCamera(60, overlay.clientWidth / (overlay.clientHeight - 40), 0.5, 800);
+
+  // Renderer
+  previewRenderer = new THREE.WebGLRenderer({ antialias: true });
+  previewRenderer.setPixelRatio(window.devicePixelRatio);
+  previewRenderer.setSize(overlay.clientWidth, overlay.clientHeight - 40);
+  overlay.appendChild(previewRenderer.domElement);
+
+  // Orbit controls
+  previewControls = new THREE.OrbitControls(previewCamera, previewRenderer.domElement);
+  previewControls.enableDamping = true;
+  previewControls.dampingFactor = 0.1;
+
+  // Ground plane with heightMap deformation
+  const groundSize = env.groundSize || 400;
+  if (env.groundColor && groundSize > 0) {
+    const segs = 80;
+    const groundGeo = new THREE.PlaneGeometry(groundSize, groundSize, segs, segs);
+    const verts = groundGeo.attributes.position.array;
+    for (let i = 0; i < verts.length; i += 3) {
+      const wx = verts[i], wz = verts[i + 1];
+      verts[i + 2] = sampleHeightFromMap(hmData, wx, -wz);
+    }
+    groundGeo.computeVertexNormals();
+    const groundMat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(env.groundColor), roughness: 0.9, flatShading: true
+    });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.5;
+    previewScene.add(ground);
+  } else {
+    // No ground plane — add a subtle grid for spatial reference
+    const gridHelper = new THREE.GridHelper(400, 80, 0x333344, 0x222233);
+    gridHelper.position.y = -0.5;
+    gridHelper.material.opacity = 0.3;
+    gridHelper.material.transparent = true;
+    previewScene.add(gridHelper);
+  }
+
+  // Background panorama for preview
+  const isSpace = isSpaceBg;
+  const isCity = ['new-york','london','dubai','tokyo','paris','atlanta','city'].includes(bgType);
+  // Compute a radius for background objects based on track extents
+  const cpBounds = json.controlPoints.reduce((b, p) => {
+    b.minX = Math.min(b.minX, p.x); b.maxX = Math.max(b.maxX, p.x);
+    b.minZ = Math.min(b.minZ, p.z); b.maxZ = Math.max(b.maxZ, p.z);
+    return b;
+  }, { minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity });
+  const RING_R = Math.max(80, Math.hypot(cpBounds.maxX - cpBounds.minX, cpBounds.maxZ - cpBounds.minZ) * 0.7 + 40);
+  if (bgType !== 'none') {
+    if (isSpace) {
+      // Stars
+      for (let i = 0; i < 200; i++) {
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI;
+        const dist = RING_R + 50 + Math.random() * 80;
+        const geo = new THREE.SphereGeometry(0.4 + Math.random() * 0.5, 4, 4);
+        const mat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const s = new THREE.Mesh(geo, mat);
+        s.position.set(Math.cos(theta)*Math.sin(phi)*dist, Math.cos(phi)*dist*0.5+30, Math.sin(theta)*Math.sin(phi)*dist);
+        previewScene.add(s);
+      }
+      // Large planet/sphere
+      const pGeo = new THREE.SphereGeometry(bgType === 'space-earth' ? 60 : 40, 16, 12);
+      const pColor = bgType === 'space-earth' ? 0x2266aa : bgType === 'space-planets' ? 0xcc6633 : 0x6633aa;
+      const pMat = new THREE.MeshStandardMaterial({ color: pColor });
+      const p = new THREE.Mesh(pGeo, pMat);
+      p.position.set(RING_R * 0.6, 20, -RING_R * 0.7);
+      previewScene.add(p);
+      if (bgType === 'space-planets') {
+        const ringGeo = new THREE.RingGeometry(50, 80, 32);
+        const ringMat = new THREE.MeshBasicMaterial({ color: 0xddaa66, transparent: true, opacity: 0.4, side: THREE.DoubleSide });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.position.set(-RING_R * 0.4, 30, RING_R * 0.5);
+        ring.rotation.x = Math.PI / 3;
+        previewScene.add(ring);
+      }
+    } else {
+    const bgCount = bgType === 'forest' ? 80 : isCity ? 50 : 30;
+    for (let i = 0; i < bgCount; i++) {
+      const angle = (i / bgCount) * Math.PI * 2 + (Math.random() - 0.5) * 0.1;
+      const dist = RING_R + (Math.random() - 0.5) * 30;
+      if (bgType === 'mountains') {
+        const h = 30 + Math.random() * 50, w = 15 + Math.random() * 20;
+        const geo = new THREE.ConeGeometry(w, h, 5);
+        const mat = new THREE.MeshStandardMaterial({ color: 0x4a6741, flatShading: true });
+        const m = new THREE.Mesh(geo, mat);
+        m.position.set(Math.cos(angle) * dist, h / 2 - 5, Math.sin(angle) * dist);
+        previewScene.add(m);
+      } else if (isCity) {
+        const h = 10 + Math.random() * 50, w = 5 + Math.random() * 10;
+        const geo = new THREE.BoxGeometry(w, h, w);
+        const mat = new THREE.MeshStandardMaterial({ color: 0x5a6370, flatShading: true });
+        const m = new THREE.Mesh(geo, mat);
+        m.position.set(Math.cos(angle) * dist, h / 2, Math.sin(angle) * dist);
+        previewScene.add(m);
+      } else if (bgType === 'forest') {
+        const h = 12 + Math.random() * 15;
+        const geo = new THREE.ConeGeometry(h * 0.25, h * 0.7, 6);
+        const mat = new THREE.MeshStandardMaterial({ color: 0x1a6030, flatShading: true });
+        const m = new THREE.Mesh(geo, mat);
+        m.position.set(Math.cos(angle) * dist, h * 0.4, Math.sin(angle) * dist);
+        previewScene.add(m);
+      } else if (bgType === 'desert') {
+        const h = 20 + Math.random() * 30, w = 15 + Math.random() * 20;
+        const geo = new THREE.CylinderGeometry(w * 0.7, w, h, 6);
+        const mat = new THREE.MeshStandardMaterial({ color: 0xb5651d, flatShading: true });
+        const m = new THREE.Mesh(geo, mat);
+        m.position.set(Math.cos(angle) * dist, h / 2 - 5, Math.sin(angle) * dist);
+        previewScene.add(m);
+      }
+    }
+    }
+  }
+
+  // Procedural texture generator for preview tiles
+  function makePreviewTexture(type) {
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = 128;
+    const ctx = canvas.getContext('2d');
+    const w = 128, h = 128;
+    if (type === 'grass') {
+      ctx.fillStyle = '#2d6a1e'; ctx.fillRect(0, 0, w, h);
+      for (let i = 0; i < 1500; i++) {
+        const x = Math.random()*w, y = Math.random()*h;
+        ctx.fillStyle = `rgb(${30+Math.random()*60},${80+Math.random()*80},${10+Math.random()*20})`;
+        ctx.fillRect(x, y, 1+Math.random()*2, 1+Math.random()*2);
+      }
+    } else if (type === 'sand') {
+      ctx.fillStyle = '#d4b483'; ctx.fillRect(0, 0, w, h);
+      for (let i = 0; i < 2000; i++) {
+        const x = Math.random()*w, y = Math.random()*h;
+        ctx.fillStyle = `rgb(${180+Math.random()*40},${155+Math.random()*40},${100+Math.random()*40})`;
+        ctx.fillRect(x, y, 1+Math.random(), 1+Math.random());
+      }
+    } else if (type === 'water') {
+      ctx.fillStyle = '#1a5c8a'; ctx.fillRect(0, 0, w, h);
+      for (let i = 0; i < 15; i++) {
+        const x = Math.random()*w, y = Math.random()*h;
+        const grad = ctx.createRadialGradient(x,y,0,x,y,20+Math.random()*30);
+        grad.addColorStop(0, 'rgba(100,180,220,0.15)');
+        grad.addColorStop(1, 'rgba(100,180,220,0)');
+        ctx.fillStyle = grad; ctx.fillRect(0,0,w,h);
+      }
+    } else if (type === 'road') {
+      ctx.fillStyle = '#555555'; ctx.fillRect(0, 0, w, h);
+      for (let i = 0; i < 1500; i++) {
+        const x = Math.random()*w, y = Math.random()*h;
+        const v = 70 + Math.random()*30;
+        ctx.fillStyle = `rgb(${v},${v},${v})`;
+        ctx.fillRect(x, y, 1+Math.random(), 1+Math.random());
+      }
+      // Lane dashes
+      ctx.strokeStyle = 'rgba(200,200,200,0.3)'; ctx.lineWidth = 2;
+      ctx.setLineDash([8, 12]);
+      ctx.beginPath(); ctx.moveTo(w/2, 0); ctx.lineTo(w/2, h); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    return tex;
+  }
+  const previewTexCache = {};
+  function getPreviewTex(type) {
+    if (!previewTexCache[type]) previewTexCache[type] = makePreviewTexture(type);
+    return previewTexCache[type];
+  }
+
+  // Tiles
+  const tileColors = { road: 0x555555, water: 0x0077be, sand: 0xC2B280, grass: 0x1a7f37 };
+  (json.tiles || []).forEach(t => {
+    if (!tileColors[t.type]) return;
+    const geo = new THREE.PlaneGeometry(gs, gs);
+    const matOpts = { map: getPreviewTex(t.type), roughness: 0.9 };
+    if (t.type === 'water') { matOpts.transparent = true; matOpts.opacity = 0.7; }
+    const mat = new THREE.MeshStandardMaterial(matOpts);
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.rotation.x = -Math.PI / 2;
+    const wy = sampleHeightFromMap(hmData, t.gx * gs, t.gz * gs);
+    mesh.position.set(t.gx * gs, wy + (t.type === 'water' ? -0.2 : 0.01), t.gz * gs);
+    previewScene.add(mesh);
+  });
+
+  // Track from control points
+  const cp = json.controlPoints;
+  const trackW = json.trackWidth || 14;
+  const curve = new THREE.CatmullRomCurve3(
+    cp.map(p => new THREE.Vector3(p.x, p.y || 0, p.z)), true
+  );
+  const samples = 500;
+  const pts = curve.getPoints(samples);
+
+  // Adjust track Y to terrain
+  pts.forEach(p => {
+    const terrainH = sampleHeightFromMap(hmData, p.x, p.z);
+    p.y = Math.max(p.y, terrainH) + 0.2;
+  });
+
+  // Build track ribbon
+  const trackVerts = [], trackUVs = [], trackIdx = [];
+  const isRainbow = json.specialFeatures && json.specialFeatures.rainbowTrack;
+  const trackColors = [];
+
+  for (let i = 0; i <= samples; i++) {
+    const p = pts[i % pts.length];
+    const pn = pts[(i + 1) % pts.length];
+    const fwd = new THREE.Vector3().subVectors(pn, p).normalize();
+    const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), fwd).normalize();
+    const half = trackW / 2;
+    const l = p.clone().add(right.clone().multiplyScalar(-half));
+    const r = p.clone().add(right.clone().multiplyScalar(half));
+    trackVerts.push(l.x, p.y, l.z, r.x, p.y, r.z);
+    trackUVs.push(0, i / samples, 1, i / samples);
+    if (isRainbow) {
+      const col = new THREE.Color().setHSL(i / samples, 0.8, 0.5);
+      trackColors.push(col.r, col.g, col.b, col.r, col.g, col.b);
+    }
+    if (i < samples) {
+      const bi = i * 2;
+      trackIdx.push(bi, bi + 1, bi + 2, bi + 1, bi + 3, bi + 2);
+    }
+  }
+
+  const trackGeo = new THREE.BufferGeometry();
+  trackGeo.setAttribute('position', new THREE.Float32BufferAttribute(trackVerts, 3));
+  trackGeo.setAttribute('uv', new THREE.Float32BufferAttribute(trackUVs, 2));
+  if (isRainbow) trackGeo.setAttribute('color', new THREE.Float32BufferAttribute(trackColors, 3));
+  trackGeo.setIndex(trackIdx);
+  trackGeo.computeVertexNormals();
+
+  let trackMat;
+  if (isRainbow) {
+    trackMat = new THREE.MeshStandardMaterial({ vertexColors: true, emissive: 0x111111, emissiveIntensity: 0.3 });
+  } else {
+    const surf = json.trackSurface || {};
+    const roadColor = surf.color || '#6e7681';
+    trackMat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(roadColor), roughness: 0.7,
+      emissive: new THREE.Color(roadColor), emissiveIntensity: 0.15
+    });
+  }
+  previewScene.add(new THREE.Mesh(trackGeo, trackMat));
+
+  // Start/finish line
+  const sfGeo = new THREE.PlaneGeometry(trackW, 2);
+  const sfMat = new THREE.MeshStandardMaterial({ color: 0xffffff });
+  const sfMesh = new THREE.Mesh(sfGeo, sfMat);
+  sfMesh.position.copy(pts[0]);
+  sfMesh.position.y += 0.05;
+  sfMesh.rotation.x = -Math.PI / 2;
+  const startAngle = Math.atan2(pts[1].x - pts[0].x, pts[1].z - pts[0].z);
+  sfMesh.rotation.z = -startAngle;
+  previewScene.add(sfMesh);
+
+  // Glowing checkpoint rings at control points
+  const ringColor = tod === 'night' ? 0x58a6ff : tod === 'sunset' ? 0xffaa44 : 0x3fb950;
+  const ringR = trackW / 2 + 2;
+  const ringGeo = new THREE.TorusGeometry(ringR, 0.3, 16, 48);
+  cp.forEach((cpData, idx) => {
+    const cpPos = new THREE.Vector3(cpData.x, cpData.y || 0, cpData.z);
+    const tangent = curve.getTangent(idx / cp.length);
+    const ty = sampleHeightFromMap(hmData, cpPos.x, cpPos.z);
+    const ringMat = new THREE.MeshStandardMaterial({
+      color: ringColor, emissive: ringColor, emissiveIntensity: 0.8,
+      transparent: true, opacity: 0.7, side: THREE.DoubleSide
+    });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.position.set(cpPos.x, Math.max(cpPos.y, ty) + ringR + 0.5, cpPos.z);
+    ring.rotation.y = Math.atan2(tangent.x, tangent.z);
+    previewScene.add(ring);
+  });
+
+  // Barrier poles
+  const barrierCfg = json.barriers || {};
+  const spacing = barrierCfg.spacing || 6;
+  const barrierColor = new THREE.Color(barrierCfg.color || '#f85149');
+  const poleGeo = new THREE.CylinderGeometry(0.12, 0.12, 1.8, 6);
+  const poleMat = new THREE.MeshStandardMaterial({ color: barrierColor, emissive: barrierColor, emissiveIntensity: barrierCfg.glowing ? 0.5 : 0.1 });
+
+  for (let i = 0; i < samples; i += Math.max(1, Math.floor(spacing * samples / curve.getLength()))) {
+    const p = pts[i];
+    const pn = pts[(i + 1) % pts.length];
+    const fwd = new THREE.Vector3().subVectors(pn, p).normalize();
+    const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), fwd).normalize();
+    const half = trackW / 2 + 0.5;
+    [-1, 1].forEach(side => {
+      const pole = new THREE.Mesh(poleGeo, poleMat);
+      const pos = p.clone().add(right.clone().multiplyScalar(side * half));
+      pole.position.set(pos.x, p.y + 0.9, pos.z);
+      previewScene.add(pole);
+    });
+  }
+
+  // Objects
+  (json.obstacles?.rocks || []).forEach(r => {
+    const geo = new THREE.DodecahedronGeometry(r.size || 1.2);
+    const mat = new THREE.MeshStandardMaterial({ color: 0x6e6e6e, roughness: 1, flatShading: true });
+    const mesh = new THREE.Mesh(geo, mat);
+    const wy = sampleHeightFromMap(hmData, r.x, r.z);
+    mesh.position.set(r.x, wy + (r.size || 1.2) * 0.5, r.z);
+    previewScene.add(mesh);
+  });
+
+  (json.obstacles?.poles || []).forEach(p => {
+    const geo = new THREE.CylinderGeometry(0.15, 0.15, 2, 6);
+    const mat = new THREE.MeshStandardMaterial({ color: 0x58a6ff });
+    const mesh = new THREE.Mesh(geo, mat);
+    const wy = sampleHeightFromMap(hmData, p.x, p.z);
+    mesh.position.set(p.x, wy + 1, p.z);
+    previewScene.add(mesh);
+  });
+
+  // Ramps
+  (json.obstacles?.ramps || []).forEach(ramp => {
+    const rW = 16, rL = 22, rH = 5;
+    // Use a box and shear top verts to make wedge
+    const rampGeo = new THREE.BoxGeometry(rW, rH, rL, 1, 1, 1);
+    const verts = rampGeo.attributes.position.array;
+    for (let i = 0; i < verts.length; i += 3) {
+      // Flatten front-top vertices (negative Z, positive Y)
+      if (verts[i + 2] < 0 && verts[i + 1] > 0) verts[i + 1] = 0;
+    }
+    rampGeo.computeVertexNormals();
+    const rampMat = new THREE.MeshStandardMaterial({ color: 0xd29922, roughness: 0.6 });
+    const mesh = new THREE.Mesh(rampGeo, rampMat);
+    const wy = sampleHeightFromMap(hmData, ramp.x, ramp.z);
+    mesh.position.set(ramp.x, wy + rH * 0.3, ramp.z);
+    mesh.rotation.y = ramp.angle || 0;
+    previewScene.add(mesh);
+
+    // Side rails
+    const railMat = new THREE.MeshStandardMaterial({ color: 0xf85149 });
+    [-1, 1].forEach(side => {
+      const railGeo = new THREE.BoxGeometry(0.5, 1.5, rL);
+      const rail = new THREE.Mesh(railGeo, railMat);
+      rail.position.set(side * (rW / 2), rH * 0.35, 0);
+      const g = new THREE.Group();
+      g.add(rail);
+      g.rotation.y = ramp.angle || 0;
+      g.position.set(ramp.x, wy, ramp.z);
+      previewScene.add(g);
+    });
+  });
+
+  // Scenery
+  (json.scenery?.items || []).forEach(s => {
+    const wy = sampleHeightFromMap(hmData, s.x, s.z);
+    if (s.type === 'palm' || s.type === 'pine') {
+      const trunkGeo = new THREE.CylinderGeometry(0.2, 0.3, 4, 6);
+      const trunkMat = new THREE.MeshStandardMaterial({ color: 0x8B4513 });
+      const trunk = new THREE.Mesh(trunkGeo, trunkMat);
+      trunk.position.set(s.x, wy + 2, s.z);
+      previewScene.add(trunk);
+      const leafGeo = s.type === 'palm'
+        ? new THREE.SphereGeometry(2, 8, 6)
+        : new THREE.ConeGeometry(1.8, 3.5, 6);
+      const leafMat = new THREE.MeshStandardMaterial({ color: s.type === 'palm' ? 0x228B22 : 0x2d5016 });
+      const leaves = new THREE.Mesh(leafGeo, leafMat);
+      leaves.position.set(s.x, wy + (s.type === 'palm' ? 4.5 : 5), s.z);
+      previewScene.add(leaves);
+    } else if (s.type === 'umbrella') {
+      const poleG = new THREE.CylinderGeometry(0.08, 0.08, 2.5, 6);
+      const poleM = new THREE.MeshStandardMaterial({ color: 0xcccccc });
+      const poleMesh = new THREE.Mesh(poleG, poleM);
+      poleMesh.position.set(s.x, wy + 1.25, s.z);
+      previewScene.add(poleMesh);
+      const topG = new THREE.ConeGeometry(1.5, 0.8, 8);
+      const topM = new THREE.MeshStandardMaterial({ color: 0xe63946 });
+      const top = new THREE.Mesh(topG, topM);
+      top.position.set(s.x, wy + 2.8, s.z);
+      previewScene.add(top);
+    }
+  });
+
+  // Boost pads
+  (json.boostPads || []).forEach(bp => {
+    if (bp.x === undefined) return;
+    const geo = new THREE.PlaneGeometry(3, 3);
+    const mat = new THREE.MeshStandardMaterial({ color: 0xf0883e, emissive: 0xf0883e, emissiveIntensity: 0.5 });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.rotation.x = -Math.PI / 2;
+    const wy = sampleHeightFromMap(hmData, bp.x, bp.z);
+    mesh.position.set(bp.x, wy + 0.25, bp.z);
+    previewScene.add(mesh);
+  });
+
+  // Water plane
+  if (json.specialFeatures?.waterPlane) {
+    const wp = json.specialFeatures.waterPlane;
+    const waterGeo = new THREE.PlaneGeometry(wp.width || 300, wp.height || 400);
+    const waterMat = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(wp.color || '#0077be'),
+      transparent: true, opacity: wp.opacity || 0.85,
+      roughness: 0.2, metalness: 0.1
+    });
+    const water = new THREE.Mesh(waterGeo, waterMat);
+    water.rotation.x = -Math.PI / 2;
+    water.position.set(wp.x || 0, wp.y || -0.2, wp.z || 0);
+    previewScene.add(water);
+  }
+
+  // Stars
+  if (json.specialFeatures?.stars) {
+    const starGeo = new THREE.BufferGeometry();
+    const starVerts = [];
+    for (let i = 0; i < 500; i++) {
+      starVerts.push((Math.random() - 0.5) * 400, Math.random() * 100 + 20, (Math.random() - 0.5) * 400);
+    }
+    starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starVerts, 3));
+    const starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.5 });
+    previewScene.add(new THREE.Points(starGeo, starMat));
+  }
+
+  // Smart camera framing — analyze level bounds and find optimal view
+  let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+  let minY = Infinity, maxY = -Infinity;
+  // Include spline points
+  pts.forEach(p => {
+    if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x;
+    if (p.z < minZ) minZ = p.z; if (p.z > maxZ) maxZ = p.z;
+    if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y;
+  });
+  // Include tiles
+  (json.tiles || []).forEach(t => {
+    const tx = t.gx * gs, tz = t.gz * gs;
+    if (tx < minX) minX = tx; if (tx > maxX) maxX = tx;
+    if (tz < minZ) minZ = tz; if (tz > maxZ) maxZ = tz;
+  });
+  // Include objects
+  (json.objects || []).forEach(o => {
+    if (o.x < minX) minX = o.x; if (o.x > maxX) maxX = o.x;
+    if (o.z < minZ) minZ = o.z; if (o.z > maxZ) maxZ = o.z;
+  });
+
+  const cx = (minX + maxX) / 2;
+  const cz = (minZ + maxZ) / 2;
+  const spanX = maxX - minX || 50;
+  const spanZ = maxZ - minZ || 50;
+  const spanY = Math.max(maxY - minY, 5);
+  const maxSpan = Math.max(spanX, spanZ);
+
+  // Calculate distance needed to fit the whole level in view
+  const fov = previewCamera.fov * (Math.PI / 180);
+  const aspect = previewCamera.aspect;
+  const hFov = 2 * Math.atan(Math.tan(fov / 2) * aspect);
+  const fitDist = (maxSpan / 2) / Math.tan(Math.min(fov, hFov) / 2);
+
+  // Determine best viewing angle based on level shape
+  const isWide = spanX > spanZ * 1.5;
+  const isTall = spanZ > spanX * 1.5;
+  const isFlat = spanY < 3;
+
+  // Camera height: higher for flat levels (top-down-ish), lower for hilly (showcase terrain)
+  const camHeight = isFlat
+    ? fitDist * 0.75   // more overhead for flat levels
+    : fitDist * 0.45;  // lower angle to show elevation
+  const camDist = isFlat
+    ? fitDist * 0.5
+    : fitDist * 0.7;
+
+  // Position camera on the side that shows the most of the level
+  const camAngle = isWide ? Math.PI * 0.5 : isTall ? 0 : Math.PI * 0.25;
+  const camX = cx + Math.sin(camAngle) * camDist;
+  const camZ = cz + Math.cos(camAngle) * camDist;
+  const targetY = (minY + maxY) / 2;
+
+  previewCamera.position.set(camX, targetY + camHeight, camZ);
+  previewControls.target.set(cx, targetY, cz);
+  previewControls.update();
+
+  // Adjust fog far to never clip the level
+  if (previewScene.fog) {
+    const diagDist = Math.sqrt(camDist * camDist + camHeight * camHeight) + maxSpan * 0.5;
+    previewScene.fog.far = Math.max(previewScene.fog.far, diagDist * 1.5);
+    previewScene.fog.near = Math.max(previewScene.fog.near, diagDist * 0.3);
+  }
+
+  // Resize handler
+  previewResizeHandler = () => {
+    const w = overlay.clientWidth;
+    const h = overlay.clientHeight - 40;
+    previewCamera.aspect = w / h;
+    previewCamera.updateProjectionMatrix();
+    previewRenderer.setSize(w, h);
+  };
+  window.addEventListener('resize', previewResizeHandler);
+
+  // Animate
+  previewActive = true;
+  function animate() {
+    if (!previewActive) return;
+    previewAnimId = requestAnimationFrame(animate);
+    previewControls.update();
+    previewRenderer.render(previewScene, previewCamera);
+  }
+  animate();
+}
+
+render();
+
+// --- Music Preview ---
+const musicFiles = { beach: 'assets/music/beach.mp3', space: 'assets/music/space.mp3', city: 'assets/music/city.mp3', retro: 'assets/music/retro.mp3', epic: 'assets/music/epic.mp3' };
+let previewAudio = null;
+const previewBtn = document.getElementById('btn-preview-music');
+const musicSelect = document.getElementById('input-music');
+
+function stopPreview() {
+  if (previewAudio) { previewAudio.pause(); previewAudio.src = ''; previewAudio = null; }
+  previewBtn.textContent = '▶';
+  previewBtn.style.background = '#238636';
+}
+
+previewBtn.addEventListener('click', () => {
+  const track = musicSelect.value;
+  if (previewAudio) { stopPreview(); return; }
+  if (!track || track === 'none' || !musicFiles[track]) return;
+  previewAudio = new Audio(musicFiles[track]);
+  previewAudio.volume = 0.4;
+  previewAudio.play().catch(() => {});
+  previewBtn.textContent = '⏹';
+  previewBtn.style.background = '#da3633';
+  previewAudio.addEventListener('ended', stopPreview);
+});
+
+musicSelect.addEventListener('change', stopPreview);
+</script>
+</body>
+</html>
