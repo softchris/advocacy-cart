@@ -1127,6 +1127,11 @@ let lastRenderedPos = -1; // track what position we last drew
 
 // ----- PLAYER SELECTION DATA -----
 const ADVOCATES = [
+  { name: 'Mona', slug: 'mona', ext: 'png', spec: '🐙 GitHub Mascot' },
+  { name: 'Ducky', slug: 'ducky', ext: 'png', spec: '🦆 Rubber Duck Debugger' },
+  { name: 'Hubot', slug: 'hubot', ext: 'jpg', spec: '🤖 GitHub Bot' },
+  { name: 'Ari Livigni', slug: 'ari-livigni', ext: 'jpg', spec: 'GitHub Copilot / Actions' },
+  { name: 'Stacey Haffner', slug: 'stacey-haffner', ext: 'png', spec: 'GitHub Copilot / Actions' },
   { name: 'Aaron Powell', slug: 'aaron-powell', ext: 'png', spec: '.NET / JavaScript' },
   { name: 'Aaron Wislang', slug: 'aaron-wislang', ext: 'jpg', spec: 'Cloud Native / Linux' },
   { name: 'Alfredo Deza', slug: 'alfredo-deza', ext: 'png', spec: 'Python / MLOps' },
@@ -6182,7 +6187,7 @@ function spawnFirework(x, y, z) {
 function updateCameraFor(racer, cam) {
   if (!racer) return;
   const dist = 2.5;
-  const height = racer.mesh.position.y + 3;
+  const height = racer.mesh.position.y + 4;
   const behind = new THREE.Vector3(
     racer.mesh.position.x - Math.sin(racer.angle) * dist,
     height,

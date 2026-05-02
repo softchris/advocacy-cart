@@ -1,0 +1,24 @@
+{
+  "name": "octo-cart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/softchris/advocacy-cart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/softchris/advocacy-cart/issues"
+  },
+  "homepage": "https://github.com/softchris/advocacy-cart#readme",
+  "dependencies": {
+    "playwright": "^1.59.1"
+  }
+}
